@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "keyboardkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/KeyboardKit/KeyboardKit",
+      "state" : {
+        "revision" : "f37349496bf1569e4f28ed13c3f0d698dafa09aa",
+        "version" : "7.7.0"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a5a1d7c305e9d9082958de04d521be57a88d431a"
+      }
+    }
+  ],
+  "version" : 2
+}

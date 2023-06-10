@@ -1,0 +1,850 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */; };
+		F312CF8C29951E70008EC197 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DE2995182E00FE664F /* Fonts */; };
+		F312CFA62995270D008EC197 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DE2995182E00FE664F /* Fonts */; };
+		F31BCE782A33B33E00A6116D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE772A33B33E00A6116D /* Utils.swift */; };
+		F31BCE792A33B33E00A6116D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE772A33B33E00A6116D /* Utils.swift */; };
+		F31BCE7B2A33B3A200A6116D /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */; };
+		F31BCE7C2A33B3A200A6116D /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */; };
+		F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7D2A348B7500A6116D /* HelpView.swift */; };
+		F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7D2A348B7500A6116D /* HelpView.swift */; };
+		F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */; };
+		F32D9E8529966FCD007BC97C /* BeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198CD299517DA00FE664F /* BeaconApp.swift */; };
+		F32D9E8629966FCD007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
+		F32D9E8829966FCD007BC97C /* simbqn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B198E42995185400FE664F /* simbqn.a */; };
+		F32D9E8929966FCD007BC97C /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = F32D9E8129966FCD007BC97C /* Introspect */; };
+		F32D9E8B29966FCD007BC97C /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DE2995182E00FE664F /* Fonts */; };
+		F32D9E8C29966FCD007BC97C /* stdlib in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DB2995181700FE664F /* stdlib */; };
+		F32D9E8D29966FCD007BC97C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3877C8D29952A6600E2FCB5 /* Assets.xcassets */; };
+		F32D9E8E29966FCD007BC97C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B198D4299517DB00FE664F /* Preview Assets.xcassets */; };
+		F32D9E9029966FCD007BC97C /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B198E02995184400FE664F /* libcbqn.a */; };
+		F32D9E972996710A007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
+		F3877C8E29952A6600E2FCB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3877C8D29952A6600E2FCB5 /* Assets.xcassets */; };
+		F38F03A92A323F8500F66354 /* libksim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38F03A82A323F8500F66354 /* libksim.a */; };
+		F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198CD299517DA00FE664F /* BeaconApp.swift */; };
+		F3B198D5299517DB00FE664F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B198D4299517DB00FE664F /* Preview Assets.xcassets */; };
+		F3B198F4299518E900FE664F /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198F3299518E900FE664F /* KeyboardViewController.swift */; };
+		F3B19907299518F900FE664F /* BQNInputSetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198FE299518F800FE664F /* BQNInputSetProvider.swift */; };
+		F3B19909299518F900FE664F /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19900299518F800FE664F /* KeyboardView.swift */; };
+		F3B1990A299518F900FE664F /* DemoKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19901299518F800FE664F /* DemoKeyboardViewController.swift */; };
+		F3B1990B299518F900FE664F /* KeyboardAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19902299518F800FE664F /* KeyboardAppearance.swift */; };
+		F3B1990C299518F900FE664F /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19903299518F900FE664F /* KeyboardActionHandler.swift */; };
+		F3B1990D299518F900FE664F /* KeyboardLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */; };
+		F3B1990E299518F900FE664F /* AutocompleteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19905299518F900FE664F /* AutocompleteProvider.swift */; };
+		F3B199112995193C00FE664F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = F3B199102995193C00FE664F /* Introspect */; };
+		F3B199142995195C00FE664F /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B199132995195C00FE664F /* KeyboardKit */; };
+		F3B199152995199000FE664F /* stdlib in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DB2995181700FE664F /* stdlib */; };
+		F3E1DFEF2A31F56800B4A553 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
+		F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
+		F3E1DFF82A3217E300B4A553 /* libk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3E1DFF72A3217E300B4A553 /* libk.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F32D9E8029966FCD007BC97C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3B198C2299517DA00FE664F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3B198F0299518E900FE664F;
+			remoteInfo = Keyboard;
+		};
+		F3E1DFF02A31F56800B4A553 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3B198C2299517DA00FE664F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3B198F0299518E900FE664F;
+			remoteInfo = Keyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F32D9E8F29966FCD007BC97C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F32D9E9029966FCD007BC97C /* Keyboard.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3E1DFF22A31F56800B4A553 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F3E1DFEF2A31F56800B4A553 /* Keyboard.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F312CF7629951B3C008EC197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Beacon-Bridging-Header.h"; sourceTree = "<group>"; };
+		F312CF95299521C6008EC197 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F31BCE772A33B33E00A6116D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
+		F31BCE7D2A348B7500A6116D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		F32D9E9429966FCD007BC97C /* BeaconSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32D9E9529966FCD007BC97C /* Beacon copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Beacon copy-Info.plist"; path = "/Users/sp/mac/applefarm/Beacon/Beacon copy-Info.plist"; sourceTree = "<absolute>"; };
+		F3877C8B29952A5400E2FCB5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F3877C8D29952A6600E2FCB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F38F03A82A323F8500F66354 /* libksim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libksim.a; path = Beacon/libs/libksim.a; sourceTree = "<group>"; };
+		F3B198CA299517DA00FE664F /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B198CD299517DA00FE664F /* BeaconApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconApp.swift; sourceTree = "<group>"; };
+		F3B198D4299517DB00FE664F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F3B198DB2995181700FE664F /* stdlib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = stdlib; sourceTree = "<group>"; };
+		F3B198DD2995181F00FE664F /* bqnffi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bqnffi.h; sourceTree = "<group>"; };
+		F3B198DE2995182E00FE664F /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		F3B198E02995184400FE664F /* libcbqn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcbqn.a; sourceTree = "<group>"; };
+		F3B198E12995184400FE664F /* iosbqn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = iosbqn.a; sourceTree = "<group>"; };
+		F3B198E42995185400FE664F /* simbqn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = simbqn.a; sourceTree = "<group>"; };
+		F3B198E62995185900FE664F /* get_libs.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = get_libs.sh; sourceTree = "<group>"; };
+		F3B198F1299518E900FE664F /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B198F3299518E900FE664F /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		F3B198FE299518F800FE664F /* BQNInputSetProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BQNInputSetProvider.swift; sourceTree = "<group>"; };
+		F3B19900299518F800FE664F /* KeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		F3B19901299518F800FE664F /* DemoKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoKeyboardViewController.swift; sourceTree = "<group>"; };
+		F3B19902299518F800FE664F /* KeyboardAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAppearance.swift; sourceTree = "<group>"; };
+		F3B19903299518F900FE664F /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
+		F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
+		F3B19905299518F900FE664F /* AutocompleteProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteProvider.swift; sourceTree = "<group>"; };
+		F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		F3E1DFF62A3216C000B4A553 /* k.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = k.h; sourceTree = "<group>"; };
+		F3E1DFF72A3217E300B4A553 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/libs/libk.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F32D9E8729966FCD007BC97C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F38F03A92A323F8500F66354 /* libksim.a in Frameworks */,
+				F32D9E8829966FCD007BC97C /* simbqn.a in Frameworks */,
+				F32D9E8929966FCD007BC97C /* Introspect in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198C7299517DA00FE664F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3E1DFF82A3217E300B4A553 /* libk.a in Frameworks */,
+				F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */,
+				F3B199112995193C00FE664F /* Introspect in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198EE299518E900FE664F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B199142995195C00FE664F /* KeyboardKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F312CF7329951A0F008EC197 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F38F03A82A323F8500F66354 /* libksim.a */,
+				F3E1DFF72A3217E300B4A553 /* libk.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F3B198C1299517DA00FE664F = {
+			isa = PBXGroup;
+			children = (
+				F3B198DE2995182E00FE664F /* Fonts */,
+				F3B198CC299517DA00FE664F /* Beacon */,
+				F3B198F2299518E900FE664F /* Keyboard */,
+				F3B198CB299517DA00FE664F /* Products */,
+				F312CF7329951A0F008EC197 /* Frameworks */,
+				F32D9E9529966FCD007BC97C /* Beacon copy-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		F3B198CB299517DA00FE664F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3B198CA299517DA00FE664F /* Beacon.app */,
+				F3B198F1299518E900FE664F /* Keyboard.appex */,
+				F32D9E9429966FCD007BC97C /* BeaconSim.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3B198CC299517DA00FE664F /* Beacon */ = {
+			isa = PBXGroup;
+			children = (
+				F312CF95299521C6008EC197 /* Info.plist */,
+				F3B19916299519AE00FE664F /* libs */,
+				F3B198DB2995181700FE664F /* stdlib */,
+				F3B198CD299517DA00FE664F /* BeaconApp.swift */,
+				F3877C8B29952A5400E2FCB5 /* ContentView.swift */,
+				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
+				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
+				F31BCE772A33B33E00A6116D /* Utils.swift */,
+				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
+				F3877C8D29952A6600E2FCB5 /* Assets.xcassets */,
+				F3B198DD2995181F00FE664F /* bqnffi.h */,
+				F3E1DFF62A3216C000B4A553 /* k.h */,
+				F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */,
+				F3B198D3299517DB00FE664F /* Preview Content */,
+			);
+			path = Beacon;
+			sourceTree = "<group>";
+		};
+		F3B198D3299517DB00FE664F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F3B198D4299517DB00FE664F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3B198F2299518E900FE664F /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F312CF7629951B3C008EC197 /* Info.plist */,
+				F3B198FE299518F800FE664F /* BQNInputSetProvider.swift */,
+				F3B19903299518F900FE664F /* KeyboardActionHandler.swift */,
+				F3B19902299518F800FE664F /* KeyboardAppearance.swift */,
+				F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */,
+				F3B19901299518F800FE664F /* DemoKeyboardViewController.swift */,
+				F3B19905299518F900FE664F /* AutocompleteProvider.swift */,
+				F3B19900299518F800FE664F /* KeyboardView.swift */,
+				F3B198F3299518E900FE664F /* KeyboardViewController.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		F3B19916299519AE00FE664F /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				F3B198E42995185400FE664F /* simbqn.a */,
+				F3B198E12995184400FE664F /* iosbqn.a */,
+				F3B198E02995184400FE664F /* libcbqn.a */,
+				F3B198E62995185900FE664F /* get_libs.sh */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F32D9E7E29966FCD007BC97C /* BeaconSim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F32D9E9129966FCD007BC97C /* Build configuration list for PBXNativeTarget "BeaconSim" */;
+			buildPhases = (
+				F32D9E8329966FCD007BC97C /* Sources */,
+				F32D9E8729966FCD007BC97C /* Frameworks */,
+				F32D9E8A29966FCD007BC97C /* Resources */,
+				F32D9E8F29966FCD007BC97C /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F32D9E7F29966FCD007BC97C /* PBXTargetDependency */,
+			);
+			name = BeaconSim;
+			packageProductDependencies = (
+				F32D9E8129966FCD007BC97C /* Introspect */,
+			);
+			productName = Beacon;
+			productReference = F32D9E9429966FCD007BC97C /* BeaconSim.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3B198C9299517DA00FE664F /* Beacon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3B198D8299517DB00FE664F /* Build configuration list for PBXNativeTarget "Beacon" */;
+			buildPhases = (
+				F3B198C6299517DA00FE664F /* Sources */,
+				F3B198C7299517DA00FE664F /* Frameworks */,
+				F3B198C8299517DA00FE664F /* Resources */,
+				F3E1DFF22A31F56800B4A553 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3E1DFF12A31F56800B4A553 /* PBXTargetDependency */,
+			);
+			name = Beacon;
+			packageProductDependencies = (
+				F3B199102995193C00FE664F /* Introspect */,
+			);
+			productName = Beacon;
+			productReference = F3B198CA299517DA00FE664F /* Beacon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3B198F0299518E900FE664F /* Keyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3B198F9299518E900FE664F /* Build configuration list for PBXNativeTarget "Keyboard" */;
+			buildPhases = (
+				F3B198ED299518E900FE664F /* Sources */,
+				F3B198EE299518E900FE664F /* Frameworks */,
+				F3B198EF299518E900FE664F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Keyboard;
+			packageProductDependencies = (
+				F3B199132995195C00FE664F /* KeyboardKit */,
+			);
+			productName = Keyboard;
+			productReference = F3B198F1299518E900FE664F /* Keyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3B198C2299517DA00FE664F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F3B198C9299517DA00FE664F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					F3B198F0299518E900FE664F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = F3B198C5299517DA00FE664F /* Build configuration list for PBXProject "Beacon" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3B198C1299517DA00FE664F;
+			packageReferences = (
+				F3B1990F2995193C00FE664F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */,
+			);
+			productRefGroup = F3B198CB299517DA00FE664F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3B198C9299517DA00FE664F /* Beacon */,
+				F3B198F0299518E900FE664F /* Keyboard */,
+				F32D9E7E29966FCD007BC97C /* BeaconSim */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F32D9E8A29966FCD007BC97C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32D9E8B29966FCD007BC97C /* Fonts in Resources */,
+				F32D9E8C29966FCD007BC97C /* stdlib in Resources */,
+				F32D9E8D29966FCD007BC97C /* Assets.xcassets in Resources */,
+				F32D9E8E29966FCD007BC97C /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198C8299517DA00FE664F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F312CF8C29951E70008EC197 /* Fonts in Resources */,
+				F3B199152995199000FE664F /* stdlib in Resources */,
+				F3877C8E29952A6600E2FCB5 /* Assets.xcassets in Resources */,
+				F3B198D5299517DB00FE664F /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198EF299518E900FE664F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F312CFA62995270D008EC197 /* Fonts in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F32D9E8329966FCD007BC97C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F31BCE792A33B33E00A6116D /* Utils.swift in Sources */,
+				F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */,
+				F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */,
+				F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */,
+				F32D9E8529966FCD007BC97C /* BeaconApp.swift in Sources */,
+				F31BCE7C2A33B3A200A6116D /* CustomInputField.swift in Sources */,
+				F32D9E8629966FCD007BC97C /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198C6299517DA00FE664F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F31BCE782A33B33E00A6116D /* Utils.swift in Sources */,
+				F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */,
+				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,
+				F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */,
+				F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */,
+				F31BCE7B2A33B3A200A6116D /* CustomInputField.swift in Sources */,
+				F32D9E972996710A007BC97C /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3B198ED299518E900FE664F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B198F4299518E900FE664F /* KeyboardViewController.swift in Sources */,
+				F3B1990B299518F900FE664F /* KeyboardAppearance.swift in Sources */,
+				F3B19909299518F900FE664F /* KeyboardView.swift in Sources */,
+				F3B1990D299518F900FE664F /* KeyboardLayoutProvider.swift in Sources */,
+				F3B1990E299518F900FE664F /* AutocompleteProvider.swift in Sources */,
+				F3B1990A299518F900FE664F /* DemoKeyboardViewController.swift in Sources */,
+				F3B1990C299518F900FE664F /* KeyboardActionHandler.swift in Sources */,
+				F3B19907299518F900FE664F /* BQNInputSetProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F32D9E7F29966FCD007BC97C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3B198F0299518E900FE664F /* Keyboard */;
+			targetProxy = F32D9E8029966FCD007BC97C /* PBXContainerItemProxy */;
+		};
+		F3E1DFF12A31F56800B4A553 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3B198F0299518E900FE664F /* Keyboard */;
+			targetProxy = F3E1DFF02A31F56800B4A553 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F32D9E9229966FCD007BC97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Beacon copy-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon",
+					"$(PROJECT_DIR)/Beacon/libs",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F32D9E9329966FCD007BC97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Beacon copy-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon",
+					"$(PROJECT_DIR)/Beacon/libs",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3B198D6299517DB00FE664F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3B198D7299517DB00FE664F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3B198D9299517DB00FE664F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Beacon/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon",
+					"$(PROJECT_DIR)/Beacon/libs",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3B198DA299517DB00FE664F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Beacon/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Beacon",
+					"$(PROJECT_DIR)/Beacon/libs",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3B198FA299518E900FE664F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Keyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3B198FB299518E900FE664F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NVN7FUCT44;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Keyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F32D9E9129966FCD007BC97C /* Build configuration list for PBXNativeTarget "BeaconSim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32D9E9229966FCD007BC97C /* Debug */,
+				F32D9E9329966FCD007BC97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3B198C5299517DA00FE664F /* Build configuration list for PBXProject "Beacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B198D6299517DB00FE664F /* Debug */,
+				F3B198D7299517DB00FE664F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3B198D8299517DB00FE664F /* Build configuration list for PBXNativeTarget "Beacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B198D9299517DB00FE664F /* Debug */,
+				F3B198DA299517DB00FE664F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3B198F9299518E900FE664F /* Build configuration list for PBXNativeTarget "Keyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B198FA299518E900FE664F /* Debug */,
+				F3B198FB299518E900FE664F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F32D9E8229966FCD007BC97C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F3B1990F2995193C00FE664F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KeyboardKit/KeyboardKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F32D9E8129966FCD007BC97C /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F32D9E8229966FCD007BC97C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		F3B199102995193C00FE664F /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B1990F2995193C00FE664F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		F3B199132995195C00FE664F /* KeyboardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */;
+			productName = KeyboardKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F3B198C2299517DA00FE664F /* Project object */;
+}
