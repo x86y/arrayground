@@ -89,6 +89,7 @@ struct ContentView: View {
                                     }
                                 Text("\(trimLongText(h.out))")
                                     .font(Font.custom("BQN386 Unicode", size: 18))
+                                    .foregroundColor(h.out.starts(with: "Error:") ? .red : .primary)
                                     .multilineTextAlignment(.leading)
                                     .onTapGesture {
                                         self.input += h.out

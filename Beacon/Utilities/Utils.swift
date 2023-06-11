@@ -65,7 +65,7 @@ func e(input: String) -> String {
 func ke(input: String) -> String {
     var input = input.replacingOccurrences(of: "\\", with: #"\\"#)
     input = input.replacingOccurrences(of: "\"", with: #"\""#)
-    input = "`0:`k@.\"\(input)\""
+    input = ".[{`0:`k@.\"\(input)\"};[];{`0:(,\"Error: \"),(-2_\"\n\"\\x)}]"
     return runCmd(kCmd, input)
 }
 
@@ -91,4 +91,11 @@ func trimLongText(_ input: String) -> String {
     let firstThreeLines = lines.prefix(3).joined(separator: "\n")
     let lastThreeLines = lines.suffix(3).joined(separator: "\n")
     return "\(firstThreeLines)\n...\n\(lastThreeLines)"
+}
+
+func removeLastLine(from string: String) -> String {
+    guard let range = string.range(of: "\n", options: .backwards) else {
+        return ""
+    }
+    return String(string[..<range.lowerBound])
 }

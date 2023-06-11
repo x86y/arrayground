@@ -168,6 +168,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F34179E62A35349800ACAF16 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F3B198DB2995181700FE664F /* stdlib */,
+				F31BCE772A33B33E00A6116D /* Utils.swift */,
+				F3B198DD2995181F00FE664F /* bqnffi.h */,
+				F3E1DFF62A3216C000B4A553 /* k.h */,
+				F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F34179E72A3534DD00ACAF16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F3877C8B29952A5400E2FCB5 /* ContentView.swift */,
+				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
+				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
+				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F3B198C1299517DA00FE664F = {
 			isa = PBXGroup;
 			children = (
@@ -194,19 +217,12 @@
 			isa = PBXGroup;
 			children = (
 				F312CF95299521C6008EC197 /* Info.plist */,
-				F3B19916299519AE00FE664F /* libs */,
-				F3B198DB2995181700FE664F /* stdlib */,
-				F3B198CD299517DA00FE664F /* BeaconApp.swift */,
-				F3877C8B29952A5400E2FCB5 /* ContentView.swift */,
-				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
-				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
-				F31BCE772A33B33E00A6116D /* Utils.swift */,
-				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
-				F3877C8D29952A6600E2FCB5 /* Assets.xcassets */,
-				F3B198DD2995181F00FE664F /* bqnffi.h */,
-				F3E1DFF62A3216C000B4A553 /* k.h */,
-				F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */,
 				F3B198D3299517DB00FE664F /* Preview Content */,
+				F34179E72A3534DD00ACAF16 /* Views */,
+				F34179E62A35349800ACAF16 /* Utilities */,
+				F3B19916299519AE00FE664F /* Libs */,
+				F3B198CD299517DA00FE664F /* BeaconApp.swift */,
+				F3877C8D29952A6600E2FCB5 /* Assets.xcassets */,
 			);
 			path = Beacon;
 			sourceTree = "<group>";
@@ -235,7 +251,7 @@
 			path = Keyboard;
 			sourceTree = "<group>";
 		};
-		F3B19916299519AE00FE664F /* libs */ = {
+		F3B19916299519AE00FE664F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
 				F3B198E42995185400FE664F /* simbqn.a */,
@@ -243,7 +259,7 @@
 				F3B198E02995184400FE664F /* libcbqn.a */,
 				F3B198E62995185900FE664F /* get_libs.sh */,
 			);
-			path = libs;
+			path = Libs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -668,7 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -704,7 +720,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
