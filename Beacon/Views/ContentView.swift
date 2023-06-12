@@ -8,6 +8,7 @@
 import Combine
 import SwiftUI
 import UIKit
+import Foundation
 
 let d = UserDefaults.standard
 
@@ -17,20 +18,20 @@ struct Entry: Hashable, Codable, Identifiable {
     var out: String
 }
 
-enum EntryCache {
+enum Buffers {
     static let k = "history"
-    static func save(_ value: [Entry]!) {
+    static func save(_ value: [String: [Entry]]) {
         d.set(try? PropertyListEncoder().encode(value), forKey: k)
     }
 
-    static func get() -> [Entry]! {
-        guard let o = d.object(forKey: k) as? Data else { return [] }
+    static func get() -> [String: [Entry]] {
+        guard let data = d.object(forKey: k) as? Data else { return ["default":[]] }
         do {
-            let userData: [Entry] = try PropertyListDecoder().decode([Entry].self, from: o)
+            let userData = try PropertyListDecoder().decode([String: [Entry]].self, from: data)
             return userData
         } catch {
-            // print("Error decoding the history: \(error)")
-            return nil
+            print("Error decoding the history: \(error)")
+            return ["default":[]]
         }
     }
 
@@ -40,35 +41,39 @@ enum EntryCache {
 }
 
 class HistoryModel: ObservableObject {
-    @Published var history: [Entry] = .init()
-    func addMessage(with src: String, out: String) {
-        let e = Entry(src: src, out: out)
-        history.append(e)
-        EntryCache.save(history)
+    @Published var history: [String: [Entry]] = ["default":[]]
+    
+    func addMessage(with src: String, out: String, for key: String) {
+        let entry = Entry(src: src, out: out)
+        if var entries = history[key] {
+            entries.append(entry)
+            history[key] = entries
+        } else {
+            history[key] = [entry]
+        }
+        Buffers.save(history)
     }
 
-    func load(h: [Entry]) {
+    func load(_ h: [String: [Entry]]) {
         history = h
     }
-
+    
     func clear() {
-        history = []
-        EntryCache.clear()
+        history = [:]
+        Buffers.clear()
     }
 }
 
-struct ContentView: View {
-    var glyphs = ["˜", "˘", "¨", "⁼", "⌜", "´", "˝", "∞", "¯", "•", "÷", "×", "¬", "⎉", "⚇", "⍟", "◶", "⊘", "⎊", "⍎", "⍕", "⟨", "⟩", "√", "⋆", "←", "→", "⊣", "⊢", "⋄", "↩", "·", "|", "∾", "≍", "≠", "‿"]
-    var modules = ["bigint.bqn", "bignat.bqn", "csv.bqn", "datetime.bqn", "hashmap.bqn", "matrix.bqn", "min.bqn", "perlin.bqn", "polynomial.bqn", "primes.bqn", "roots.bqn", "strings.bqn"]
-    let characterMap: [String: Character] = ["\\`": "˜", "\\1": "˘", "\\2": "¨", "\\3": "⁼", "\\4": "⌜", "\\5": "´", "\\6": "˝", "\\7": "7", "\\8": "∞", "\\9": "¯", "\\0": "•", "\\-": "÷", "\\=": "×", "\\~": "¬", "\\!": "⎉", "\\@": "⚇", "\\#": "⍟", "\\$": "◶", "\\%": "⊘", "\\^": "⎊", "\\&": "⍎", "\\*": "⍕", "\\(": "⟨", "\\)": "⟩", "\\_": "√", "\\+": "⋆", "\\q": "⌽", "\\w": "𝕨", "\\e": "∊", "\\r": "↑", "\\t": "∧", "\\y": "y", "\\u": "⊔", "\\i": "⊏", "\\o": "⊐", "\\p": "π", "\\[": "←", "\\]": "→", "\\Q": "↙", "\\W": "𝕎", "\\E": "⍷", "\\R": "𝕣", "\\T": "⍋", "\\Y": "Y", "\\U": "U", "\\I": "⊑", "\\O": "⊒", "\\P": "⍳", "\\{": "⊣", "\\}": "⊢", "\\a": "⍉", "\\s": "𝕤", "\\d": "↕", "\\f": "𝕗", "\\g": "𝕘", "\\h": "⊸", "\\j": "∘", "\\k": "○", "\\l": "⟜", "\\;": "⋄", "\\'": "↩", "\\A": "↖", "\\S": "𝕊", "\\D": "D", "\\F": "𝔽", "\\G": "𝔾", "\\H": "«", "\\J": "J", "\\K": "⌾", "\\L": "»", "\\:": "·", "\\|": "|", "\\z": "⥊", "\\x": "𝕩", "\\c": "↓", "\\v": "∨", "\\b": "⌊", "\\n": "n", "\\m": "≡", "\\,": "∾", "\\.": "≍", "\\/": "≠", "\\Z": "⋈", "\\X": "𝕏", "\\C": "C", "\\V": "⍒", "\\B": "⌈", "\\N": "N", "\\M": "≢", "\\<": "≤", "\\>": "≥", "\\?": "⇐", "\\ ": "‿"]
 
+
+struct ContentView: View {
     @State var input: String = ""
     @State var showSettings: Bool = false
     @State var showHelp: Bool = false
+    @State var showBuffers: Bool = false
+    @State var curBuffer: String = "default"
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
-    @State var tf: UITextField = .init()
-    @State private var history: [Entry] = []
     @AppStorage("langSelection") private var chosenLang: Int = 0
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel = HistoryModel()
@@ -78,7 +83,7 @@ struct ContentView: View {
             VStack {
                 ScrollView(.vertical) {
                     VStack {
-                        ForEach(Array(viewModel.history.enumerated()), id: \.offset) { _, h in
+                        ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { _, h in
                             VStack(alignment: .leading) {
                                 Text("\(h.src)")
                                     .font(Font.custom("BQN386 Unicode", size: 18))
@@ -125,11 +130,24 @@ struct ContentView: View {
                     self.input = ""
                     return
                 }
+                if input == #"\,l"# {
+                    self.showBuffers = true
+                    self.input = ""
+                    return
+                }
+                if input.hasPrefix(#"\,"#) {
+                    let components = self.input.components(separatedBy: " ")
+                    if let lastWord = components.last {
+                        self.curBuffer = lastWord
+                    }
+                    self.input = ""
+                    return
+                }
                 if input != "" {
                     if chosenLang == 0 {
-                        self.viewModel.addMessage(with: self.input, out: e(input: self.input))
+                        self.viewModel.addMessage(with: self.input, out: e(input: self.input), for: curBuffer)
                     } else {
-                        self.viewModel.addMessage(with: self.input, out: ke(input: self.input))
+                        self.viewModel.addMessage(with: self.input, out: ke(input: self.input), for: curBuffer)
                     }
                     self.input = ""
                 }
@@ -158,7 +176,7 @@ struct ContentView: View {
                             HStack {
                                 ForEach(glyphs, id: \.self) { glyph in
                                     Button(glyph) {
-                                        self.tf.insertText(glyph)
+                                        print(glyph)
                                     }
                                     .font(Font.custom("BQN386 Unicode", size: 30))
                                 }
@@ -176,13 +194,15 @@ struct ContentView: View {
             HelpView(key: self.$input)
                 .presentationDetents([.large])
         }
+        .sheet(isPresented: $showBuffers) {
+            BufferBrowserView(buffers: Array(viewModel.history.keys), sel: self.$curBuffer)
+                .presentationDetents([.medium])
+        }
         .onAppear(perform: initRepl)
     }
 
     func initRepl() {
-        if EntryCache.get() != nil {
-            viewModel.load(h: EntryCache.get())
-        }
+        viewModel.load(Buffers.get())
         kinit()
         repl_init()
         /* for filename in modules {
