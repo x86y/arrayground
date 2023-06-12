@@ -2,7 +2,7 @@
 //  BeaconApp.swift
 //  Beacon
 //
-//  
+//
 //
 
 import SwiftUI

@@ -20,32 +20,31 @@ import KeyboardKit
  create a custom layout that removes all these switcher keys.
  */
 class BQNSP: InputSetProvider {
-    
     let baseProvider = EnglishInputSetProvider()
-    
+
     var alphabeticInputSet: AlphabeticInputSet {
         AlphabeticInputSet(rows: [
-            //.init(lowercased: "‿[{+-×÷}]", uppercased: "‿[{+-×÷}]"),
+            // .init(lowercased: "‿[{+-×÷}]", uppercased: "‿[{+-×÷}]"),
             .init(lowercased: "⌽𝕨∊↑∧y⊔⊏⊐π", uppercased: "⌽𝕎⍷↑∧⍋⊔⊑⊐π"),
             .init(lowercased: "⍉𝕤↕𝕗𝕘⊸∘○⟜", uppercased: "⍉𝕊↕𝔽𝔾«∘⌾»"),
             .init(
                 phoneLowercased: "⥊𝕩↓∨⌊n≡",
                 phoneUppercased: "⋈𝕏↓⍒⌈N≢",
                 padLowercased: "⥊𝕩↓∨⌊n≡∾≤",
-                padUppercased: "⋈𝕏↓⍒⌈N≢≍≥"),
+                padUppercased: "⋈𝕏↓⍒⌈N≢≍≥"
+            ),
         ])
     }
-    
+
     var numericInputSet: NumericInputSet {
         NumericInputSet(rows: [
             .init(chars: "1234567890"),
             .init(phone: "˘¨⁼⌜´)&@”", pad: "1"),
-            .init(phone: ".,?!’", pad: "%-+=/;:!?")
+            .init(phone: ".,?!’", pad: "%-+=/;:!?"),
         ])
     }
-    
+
     var symbolicInputSet: SymbolicInputSet {
         baseProvider.symbolicInputSet
     }
 }
-

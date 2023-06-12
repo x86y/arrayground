@@ -20,13 +20,11 @@ import SwiftUI
  how the keyboard changes.
  */
 class DemoKeyboardViewController: KeyboardInputViewController {
-
     /**
      Here, we register demo-specific services which are then
      used by the keyboard.
      */
     override func viewDidLoad() {
-
         // Set a custom keyboard locale
         // 💡 Changing locale without KeyboardKit Pro or custom input sets will only change some button texts.
         keyboardContext.setLocale(.english)
@@ -57,7 +55,8 @@ class DemoKeyboardViewController: KeyboardInputViewController {
         // 💡 You can change this provider to see how the keyboard layout changes.
         keyboardLayoutProvider = DemoKeyboardLayoutProvider(
             keyboardContext: keyboardContext,
-            inputSetProvider: inputSetProvider)
+            inputSetProvider: inputSetProvider
+        )
 
         // Call super to perform the base initialization
         super.viewDidLoad()

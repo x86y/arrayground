@@ -20,7 +20,6 @@ import KeyboardKit
  will by default only use English.
  */
 class DemoKeyboardLayoutProvider: StandardKeyboardLayoutProvider {
-
     override func keyboardLayout(for context: KeyboardContext) -> KeyboardLayout {
         let layout = super.keyboardLayout(for: context)
         guard layout.hasRows && context.hasMultipleLocales else { return layout }
@@ -30,14 +29,12 @@ class DemoKeyboardLayoutProvider: StandardKeyboardLayoutProvider {
 }
 
 private extension KeyboardContext {
-
     var hasMultipleLocales: Bool {
         locales.count > 1
     }
 }
 
 private extension KeyboardLayout {
-
     var bottomRowIndex: Int {
         itemRows.count - 1
     }

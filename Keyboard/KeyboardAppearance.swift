@@ -25,9 +25,9 @@ class DemoKeyboardAppearance: StandardKeyboardAppearance {
         isPressed: Bool
     ) -> KeyboardButtonStyle {
         var style = super.buttonStyle(for: action, isPressed: isPressed)
-        //style.cornerRadius = 10
-        //style.backgroundColor = .blue
-        //style.foregroundColor = .yellow
+        // style.cornerRadius = 10
+        // style.backgroundColor = .blue
+        // style.foregroundColor = .yellow
         if action != KeyboardAction.space && action != KeyboardAction.backspace && action != KeyboardAction.primary(.return) {
             style.font = KeyboardFont.custom("BQN386 Unicode", size: 24)
         }
@@ -35,8 +35,8 @@ class DemoKeyboardAppearance: StandardKeyboardAppearance {
     }
 
     override var inputCalloutStyle: KeyboardInputCalloutStyle {
-         var style = super.inputCalloutStyle
-         style.font = KeyboardFont.custom("BQN386 Unicode", size: 24)
-         return style
-     }
+        var style = super.inputCalloutStyle
+        style.font = KeyboardFont.custom("BQN386 Unicode", size: 24)
+        return style
+    }
 }

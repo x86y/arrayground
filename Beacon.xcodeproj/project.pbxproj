@@ -162,6 +162,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F30A7B8C2A37258200503966 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F312CF7329951A0F008EC197 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +197,6 @@
 				F3877C8B29952A5400E2FCB5 /* ContentView.swift */,
 				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
 				F30A7B892A370B7800503966 /* BufferBrowserView.swift */,
-				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
 				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
 			);
 			path = Views;
@@ -222,6 +229,7 @@
 			children = (
 				F312CF95299521C6008EC197 /* Info.plist */,
 				F3B198D3299517DB00FE664F /* Preview Content */,
+				F30A7B8C2A37258200503966 /* Components */,
 				F34179E72A3534DD00ACAF16 /* Views */,
 				F34179E62A35349800ACAF16 /* Utilities */,
 				F3B19916299519AE00FE664F /* Libs */,

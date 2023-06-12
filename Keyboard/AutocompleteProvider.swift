@@ -3449,8 +3449,6 @@ let JSONString = """
 ]]
 """
 
-
-
 /**
  This autocomplete provider can be used in the non-pro demos,
  where KeyboardKit Pro standard autocomplete isn't available.
@@ -3474,25 +3472,25 @@ class FakeAutocompleteProvider: AutocompleteProvider {
     init(match: String = "match") {
         self.match = match
         let data = JSONString.data(using: .utf8, allowLossyConversion: false)
-        self.bqncrate = try! JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [[String]]
+        bqncrate = try! JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [[String]]
     }
 
     private var match: String
-    
+
     var locale: Locale = .current
-    
+
     var canIgnoreWords: Bool { false }
     var canLearnWords: Bool { false }
     var ignoredWords: [String] = []
     var learnedWords: [String] = []
-    
-    func hasIgnoredWord(_ word: String) -> Bool { false }
-    func hasLearnedWord(_ word: String) -> Bool { false }
-    func ignoreWord(_ word: String) {}
-    func learnWord(_ word: String) {}
-    func removeIgnoredWord(_ word: String) {}
-    func unlearnWord(_ word: String) {}
-    
+
+    func hasIgnoredWord(_: String) -> Bool { false }
+    func hasLearnedWord(_: String) -> Bool { false }
+    func ignoreWord(_: String) {}
+    func learnWord(_: String) {}
+    func removeIgnoredWord(_: String) {}
+    func unlearnWord(_: String) {}
+
     func autocompleteSuggestions(for text: String, completion: AutocompleteCompletion) {
         guard text.count > 0 else { return completion(.success([])) }
         if text == match {
@@ -3506,18 +3504,18 @@ class FakeAutocompleteProvider: AutocompleteProvider {
 private extension FakeAutocompleteProvider {
     func fakeSuggestions(for text: String) -> [AutocompleteSuggestion] {
         var res = ""
-       let filteredStrings = self.bqncrate.filter({(item: [String]) -> Bool in
-           let stringMatch = item[1].lowercased().range(of: text.lowercased())
-           return stringMatch != nil ? true : false
-       })
+        let filteredStrings = bqncrate.filter { (item: [String]) -> Bool in
+            let stringMatch = item[1].lowercased().range(of: text.lowercased())
+            return stringMatch != nil ? true : false
+        }
         if filteredStrings.count != 0 {
             res = filteredStrings.first![0]
         }
         return [
-          AutocompleteSuggestion(text: res, subtitle: "@BQNCrate"),
+            AutocompleteSuggestion(text: res, subtitle: "@BQNCrate"),
         ]
     }
-    
+
     func fakeSuggestion(_ text: String, _ subtitle: String? = nil) -> AutocompleteSuggestion {
         AutocompleteSuggestion(text: text, subtitle: subtitle)
     }

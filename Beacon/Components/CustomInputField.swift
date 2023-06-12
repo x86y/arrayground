@@ -2,7 +2,7 @@
 //  CustomInputField.swift
 //  Beacon
 //
-//  
+//
 //
 
 import SwiftUI

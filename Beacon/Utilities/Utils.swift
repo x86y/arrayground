@@ -2,7 +2,7 @@
 //  Utils.swift
 //  Beacon
 //
-//  
+//
 //
 
 import Foundation

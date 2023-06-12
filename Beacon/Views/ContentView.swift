@@ -2,13 +2,13 @@
 //  ContentView.swift
 //  BQN
 //
-//  
+//
 //
 
 import Combine
+import Foundation
 import SwiftUI
 import UIKit
-import Foundation
 
 let d = UserDefaults.standard
 
@@ -25,13 +25,13 @@ enum Buffers {
     }
 
     static func get() -> [String: [Entry]] {
-        guard let data = d.object(forKey: k) as? Data else { return ["default":[]] }
+        guard let data = d.object(forKey: k) as? Data else { return ["default": []] }
         do {
             let userData = try PropertyListDecoder().decode([String: [Entry]].self, from: data)
             return userData
         } catch {
             print("Error decoding the history: \(error)")
-            return ["default":[]]
+            return ["default": []]
         }
     }
 
@@ -41,8 +41,8 @@ enum Buffers {
 }
 
 class HistoryModel: ObservableObject {
-    @Published var history: [String: [Entry]] = ["default":[]]
-    
+    @Published var history: [String: [Entry]] = ["default": []]
+
     func addMessage(with src: String, out: String, for key: String) {
         let entry = Entry(src: src, out: out)
         if var entries = history[key] {
@@ -57,17 +57,16 @@ class HistoryModel: ObservableObject {
     func load(_ h: [String: [Entry]]) {
         history = h
     }
-    
+
     func clear() {
         history = [:]
         Buffers.clear()
     }
 }
 
-
-
 struct ContentView: View {
     @State var input: String = ""
+    @State var ephemerals: [Int: [String]] = [:]
     @State var showSettings: Bool = false
     @State var showHelp: Bool = false
     @State var showBuffers: Bool = false
@@ -78,20 +77,67 @@ struct ContentView: View {
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel = HistoryModel()
 
+    func onMySubmit(input: String) {
+        if input == "config" {
+            showSettings = true
+            self.input = ""
+            return
+        }
+        if input == #"\:"# {
+            showHelp = true
+            return
+        }
+        if input == "clear" {
+            viewModel.clear()
+            self.input = ""
+            return
+        }
+        if input == #"\,l"# {
+            showBuffers = true
+            self.input = ""
+            return
+        }
+        if input.hasPrefix(#"\,"#) {
+            let components = input.components(separatedBy: " ")
+            if let lastWord = components.last {
+                curBuffer = lastWord
+            }
+            self.input = ""
+            return
+        }
+        if input != "" {
+            if chosenLang == 0 {
+                viewModel.addMessage(with: input, out: e(input: input), for: curBuffer)
+            } else {
+                viewModel.addMessage(with: input, out: ke(input: input), for: curBuffer)
+            }
+            self.input = ""
+        }
+    }
+
     var body: some View {
         ScrollViewReader { scrollView in
             VStack {
                 ScrollView(.vertical) {
                     VStack {
-                        ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { _, h in
+                        ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, h in
                             VStack(alignment: .leading) {
-                                Text("\(h.src)")
-                                    .font(Font.custom("BQN386 Unicode", size: 18))
-                                    .foregroundColor(.blue)
-                                    .multilineTextAlignment(.leading)
-                                    .onTapGesture {
-                                        self.input = h.src
+                                TextField("Source", text: Binding(
+                                    get: { self.viewModel.history[curBuffer, default: []][index].src },
+                                    set: {
+                                        self.viewModel.history[curBuffer, default: []][index].src = $0
+                                        ephemerals[index, default: []].append($0)
                                     }
+                                ))
+                                .onSubmit {
+                                    onMySubmit(input: self.viewModel.history[curBuffer, default: []][index].src)
+                                    for k in ephemerals.keys {
+                                        self.viewModel.history[curBuffer, default: []][k].src = ephemerals[k, default: []].first!
+                                    }
+                                    ephemerals = [:] // reset all virtual textfield edits
+                                }
+                                .font(Font.custom("BQN386 Unicode", size: 18))
+                                .foregroundColor(.blue)
                                 Text("\(trimLongText(h.out))")
                                     .font(Font.custom("BQN386 Unicode", size: 18))
                                     .foregroundColor(h.out.starts(with: "Error:") ? .red : .primary)
@@ -115,43 +161,10 @@ struct ContentView: View {
                 }
                 .padding(.bottom, 5)
 
-            CustomInputField(text: $input, onSubmit: {
-                if input == "config" {
-                    self.showSettings = true
-                    self.input = ""
-                    return
-                }
-                if input == #"\:"# {
-                    self.showHelp = true
-                    return
-                }
-                if input == "clear" {
-                    viewModel.clear()
-                    self.input = ""
-                    return
-                }
-                if input == #"\,l"# {
-                    self.showBuffers = true
-                    self.input = ""
-                    return
-                }
-                if input.hasPrefix(#"\,"#) {
-                    let components = self.input.components(separatedBy: " ")
-                    if let lastWord = components.last {
-                        self.curBuffer = lastWord
-                    }
-                    self.input = ""
-                    return
-                }
-                if input != "" {
-                    if chosenLang == 0 {
-                        self.viewModel.addMessage(with: self.input, out: e(input: self.input), for: curBuffer)
-                    } else {
-                        self.viewModel.addMessage(with: self.input, out: ke(input: self.input), for: curBuffer)
-                    }
-                    self.input = ""
-                }
-            }, font: UIFont(name: "BQN386 Unicode", size: 20)!, keyboardType: .asciiCapable)
+            CustomInputField(text: $input,
+                             onSubmit: { onMySubmit(input: self.input) },
+                             font: UIFont(name: "BQN386 Unicode", size: 20)!,
+                             keyboardType: .asciiCapable)
                 .frame(height: 24)
                 .focused($isFocused)
                 .padding()
@@ -170,20 +183,22 @@ struct ContentView: View {
                         self.move(oldCurPos)
                     }
                 }
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(glyphs, id: \.self) { glyph in
-                                    Button(glyph) {
-                                        print(glyph)
-                                    }
-                                    .font(Font.custom("BQN386 Unicode", size: 30))
-                                }
-                            }
-                        }
-                    }
-                }
+            /*
+             .toolbar {
+             ToolbarItemGroup(placement: .keyboard) {
+             ScrollView(.horizontal) {
+             HStack {
+             ForEach(glyphs, id: \.self) { glyph in
+             Button(glyph) {
+             print(glyph)
+             }
+             .font(Font.custom("BQN386 Unicode", size: 30))
+             }
+             }
+             }
+             }
+             }
+             */
         }
         .padding(.top, 0.1)
         .sheet(isPresented: $showSettings) {

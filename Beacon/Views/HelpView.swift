@@ -2,11 +2,11 @@
 //  HelpView.swift
 //  Beacon
 //
-//  
+//
 //
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
 func toDict(h: String) -> [String: String] {
     var helpDict = [String: String]()
@@ -227,7 +227,7 @@ limits: 8 args, 16 locals, 256 bytecode, 2048 stack
 struct HelpView: View {
     @Binding var key: String
     let hd: [String: String] = toDict(h: kh)
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -242,5 +242,5 @@ struct HelpView: View {
 }
 
 #Preview {
-    //HelpView(key: "\\:")
+    // HelpView(key: "\\:")
 }

@@ -24,13 +24,11 @@ import SwiftUI
  make it easy to test and develop the library from this demo.
  */
 class KeyboardViewController: DemoKeyboardViewController {
-    
     /**
      Here, we register demo-specific services which are then
      used by the keyboard.
      */
     override func viewDidLoad() {
-
         // Setup a demo-specific Unicode input set provider.
         // 💡 You can change this provider to see how the keyboard layout changes.
         inputSetProvider = BQNSP()

@@ -17,7 +17,7 @@ import SwiftUI
  keyboard, if the keyboard type isn't emojis. The toolbar is
  hidden if the keyboard shouldn't have autocomplete, but the
  height is still allocated, since the callouts need it.
- 
+
  The view must observe a `KeyboardContext` as an environment
  object, or take a context instance as an init parameter and
  set it to an observed object. Otherwise, it will not change
@@ -25,7 +25,6 @@ import SwiftUI
  I have not yet figured out why this is needed.
  */
 struct KeyboardView: View {
-    
     @EnvironmentObject
     private var autocompleteContext: AutocompleteContext
     unowned var controller: KeyboardInputViewController
@@ -33,7 +32,7 @@ struct KeyboardView: View {
     private var keyboardContext: KeyboardContext
     @EnvironmentObject
     private var keyboardTextContext: KeyboardTextContext
-    
+
     var body: some View {
         VStack(spacing: 0) {
             if keyboardContext.keyboardType != .emojis {
@@ -43,21 +42,18 @@ struct KeyboardView: View {
                 controller: controller,
                 autocompleteToolbar: .none
             )
-
         }
     }
 }
 
-
 // MARK: - Private Views
 
 private extension KeyboardView {
-
     var autocompleteToolbar: some View {
         AutocompleteToolbar(
             suggestions: autocompleteContext.suggestions,
             locale: keyboardContext.locale,
             suggestionAction: controller.insertAutocompleteSuggestion
-        ).font(Font.custom("BQN386 Unicode", size: 24)).opacity(keyboardContext.prefersAutocomplete ? 1 : 0)  // Still allocate height
+        ).font(Font.custom("BQN386 Unicode", size: 24)).opacity(keyboardContext.prefersAutocomplete ? 1 : 0) // Still allocate height
     }
 }
