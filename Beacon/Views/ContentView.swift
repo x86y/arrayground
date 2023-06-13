@@ -78,38 +78,27 @@ struct ContentView: View {
     @ObservedObject var viewModel = HistoryModel()
 
     func onMySubmit(input: String) {
-        if input == "config" {
+        switch input {
+        case "config":
             showSettings = true
-            self.input = ""
-            return
-        }
-        if input == #"\:"# {
+        case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
             showHelp = true
-            return
-        }
-        if input == "clear" {
+        case "clear":
             viewModel.clear()
-            self.input = ""
-            return
-        }
-        if input == #"\,l"# {
+        case #"\,l"#:
             showBuffers = true
-            self.input = ""
-            return
-        }
-        if input.hasPrefix(#"\,"#) {
+        case _ where input.hasPrefix(#"\,"#):
             let components = input.components(separatedBy: " ")
             if let lastWord = components.last {
                 curBuffer = lastWord
             }
-            self.input = ""
-            return
-        }
-        if input != "" {
-            if chosenLang == 0 {
-                viewModel.addMessage(with: input, out: e(input: input), for: curBuffer)
-            } else {
-                viewModel.addMessage(with: input, out: ke(input: input), for: curBuffer)
+        default:
+            if !input.isEmpty {
+                if chosenLang == 0 {
+                    viewModel.addMessage(with: input, out: e(input: input), for: curBuffer)
+                } else {
+                    viewModel.addMessage(with: input, out: ke(input: input), for: curBuffer)
+                }
             }
             self.input = ""
         }

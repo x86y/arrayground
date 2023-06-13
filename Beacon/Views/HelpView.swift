@@ -226,21 +226,46 @@ limits: 8 args, 16 locals, 256 bytecode, 2048 stack
 
 struct HelpView: View {
     @Binding var key: String
-    let hd: [String: String] = toDict(h: kh)
-
+    let helpDictionary: [String: String] = toDict(h: kh)
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Text("Cheatsheet for \(key)")
-                    .font(.system(.body, design: .monospaced))
-                Text(hd[key]!)
-                    .font(.system(.body, design: .monospaced))
-                    .padding()
-            }.padding()
+            if key == #"\\:"# {
+                all()
+            } else {
+                single(for: key)
+            }
+        }
+    }
+
+    private func single(for key: String) -> some View {
+        VStack(alignment: .leading) {
+            if let helpText = helpDictionary[key] {
+                Text(key)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.blue)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    Text(helpText)
+                        .font(.system(.body, design: .monospaced))
+                        .foregroundColor(Color.black)
+                        .lineLimit(nil)
+                }
+                .padding()
+            }
+        }
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(10)
+        .padding(.bottom)
+    }
+
+    private func all() -> some View {
+        ForEach(Array(helpDictionary.keys), id: \.self) { key in
+            single(for: key)
         }
     }
 }
 
 #Preview {
-    // HelpView(key: "\\:")
+    HelpView(key: .constant("\\:"))
 }
