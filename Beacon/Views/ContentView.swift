@@ -23,7 +23,7 @@ enum Buffers {
     static func save(_ value: [String: [Entry]]) {
         d.set(try? PropertyListEncoder().encode(value), forKey: k)
     }
-
+    
     static func get() -> [String: [Entry]] {
         guard let data = d.object(forKey: k) as? Data else { return ["default": []] }
         do {
@@ -34,7 +34,7 @@ enum Buffers {
             return ["default": []]
         }
     }
-
+    
     static func clear() {
         d.removeObject(forKey: k)
     }
@@ -42,7 +42,7 @@ enum Buffers {
 
 class HistoryModel: ObservableObject {
     @Published var history: [String: [Entry]] = ["default": []]
-
+    
     func addMessage(with src: String, out: String, for key: String) {
         let entry = Entry(src: src, out: out)
         if var entries = history[key] {
@@ -53,11 +53,11 @@ class HistoryModel: ObservableObject {
         }
         Buffers.save(history)
     }
-
+    
     func load(_ h: [String: [Entry]]) {
         history = h
     }
-
+    
     func clear() {
         history = [:]
         Buffers.clear()
@@ -76,17 +76,13 @@ struct ContentView: View {
     @AppStorage("langSelection") private var chosenLang: Int = 0
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel = HistoryModel()
-
+    
     func onMySubmit(input: String) {
         switch input {
-        case "config":
-            showSettings = true
         case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
             showHelp = true
         case "clear":
             viewModel.clear()
-        case #"\,l"#:
-            showBuffers = true
         case _ where input.hasPrefix(#"\,"#):
             let components = input.components(separatedBy: " ")
             if let lastWord = components.last {
@@ -103,7 +99,7 @@ struct ContentView: View {
             self.input = ""
         }
     }
-
+    
     var body: some View {
         ScrollViewReader { scrollView in
             VStack {
@@ -149,45 +145,31 @@ struct ContentView: View {
                     isFocused = false
                 }
                 .padding(.bottom, 5)
-
+            
             CustomInputField(text: $input,
+                             settingsB: $showSettings,
+                             buffersB: $showBuffers,
                              onSubmit: { onMySubmit(input: self.input) },
                              font: UIFont(name: "BQN386 Unicode", size: 20)!,
                              keyboardType: .asciiCapable)
-                .frame(height: 24)
-                .focused($isFocused)
-                .padding()
-                .onTapGesture {
-                    isFocused = true
-                    scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
-                }
-                .onReceive(Just(input)) { newV in
-                    let oldCurPos = self.inpPos
-                    newV.matchingStrings(regex: "\\\\[a-zA-Z0-9]").forEach { NSR in
-                        let range = Range(NSR[0], in: newV)!
-                        if let res = characterMap[String(newV[range])] {
-                            let mod = newV.replacingCharacters(in: range, with: String(res))
-                            self.input = mod
-                        }
-                        self.move(oldCurPos)
+            .frame(height: 24)
+            .padding(.bottom, 4)
+            .focused($isFocused)
+            .onTapGesture {
+                isFocused = true
+                scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
+            }
+            .onReceive(Just(input)) { newV in
+                let oldCurPos = self.inpPos
+                newV.matchingStrings(regex: "\\\\[a-zA-Z0-9]").forEach { NSR in
+                    let range = Range(NSR[0], in: newV)!
+                    if let res = characterMap[String(newV[range])] {
+                        let mod = newV.replacingCharacters(in: range, with: String(res))
+                        self.input = mod
                     }
+                    self.move(oldCurPos)
                 }
-            /*
-             .toolbar {
-             ToolbarItemGroup(placement: .keyboard) {
-             ScrollView(.horizontal) {
-             HStack {
-             ForEach(glyphs, id: \.self) { glyph in
-             Button(glyph) {
-             print(glyph)
-             }
-             .font(Font.custom("BQN386 Unicode", size: 30))
-             }
-             }
-             }
-             }
-             }
-             */
+            }
         }
         .padding(.top, 0.1)
         .sheet(isPresented: $showSettings) {
@@ -204,7 +186,7 @@ struct ContentView: View {
         }
         .onAppear(perform: initRepl)
     }
-
+    
     func initRepl() {
         viewModel.load(Buffers.get())
         kinit()
