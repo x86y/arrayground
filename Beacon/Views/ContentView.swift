@@ -58,8 +58,8 @@ class HistoryModel: ObservableObject {
         history = h
     }
     
-    func clear() {
-        history = [:]
+    func clear(b: String) {
+        history[b] = []
         Buffers.clear()
     }
 }
@@ -81,8 +81,10 @@ struct ContentView: View {
         switch input {
         case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
             showHelp = true
+            self.input = ""
         case "clear":
-            viewModel.clear()
+            viewModel.clear(b: curBuffer)
+            self.input = ""
         case _ where input.hasPrefix(#"\,"#):
             let components = input.components(separatedBy: " ")
             if let lastWord = components.last {
@@ -95,6 +97,8 @@ struct ContentView: View {
                 } else {
                     viewModel.addMessage(with: input, out: ke(input: input), for: curBuffer)
                 }
+            } else {
+                isFocused = false
             }
             self.input = ""
         }
@@ -108,10 +112,17 @@ struct ContentView: View {
                         ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, h in
                             VStack(alignment: .leading) {
                                 TextField("Source", text: Binding(
-                                    get: { self.viewModel.history[curBuffer, default: []][index].src },
+                                    get: {
+                                        if index < viewModel.history[curBuffer, default: []].count {
+                                            return self.viewModel.history[curBuffer, default: []][index].src
+                                        } else {
+                                            return ""
+                                        }},
                                     set: {
-                                        self.viewModel.history[curBuffer, default: []][index].src = $0
-                                        ephemerals[index, default: []].append($0)
+                                        if index < viewModel.history[curBuffer, default: []].count {
+                                            self.viewModel.history[curBuffer, default: []][index].src = $0
+                                            ephemerals[index, default: []].append($0)
+                                        }
                                     }
                                 ))
                                 .onSubmit {
@@ -141,10 +152,7 @@ struct ContentView: View {
                         }
                 }
             }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                .onTapGesture {
-                    isFocused = false
-                }
-                .padding(.bottom, 5)
+            .padding(.bottom, 5)
             
             CustomInputField(text: $input,
                              settingsB: $showSettings,
@@ -156,7 +164,7 @@ struct ContentView: View {
             .padding(.bottom, 4)
             .focused($isFocused)
             .onTapGesture {
-                isFocused = true
+                //isFocused = true
                 scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
             }
             .onReceive(Just(input)) { newV in
@@ -174,7 +182,7 @@ struct ContentView: View {
         .padding(.top, 0.1)
         .sheet(isPresented: $showSettings) {
             ConfigView()
-                .presentationDetents([.large])
+                .presentationDetents([.medium])
         }
         .sheet(isPresented: $showHelp) {
             HelpView(key: self.$input)
@@ -194,7 +202,7 @@ struct ContentView: View {
         /* for filename in modules {
          print(e(input: "•Import \"\(Bundle.main.resourcePath!)/bqn-libs/\(filename)\""))
          } */
-        isFocused = true
+        //isFocused = true
     }
 }
 

@@ -75,7 +75,7 @@ struct CustomInputField: UIViewRepresentable {
         scrollable.axis = .horizontal
         scrollable.distribution = .fillEqually
         scrollable.spacing = 8
-        let letters = ["'", "/", "\\", "%", "*", "+", "-", "\""]
+        let letters = ["'", "/", "\\", "%", "*", "+", "-", "\"", ":"]
         for (_, letter) in letters.enumerated() {
             let button = createCustomButton(image: false, title: letter, action: #selector(Coordinator.letterTap(_:)), coordinator: context.coordinator)
             scrollable.addArrangedSubview(button)

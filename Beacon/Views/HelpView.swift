@@ -247,7 +247,6 @@ struct HelpView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     Text(helpText)
                         .font(.system(.body, design: .monospaced))
-                        .foregroundColor(Color.black)
                         .lineLimit(nil)
                 }
                 .padding()
