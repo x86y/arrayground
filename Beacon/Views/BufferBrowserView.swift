@@ -25,9 +25,16 @@ struct BufferBrowserView: View {
                                 Text(b)
                                     .font(.system(.body, design: .monospaced))
                                     .padding()
-                                    .background(Color.gray.opacity(0.1))
+                                    .background(self.sel == b ? Color.blue.opacity(0.1) : Color.gray.opacity(0.1)) // Change colour if selected
                                     .cornerRadius(8)
                                 Spacer()
+                                Button(action: {
+                                    //wip
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
+                                }
+                                .padding(.trailing)
                             }
                         }
                     }
@@ -37,6 +44,7 @@ struct BufferBrowserView: View {
     }
 }
 
+
 #Preview {
-    // BufferBrowserView()
+    BufferBrowserView(buffers: ["1", "2"], sel: .constant("1"))
 }

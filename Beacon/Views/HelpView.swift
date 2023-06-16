@@ -229,7 +229,7 @@ struct HelpView: View {
     let helpDictionary: [String: String] = toDict(h: kh)
     var body: some View {
         ScrollView {
-            if key == #"\\:"# {
+            if key == #"\\:"#  || key == "" {
                 all()
             } else {
                 single(for: key)

@@ -81,7 +81,6 @@ struct ContentView: View {
         switch input {
         case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
             showHelp = true
-            self.input = ""
         case "clear":
             viewModel.clear(b: curBuffer)
             self.input = ""
@@ -155,6 +154,7 @@ struct ContentView: View {
             .padding(.bottom, 5)
             
             CustomInputField(text: $input,
+                             helpB: $showHelp,
                              settingsB: $showSettings,
                              buffersB: $showBuffers,
                              onSubmit: { onMySubmit(input: self.input) },
