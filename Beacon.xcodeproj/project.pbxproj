@@ -45,6 +45,8 @@
 		F3B199112995193C00FE664F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = F3B199102995193C00FE664F /* Introspect */; };
 		F3B199142995195C00FE664F /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B199132995195C00FE664F /* KeyboardKit */; };
 		F3B199152995199000FE664F /* stdlib in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DB2995181700FE664F /* stdlib */; };
+		F3D296822A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
+		F3D296832A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
 		F3E1DFEF2A31F56800B4A553 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
 		F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
@@ -125,6 +127,7 @@
 		F3B19903299518F900FE664F /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		F3B19905299518F900FE664F /* AutocompleteProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteProvider.swift; sourceTree = "<group>"; };
+		F3D296812A404A3E00AD21A2 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		F3E1DFF62A3216C000B4A553 /* k.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = k.h; sourceTree = "<group>"; };
 		F3E1DFF72A3217E300B4A553 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/libs/libk.a; sourceTree = "<group>"; };
@@ -231,6 +234,7 @@
 				F3B198D3299517DB00FE664F /* Preview Content */,
 				F30A7B8C2A37258200503966 /* Components */,
 				F34179E72A3534DD00ACAF16 /* Views */,
+				F3D296802A404A1D00AD21A2 /* Models */,
 				F34179E62A35349800ACAF16 /* Utilities */,
 				F3B19916299519AE00FE664F /* Libs */,
 				F3B198CD299517DA00FE664F /* BeaconApp.swift */,
@@ -272,6 +276,14 @@
 				F3B198E62995185900FE664F /* get_libs.sh */,
 			);
 			path = Libs;
+			sourceTree = "<group>";
+		};
+		F3D296802A404A1D00AD21A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F3D296812A404A3E00AD21A2 /* History.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D296832A404A3E00AD21A2 /* History.swift in Sources */,
 				F31BCE792A33B33E00A6116D /* Utils.swift in Sources */,
 				F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */,
@@ -436,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D296822A404A3E00AD21A2 /* History.swift in Sources */,
 				F31BCE782A33B33E00A6116D /* Utils.swift in Sources */,
 				F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,

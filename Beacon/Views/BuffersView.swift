@@ -8,13 +8,13 @@ import SwiftUI
 struct BuffersView: View {
     var buffers: [String]
     @Binding var sel: String
-
+    
     var body: some View {
         Section {
             Text("Buffers")
                 .font(.system(.body, design: .monospaced, weight: .semibold))
                 .padding()
-
+            
             ScrollView(.vertical) {
                 VStack(alignment: .leading) {
                     ForEach(Array(buffers), id: \.self) { b in
@@ -39,6 +39,18 @@ struct BuffersView: View {
                         }
                     }
                 }.padding(.horizontal)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        //wip
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                            .font(.system(size: 36)) // Increase the size here
+                    }
+                    .padding(.trailing)
+                    Spacer()
+                }
             }
         }
     }

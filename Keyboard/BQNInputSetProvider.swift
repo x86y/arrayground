@@ -25,13 +25,13 @@ class BQNSP: InputSetProvider {
     var alphabeticInputSet: AlphabeticInputSet {
         AlphabeticInputSet(rows: [
             // .init(lowercased: "‿[{+-×÷}]", uppercased: "‿[{+-×÷}]"),
-            .init(lowercased: "⌽𝕨∊↑∧y⊔⊏⊐π", uppercased: "⌽𝕎⍷↑∧⍋⊔⊑⊐π"),
+            .init(lowercased: "⌽𝕨∊↑∧⊔⊏⊐π←", uppercased: "⌽𝕎⍷↑∧⍋⊔⊑⊐π←"),
             .init(lowercased: "⍉𝕤↕𝕗𝕘⊸∘○⟜", uppercased: "⍉𝕊↕𝔽𝔾«∘⌾»"),
             .init(
-                phoneLowercased: "⥊𝕩↓∨⌊n≡",
-                phoneUppercased: "⋈𝕏↓⍒⌈N≢",
-                padLowercased: "⥊𝕩↓∨⌊n≡∾≤",
-                padUppercased: "⋈𝕏↓⍒⌈N≢≍≥"
+                phoneLowercased: "⥊𝕩↓∨⌊≡∾",
+                phoneUppercased: "⋈𝕏↓⍒⌈≢≤",
+                padLowercased: "⥊𝕩↓∨⌊≡∾≤≍",
+                padUppercased: "⋈𝕏↓⍒⌈≢≍≥≥"
             ),
         ])
     }

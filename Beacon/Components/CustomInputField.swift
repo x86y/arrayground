@@ -5,23 +5,6 @@
 //
 //
 
-/* FOR BQN
- .toolbar {
- ToolbarItemGroup(placement: .keyboard) {
- ScrollView(.horizontal) {
- HStack {
- ForEach(glyphs, id: \.self) { glyph in
- Button(glyph) {
- print(glyph)
- }
- .font(Font.custom("BQN386 Unicode", size: 30))
- }
- }
- }
- }
- }
- */
-
 import SwiftUI
 import UIKit
 
@@ -30,6 +13,7 @@ struct CustomInputField: UIViewRepresentable {
     @Binding var helpOpen: Bool
     @Binding var settingsOpen: Bool
     @Binding var buffersOpen: Bool
+    @AppStorage("langSelection") private var chosenLang: Int = 0
     var onSubmit: (() -> Void)?
     var font: UIFont
     var keyboardType: UIKeyboardType
@@ -42,6 +26,22 @@ struct CustomInputField: UIViewRepresentable {
         self.onSubmit = onSubmit
         self.font = font
         self.keyboardType = keyboardType
+    }
+    
+    func updateLetterButtons(coordinator: Coordinator, scrollable: UIStackView) {
+        // clear the existing buttons
+        scrollable.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        var letters = ["'", "/", "\\", "%", "*", "+", "-", "=", "!", "\"", ":"]
+        if chosenLang == 0 {
+            letters = glyphs // Assuming `glyphs` is defined elsewhere
+        }
+        
+        // recreate the buttons
+        for (_, letter) in letters.enumerated() {
+            let button = createBtn(image: false, title: letter, action: #selector(Coordinator.letterTap(_:)), coordinator: coordinator)
+            scrollable.addArrangedSubview(button)
+        }
     }
     
     func makeUIView(context: Context) -> UITextView {
@@ -77,11 +77,7 @@ struct CustomInputField: UIViewRepresentable {
         scrollable.axis = .horizontal
         scrollable.distribution = .fillEqually
         scrollable.spacing = 8
-        let letters = ["'", "/", "\\", "%", "*", "+", "-", "=", "!", "\"", ":"]
-        for (_, letter) in letters.enumerated() {
-            let button = createBtn(image: false, title: letter, action: #selector(Coordinator.letterTap(_:)), coordinator: context.coordinator)
-            scrollable.addArrangedSubview(button)
-        }
+        updateLetterButtons(coordinator: context.coordinator, scrollable: scrollable)
         let scrollView = UIScrollView()
         scrollView.addSubview(scrollable)
         scrollable.translatesAutoresizingMaskIntoConstraints = false
@@ -124,8 +120,15 @@ struct CustomInputField: UIViewRepresentable {
     }
     
     
-    func updateUIView(_ uiView: UITextView, context _: Context) {
+    func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
+
+        if let toolbar = uiView.inputAccessoryView as? UIToolbar,
+           let scrollView = toolbar.items?.first?.customView as? UIScrollView,
+           let scrollable = scrollView.subviews.first as? UIStackView {
+            updateLetterButtons(coordinator: context.coordinator, scrollable: scrollable)
+        }
+
     }
     
     func makeCoordinator() -> Coordinator {
