@@ -11,6 +11,7 @@ struct ConfigView: View {
     @AppStorage("appearanceSelection") private var appearanceSelection: Int = 0
     @AppStorage("fontSelection") private var fontSelection: Int = 0
     @AppStorage("langSelection") private var langSelection: Int = 0
+    @AppStorage("ephBehavior") private var ephBehavior: Int = 0
 
     var body: some View {
         NavigationView {
@@ -31,6 +32,22 @@ struct ConfigView: View {
                         }
                     } header: {
                         Text("Language Settings")
+                    }.headerProminence(.increased)
+                    Section {
+                        HStack {
+                            Text("Input Click Behavior")
+                            Picker(selection: $ephBehavior) {
+                                Text("Inline edit")
+                                    .tag(0)
+                                Text("Duplicate")
+                                    .tag(1)
+                            } label: {
+                                Text("")
+                            }
+                            .pickerStyle(.menu)
+                        }
+                    } header: {
+                        Text("App Behavior")
                     }.headerProminence(.increased)
                     Section {
                         HStack {

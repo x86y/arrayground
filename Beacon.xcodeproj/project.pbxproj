@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F30A7B8A2A370B7800503966 /* BufferBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A7B892A370B7800503966 /* BufferBrowserView.swift */; };
-		F30A7B8B2A370B7800503966 /* BufferBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A7B892A370B7800503966 /* BufferBrowserView.swift */; };
+		F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A7B892A370B7800503966 /* BuffersView.swift */; };
+		F30A7B8B2A370B7800503966 /* BuffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A7B892A370B7800503966 /* BuffersView.swift */; };
 		F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */; };
 		F312CF8C29951E70008EC197 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DE2995182E00FE664F /* Fonts */; };
 		F312CFA62995270D008EC197 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DE2995182E00FE664F /* Fonts */; };
@@ -94,7 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F30A7B892A370B7800503966 /* BufferBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferBrowserView.swift; sourceTree = "<group>"; };
+		F30A7B892A370B7800503966 /* BuffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffersView.swift; sourceTree = "<group>"; };
 		F312CF7629951B3C008EC197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Beacon-Bridging-Header.h"; sourceTree = "<group>"; };
 		F312CF95299521C6008EC197 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 			children = (
 				F3877C8B29952A5400E2FCB5 /* ContentView.swift */,
 				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
-				F30A7B892A370B7800503966 /* BufferBrowserView.swift */,
+				F30A7B892A370B7800503966 /* BuffersView.swift */,
 				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
 			);
 			path = Views;
@@ -424,7 +424,7 @@
 				F31BCE792A33B33E00A6116D /* Utils.swift in Sources */,
 				F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */,
-				F30A7B8B2A370B7800503966 /* BufferBrowserView.swift in Sources */,
+				F30A7B8B2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */,
 				F32D9E8529966FCD007BC97C /* BeaconApp.swift in Sources */,
 				F31BCE7C2A33B3A200A6116D /* CustomInputField.swift in Sources */,
@@ -439,7 +439,7 @@
 				F31BCE782A33B33E00A6116D /* Utils.swift in Sources */,
 				F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,
-				F30A7B8A2A370B7800503966 /* BufferBrowserView.swift in Sources */,
+				F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */,
 				F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */,
 				F31BCE7B2A33B3A200A6116D /* CustomInputField.swift in Sources */,

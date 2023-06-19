@@ -74,6 +74,7 @@ struct ContentView: View {
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
     @AppStorage("langSelection") private var chosenLang: Int = 0
+    @AppStorage("ephBehavior") private var ephBehavior: Int = 0
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel = HistoryModel()
     
@@ -110,35 +111,44 @@ struct ContentView: View {
                     VStack {
                         ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, h in
                             VStack(alignment: .leading) {
-                                TextField("Source", text: Binding(
-                                    get: {
-                                        if index < viewModel.history[curBuffer, default: []].count {
-                                            return self.viewModel.history[curBuffer, default: []][index].src
-                                        } else {
-                                            return ""
-                                        }},
-                                    set: {
-                                        if index < viewModel.history[curBuffer, default: []].count {
-                                            self.viewModel.history[curBuffer, default: []][index].src = $0
-                                            ephemerals[index, default: []].append($0)
+                                if ephBehavior == 0 {
+                                    TextField("Source", text: Binding(
+                                        get: {
+                                            if index < viewModel.history[curBuffer, default: []].count {
+                                                return self.viewModel.history[curBuffer, default: []][index].src
+                                            } else {
+                                                return ""
+                                            }},
+                                        set: {
+                                            if index < viewModel.history[curBuffer, default: []].count {
+                                                self.viewModel.history[curBuffer, default: []][index].src = $0
+                                                ephemerals[index, default: []].append($0)
+                                            }
                                         }
+                                    ))
+                                    .onSubmit {
+                                        onMySubmit(input: self.viewModel.history[curBuffer, default: []][index].src)
+                                        for k in ephemerals.keys {
+                                            self.viewModel.history[curBuffer, default: []][k].src = ephemerals[k, default: []].first!
+                                        }
+                                        ephemerals = [:] // reset all virtual textfield edits
                                     }
-                                ))
-                                .onSubmit {
-                                    onMySubmit(input: self.viewModel.history[curBuffer, default: []][index].src)
-                                    for k in ephemerals.keys {
-                                        self.viewModel.history[curBuffer, default: []][k].src = ephemerals[k, default: []].first!
-                                    }
-                                    ephemerals = [:] // reset all virtual textfield edits
+                                    .font(Font.custom("BQN386 Unicode", size: 18))
+                                    .foregroundColor(.blue)
+                                } else if ephBehavior == 1 {
+                                    Text(h.src)
+                                        .font(Font.custom("BQN386 Unicode", size: 18))
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                                            self.input = h.src
+                                        }
                                 }
-                                .font(Font.custom("BQN386 Unicode", size: 18))
-                                .foregroundColor(.blue)
                                 Text("\(trimLongText(h.out))")
                                     .font(Font.custom("BQN386 Unicode", size: 18))
                                     .foregroundColor(h.out.starts(with: "Error:") ? .red : .primary)
                                     .multilineTextAlignment(.leading)
                                     .onTapGesture {
-                                        self.input += h.out
+                                        self.input = h.out
                                     }
                             }.frame(maxWidth: .infinity, alignment: .leading)
                         }.listRowBackground(Color.clear)
@@ -151,7 +161,7 @@ struct ContentView: View {
                         }
                 }
             }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            .padding(.bottom, 5)
+                .padding(.bottom, 5)
             
             CustomInputField(text: $input,
                              helpB: $showHelp,
@@ -189,7 +199,7 @@ struct ContentView: View {
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $showBuffers) {
-            BufferBrowserView(buffers: Array(viewModel.history.keys), sel: self.$curBuffer)
+            BuffersView(buffers: Array(viewModel.history.keys), sel: self.$curBuffer)
                 .presentationDetents([.medium])
         }
         .onAppear(perform: initRepl)

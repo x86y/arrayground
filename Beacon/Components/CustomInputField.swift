@@ -119,6 +119,7 @@ struct CustomInputField: UIViewRepresentable {
         button.tag = title.hashValue
         button.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: 16, weight: .regular)
         button.tintColor = .label
+        button.setTitleColor(.label, for: .normal)
         return button
     }
     

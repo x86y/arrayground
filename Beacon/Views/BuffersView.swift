@@ -1,11 +1,11 @@
 //
-//  BufferBrowserView.swift
+//  BufferView.swift
 //  Beacon
 //
 
 import SwiftUI
 
-struct BufferBrowserView: View {
+struct BuffersView: View {
     var buffers: [String]
     @Binding var sel: String
 
@@ -46,5 +46,5 @@ struct BufferBrowserView: View {
 
 
 #Preview {
-    BufferBrowserView(buffers: ["1", "2"], sel: .constant("1"))
+    BuffersView(buffers: ["1", "2"], sel: .constant("1"))
 }
