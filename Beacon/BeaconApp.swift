@@ -19,10 +19,11 @@ struct BeaconApp: App {
             return .none
         }
     }
+    @StateObject private var viewModel = HistoryModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
                 .preferredColorScheme(appearanceSwitch)
         }
     }

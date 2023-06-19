@@ -22,7 +22,7 @@ struct ContentView: View {
     @AppStorage("langSelection") private var chosenLang: Int = 0
     @AppStorage("ephBehavior") private var ephBehavior: Int = 0
     @FocusState var isFocused: Bool
-    @ObservedObject var viewModel = HistoryModel()
+    @ObservedObject var viewModel: HistoryModel
     
     func onMySubmit(input: String) {
         switch input {
@@ -148,7 +148,7 @@ struct ContentView: View {
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $showBuffers) {
-            BuffersView(buffers: Array(viewModel.history.keys), sel: self.$curBuffer)
+            BuffersView(buffers: $viewModel.history, sel: self.$curBuffer)
                 .presentationDetents([.medium])
         }
         .onAppear(perform: initRepl)
@@ -165,8 +165,10 @@ struct ContentView: View {
     }
 }
 
+/*
 struct ContentView_Preview: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+*/

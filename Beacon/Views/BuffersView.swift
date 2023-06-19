@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct BuffersView: View {
-    var buffers: [String]
+    @Binding var buffers: [String: [Entry]]
     @Binding var sel: String
     
     var body: some View {
@@ -17,7 +17,7 @@ struct BuffersView: View {
             
             ScrollView(.vertical) {
                 VStack(alignment: .leading) {
-                    ForEach(Array(buffers), id: \.self) { b in
+                    ForEach(Array(buffers.keys), id: \.self) { b in
                         Button(action: {
                             self.sel = b
                         }) {
@@ -29,7 +29,7 @@ struct BuffersView: View {
                                     .cornerRadius(8)
                                 Spacer()
                                 Button(action: {
-                                    //wip
+                                    buffers[b] = nil
                                 }) {
                                     Image(systemName: "minus.circle.fill")
                                         .foregroundColor(.red)
@@ -42,7 +42,8 @@ struct BuffersView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        //wip
+                        sel = genRandBuffer(length: 8)
+                        buffers[sel] = []
                     }) {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
@@ -58,5 +59,5 @@ struct BuffersView: View {
 
 
 #Preview {
-    BuffersView(buffers: ["1", "2"], sel: .constant("1"))
+    // BuffersView(buffers:  ["key1": "value1", "key2": "value2"], sel: .constant("1"))
 }

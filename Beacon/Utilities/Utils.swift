@@ -100,6 +100,21 @@ func removeLastLine(from string: String) -> String {
     return String(string[..<range.lowerBound])
 }
 
+func genRandBuffer(length: Int) -> String {
+    let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let allowedCharsCount = UInt32(allowedChars.count)
+    var randomString = ""
+
+    for _ in 0 ..< length {
+        let randomNum = Int(arc4random_uniform(allowedCharsCount))
+        let randomIndex = allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)
+        let newCharacter = allowedChars[randomIndex]
+        randomString += String(newCharacter)
+    }
+
+    return randomString
+}
+
 var glyphs = ["˜", "˘", "¨", "⁼", "⌜", "´", "˝", "∞", "¯", "•", "÷", "×", "¬", "⎉", "⚇", "⍟", "◶", "⊘", "⎊", "⍎", "⍕", "⟨", "⟩", "√", "⋆", "←", "→", "⊣", "⊢", "⋄", "↩", "·", "|", "∾", "≍", "≠", "‿"]
 var modules = ["bigint.bqn", "bignat.bqn", "csv.bqn", "datetime.bqn", "hashmap.bqn", "matrix.bqn", "min.bqn", "perlin.bqn", "polynomial.bqn", "primes.bqn", "roots.bqn", "strings.bqn"]
 let characterMap: [String: Character] = ["\\`": "˜", "\\1": "˘", "\\2": "¨", "\\3": "⁼", "\\4": "⌜", "\\5": "´", "\\6": "˝", "\\7": "7", "\\8": "∞", "\\9": "¯", "\\0": "•", "\\-": "÷", "\\=": "×", "\\~": "¬", "\\!": "⎉", "\\@": "⚇", "\\#": "⍟", "\\$": "◶", "\\%": "⊘", "\\^": "⎊", "\\&": "⍎", "\\*": "⍕", "\\(": "⟨", "\\)": "⟩", "\\_": "√", "\\+": "⋆", "\\q": "⌽", "\\w": "𝕨", "\\e": "∊", "\\r": "↑", "\\t": "∧", "\\y": "y", "\\u": "⊔", "\\i": "⊏", "\\o": "⊐", "\\p": "π", "\\[": "←", "\\]": "→", "\\Q": "↙", "\\W": "𝕎", "\\E": "⍷", "\\R": "𝕣", "\\T": "⍋", "\\Y": "Y", "\\U": "U", "\\I": "⊑", "\\O": "⊒", "\\P": "⍳", "\\{": "⊣", "\\}": "⊢", "\\a": "⍉", "\\s": "𝕤", "\\d": "↕", "\\f": "𝕗", "\\g": "𝕘", "\\h": "⊸", "\\j": "∘", "\\k": "○", "\\l": "⟜", "\\;": "⋄", "\\'": "↩", "\\A": "↖", "\\S": "𝕊", "\\D": "D", "\\F": "𝔽", "\\G": "𝔾", "\\H": "«", "\\J": "J", "\\K": "⌾", "\\L": "»", "\\:": "·", "\\|": "|", "\\z": "⥊", "\\x": "𝕩", "\\c": "↓", "\\v": "∨", "\\b": "⌊", "\\n": "n", "\\m": "≡", "\\,": "∾", "\\.": "≍", "\\/": "≠", "\\Z": "⋈", "\\X": "𝕏", "\\C": "C", "\\V": "⍒", "\\B": "⌈", "\\N": "N", "\\M": "≢", "\\<": "≤", "\\>": "≥", "\\?": "⇐", "\\ ": "‿"]
