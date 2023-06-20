@@ -9,16 +9,17 @@ import SwiftUI
 
 @main
 struct BeaconApp: App {
-    @AppStorage("appearanceSelection") private var appearanceSelection: Int = 0
+    @AppStorage("scheme") private var scheme: Appearance = .system
     var appearanceSwitch: ColorScheme? {
-        if appearanceSelection == 1 {
+        if scheme == .light {
             return .light
-        } else if appearanceSelection == 2 {
+        } else if scheme == .dark {
             return .dark
         } else {
             return .none
         }
     }
+
     @StateObject private var viewModel = HistoryModel()
 
     var body: some Scene {

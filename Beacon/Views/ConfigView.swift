@@ -7,11 +7,33 @@
 
 import SwiftUI
 
+enum Appearance: Int {
+    case system = 0
+    case light = 1
+    case dark = 2
+}
+
+enum AppFont: Int {
+    case bqn386 = 0
+    case iosevka = 1
+    case apl = 2
+}
+
+enum Language: Int {
+    case bqn = 0
+    case k = 1
+}
+
+enum Behavior: Int {
+    case inlineEdit = 0
+    case duplicate = 1
+}
+
 struct ConfigView: View {
-    @AppStorage("appearanceSelection") private var appearanceSelection: Int = 0
-    @AppStorage("fontSelection") private var fontSelection: Int = 0
-    @AppStorage("langSelection") private var langSelection: Int = 0
-    @AppStorage("ephBehavior") private var ephBehavior: Int = 0
+    @AppStorage("scheme") private var scheme: Appearance = .system
+    @AppStorage("font") private var font: AppFont = .bqn386
+    @AppStorage("lang") private var lang: Language = .bqn
+    @AppStorage("editType") private var editType: Behavior = .inlineEdit
 
     var body: some View {
         NavigationView {
@@ -20,11 +42,11 @@ struct ConfigView: View {
                     Section {
                         HStack {
                             Text("Language")
-                            Picker(selection: $langSelection) {
+                            Picker(selection: $lang) {
                                 Text("BQN")
-                                    .tag(0)
+                                    .tag(Language.bqn)
                                 Text("K")
-                                    .tag(1)
+                                    .tag(Language.k)
                             } label: {
                                 Text("")
                             }
@@ -36,11 +58,11 @@ struct ConfigView: View {
                     Section {
                         HStack {
                             Text("Input Click Behavior")
-                            Picker(selection: $ephBehavior) {
+                            Picker(selection: $editType) {
                                 Text("Inline edit")
-                                    .tag(0)
+                                    .tag(Behavior.inlineEdit)
                                 Text("Duplicate")
-                                    .tag(1)
+                                    .tag(Behavior.duplicate)
                             } label: {
                                 Text("")
                             }
@@ -52,13 +74,13 @@ struct ConfigView: View {
                     Section {
                         HStack {
                             Text("Colorscheme")
-                            Picker(selection: $appearanceSelection) {
+                            Picker(selection: $scheme) {
                                 Text("System")
-                                    .tag(0)
+                                    .tag(Appearance.system)
                                 Text("Light")
-                                    .tag(1)
+                                    .tag(Appearance.light)
                                 Text("Dark")
-                                    .tag(2)
+                                    .tag(Appearance.dark)
                             } label: {
                                 Text("")
                             }
@@ -66,13 +88,13 @@ struct ConfigView: View {
                         .pickerStyle(.menu)
                         HStack {
                             Text("Font")
-                            Picker(selection: $fontSelection) {
+                            Picker(selection: $font) {
                                 Text("BQN386")
-                                    .tag(0)
+                                    .tag(AppFont.bqn386)
                                 Text("Iosevka")
-                                    .tag(1)
+                                    .tag(AppFont.iosevka)
                                 Text("APL")
-                                    .tag(2)
+                                    .tag(AppFont.apl)
                             } label: {
                                 Text("")
                             }

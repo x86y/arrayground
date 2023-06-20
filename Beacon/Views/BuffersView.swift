@@ -8,13 +8,13 @@ import SwiftUI
 struct BuffersView: View {
     @Binding var buffers: [String: [Entry]]
     @Binding var sel: String
-    
+
     var body: some View {
         Section {
             Text("Buffers")
                 .font(.system(.body, design: .monospaced, weight: .semibold))
                 .padding()
-            
+
             ScrollView(.vertical) {
                 VStack(alignment: .leading) {
                     ForEach(Array(buffers.keys), id: \.self) { b in
@@ -56,7 +56,6 @@ struct BuffersView: View {
         }
     }
 }
-
 
 #Preview {
     // BuffersView(buffers:  ["key1": "value1", "key2": "value2"], sel: .constant("1"))

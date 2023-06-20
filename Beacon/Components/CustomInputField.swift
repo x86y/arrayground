@@ -13,12 +13,12 @@ struct CustomInputField: UIViewRepresentable {
     @Binding var helpOpen: Bool
     @Binding var settingsOpen: Bool
     @Binding var buffersOpen: Bool
-    @AppStorage("langSelection") private var chosenLang: Int = 0
+    var lang: Language
     var onSubmit: (() -> Void)?
     var font: UIFont
     var keyboardType: UIKeyboardType
-    
-    init(text: Binding<String>, helpB: Binding<Bool>, settingsB: Binding<Bool>, buffersB: Binding<Bool>, onSubmit: (() -> Void)? = nil, font: UIFont, keyboardType: UIKeyboardType) {
+
+    init(text: Binding<String>, helpB: Binding<Bool>, settingsB: Binding<Bool>, buffersB: Binding<Bool>, onSubmit: (() -> Void)? = nil, font: UIFont, keyboardType: UIKeyboardType, lang: Language) {
         _text = text
         _settingsOpen = settingsB
         _buffersOpen = buffersB
@@ -26,24 +26,25 @@ struct CustomInputField: UIViewRepresentable {
         self.onSubmit = onSubmit
         self.font = font
         self.keyboardType = keyboardType
+        self.lang = lang
     }
-    
+
     func updateLetterButtons(coordinator: Coordinator, scrollable: UIStackView) {
         // clear the existing buttons
         scrollable.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
+
         var letters = ["'", "/", "\\", "%", "*", "+", "-", "=", "!", "\"", ":"]
-        if chosenLang == 0 {
+        if lang == .bqn {
             letters = glyphs // Assuming `glyphs` is defined elsewhere
         }
-        
+
         // recreate the buttons
         for (_, letter) in letters.enumerated() {
             let button = createBtn(image: false, title: letter, action: #selector(Coordinator.letterTap(_:)), coordinator: coordinator)
             scrollable.addArrangedSubview(button)
         }
     }
-    
+
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.delegate = context.coordinator
@@ -57,13 +58,12 @@ struct CustomInputField: UIViewRepresentable {
         textView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         textView.textContainer.lineBreakMode = NSLineBreakMode.byWordWrapping
         textView.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: NSLayoutConstraint.Axis.vertical)
-        
-        
+
         let stickyRightView = UIStackView()
         stickyRightView.axis = .horizontal
         stickyRightView.distribution = .fillEqually
         stickyRightView.spacing = 10
-        
+
         let buttonOne = createBtn(image: true, title: "arrow.left.square.fill", action: #selector(Coordinator.btnClearnInp), coordinator: context.coordinator)
         let buttonTwo = createBtn(image: true, title: "questionmark.app.fill", action: #selector(Coordinator.btnHelp), coordinator: context.coordinator)
         let buttonThree = createBtn(image: true, title: "list.bullet.rectangle.portrait.fill", action: #selector(Coordinator.btnBuffers), coordinator: context.coordinator)
@@ -72,7 +72,7 @@ struct CustomInputField: UIViewRepresentable {
         stickyRightView.addArrangedSubview(buttonTwo)
         stickyRightView.addArrangedSubview(buttonThree)
         stickyRightView.addArrangedSubview(buttonFour)
-        
+
         let scrollable = UIStackView()
         scrollable.axis = .horizontal
         scrollable.distribution = .fillEqually
@@ -86,19 +86,18 @@ struct CustomInputField: UIViewRepresentable {
             scrollable.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             scrollable.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             scrollable.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            scrollable.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+            scrollable.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
         ])
-        
+
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textView.frame.size.width, height: 44))
         let sticky = UIBarButtonItem(customView: stickyRightView)
         let iscrollable = UIBarButtonItem(customView: scrollView)
-        
+
         toolbar.items = [iscrollable, sticky]
         textView.inputAccessoryView = toolbar
         return textView
     }
-    
-    
+
     func createBtn(image: Bool, title: String, action: Selector, coordinator: Coordinator) -> UIButton {
         let button = UIButton()
         if image {
@@ -118,32 +117,29 @@ struct CustomInputField: UIViewRepresentable {
         button.setTitleColor(.label, for: .normal)
         return button
     }
-    
-    
+
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
 
         if let toolbar = uiView.inputAccessoryView as? UIToolbar,
            let scrollView = toolbar.items?.first?.customView as? UIScrollView,
-           let scrollable = scrollView.subviews.first as? UIStackView {
+           let scrollable = scrollView.subviews.first as? UIStackView
+        {
             updateLetterButtons(coordinator: context.coordinator, scrollable: scrollable)
         }
-
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
-    
-    
+
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: CustomInputField
-        
+
         init(_ textView: CustomInputField) {
             parent = textView
         }
-        
+
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if text == "\n" {
                 parent.onSubmit?()
@@ -157,19 +153,23 @@ struct CustomInputField: UIViewRepresentable {
             }
             return true
         }
-        
+
         @objc func btnClearnInp() {
             parent.text = ""
         }
+
         @objc func btnHelp() {
             parent.helpOpen = true
         }
+
         @objc func btnBuffers() {
             parent.buffersOpen = true
         }
+
         @objc func btnSettings() {
             parent.settingsOpen = true
         }
+
         @objc func letterTap(_ sender: UIButton) {
             if let letter = sender.titleLabel?.text {
                 if letter == "\"" && parent.text == "" {

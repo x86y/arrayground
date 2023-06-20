@@ -2,7 +2,6 @@
 //  History.swift
 //  Beacon
 //
-//
 
 import Foundation
 
@@ -19,7 +18,7 @@ enum Buffers {
     static func save(_ value: [String: [Entry]]) {
         d.set(try? PropertyListEncoder().encode(value), forKey: k)
     }
-    
+
     static func get() -> [String: [Entry]] {
         guard let data = d.object(forKey: k) as? Data else { return ["default": []] }
         do {
@@ -30,7 +29,7 @@ enum Buffers {
             return ["default": []]
         }
     }
-    
+
     static func clear() {
         d.removeObject(forKey: k)
     }
@@ -38,7 +37,7 @@ enum Buffers {
 
 class HistoryModel: ObservableObject {
     @Published var history: [String: [Entry]] = ["default": []]
-    
+
     func addMessage(with src: String, out: String, for key: String) {
         let entry = Entry(src: src, out: out)
         if var entries = history[key] {
@@ -49,14 +48,13 @@ class HistoryModel: ObservableObject {
         }
         Buffers.save(history)
     }
-    
+
     func load(_ h: [String: [Entry]]) {
         history = h
     }
-    
+
     func clear(b: String) {
         history[b] = []
         Buffers.clear()
     }
 }
-
