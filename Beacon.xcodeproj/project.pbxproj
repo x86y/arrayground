@@ -30,6 +30,7 @@
 		F32D9E9029966FCD007BC97C /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B198E02995184400FE664F /* libcbqn.a */; };
 		F32D9E972996710A007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
+		F3512E092A4CE18D00658F24 /* libk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3512E082A4CE18D00658F24 /* libk.a */; };
 		F3877C8E29952A6600E2FCB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3877C8D29952A6600E2FCB5 /* Assets.xcassets */; };
 		F38F03A92A323F8500F66354 /* libksim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38F03A82A323F8500F66354 /* libksim.a */; };
 		F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198CD299517DA00FE664F /* BeaconApp.swift */; };
@@ -47,10 +48,10 @@
 		F3B199152995199000FE664F /* stdlib in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DB2995181700FE664F /* stdlib */; };
 		F3D296822A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
 		F3D296832A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
+		F3DF828A2A4EF33A00F6CD19 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */; };
 		F3E1DFEF2A31F56800B4A553 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
 		F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
-		F3E1DFF82A3217E300B4A553 /* libk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3E1DFF72A3217E300B4A553 /* libk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,9 @@
 		F31BCE7D2A348B7500A6116D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		F32D9E9429966FCD007BC97C /* BeaconSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32D9E9529966FCD007BC97C /* Beacon copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Beacon copy-Info.plist"; path = "/Users/sp/mac/applefarm/Beacon/Beacon copy-Info.plist"; sourceTree = "<absolute>"; };
+		F3512E082A4CE18D00658F24 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/Libs/libk.a; sourceTree = "<group>"; };
+		F35FE0AD2A44387C00653849 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F35FE0AF2A44387D00653849 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F3877C8B29952A5400E2FCB5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F3877C8D29952A6600E2FCB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F38F03A82A323F8500F66354 /* libksim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libksim.a; path = Beacon/libs/libksim.a; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 		F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		F3B19905299518F900FE664F /* AutocompleteProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteProvider.swift; sourceTree = "<group>"; };
 		F3D296812A404A3E00AD21A2 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		F3DF82872A4CF0C000F6CD19 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = Beacon/Libs/libcurl.a; sourceTree = "<group>"; };
+		F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		F3E1DFF62A3216C000B4A553 /* k.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = k.h; sourceTree = "<group>"; };
 		F3E1DFF72A3217E300B4A553 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/libs/libk.a; sourceTree = "<group>"; };
@@ -148,7 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3E1DFF82A3217E300B4A553 /* libk.a in Frameworks */,
+				F3512E092A4CE18D00658F24 /* libk.a in Frameworks */,
 				F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */,
 				F3B199112995193C00FE664F /* Introspect in Frameworks */,
 			);
@@ -176,8 +182,12 @@
 		F312CF7329951A0F008EC197 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F3DF82872A4CF0C000F6CD19 /* libcurl.a */,
+				F3512E082A4CE18D00658F24 /* libk.a */,
 				F38F03A82A323F8500F66354 /* libksim.a */,
 				F3E1DFF72A3217E300B4A553 /* libk.a */,
+				F35FE0AD2A44387C00653849 /* WidgetKit.framework */,
+				F35FE0AF2A44387D00653849 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -201,6 +211,7 @@
 				F31BCE7D2A348B7500A6116D /* HelpView.swift */,
 				F30A7B892A370B7800503966 /* BuffersView.swift */,
 				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
+				F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -360,7 +371,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F3B198C9299517DA00FE664F = {
@@ -389,8 +400,8 @@
 			projectRoot = "";
 			targets = (
 				F3B198C9299517DA00FE664F /* Beacon */,
-				F3B198F0299518E900FE664F /* Keyboard */,
 				F32D9E7E29966FCD007BC97C /* BeaconSim */,
+				F3B198F0299518E900FE664F /* Keyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -451,6 +462,7 @@
 			files = (
 				F3D296822A404A3E00AD21A2 /* History.swift in Sources */,
 				F31BCE782A33B33E00A6116D /* Utils.swift in Sources */,
+				F3DF828A2A4EF33A00F6CD19 /* DashboardView.swift in Sources */,
 				F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,
 				F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */,
@@ -523,7 +535,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -560,7 +572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Beacon-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -685,6 +697,7 @@
 		F3B198D9299517DB00FE664F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -694,6 +707,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Beacon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Beacon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -707,6 +722,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Beacon",
 					"$(PROJECT_DIR)/Beacon/libs",
+					"$(PROJECT_DIR)/Beacon/Libs",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
@@ -721,6 +737,7 @@
 		F3B198DA299517DB00FE664F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -730,6 +747,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Beacon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Beacon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -743,6 +762,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Beacon",
 					"$(PROJECT_DIR)/Beacon/libs",
+					"$(PROJECT_DIR)/Beacon/Libs",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;

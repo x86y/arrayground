@@ -2,8 +2,6 @@
 //  ConfigView.swift
 //  Beacon
 //
-//
-//
 
 import SwiftUI
 

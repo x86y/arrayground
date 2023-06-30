@@ -7,6 +7,8 @@ import Combine
 import Foundation
 import SwiftUI
 import UIKit
+import CoreSpotlight
+import MobileCoreServices
 
 struct HistoryView: View {
     var index: Int
@@ -17,7 +19,7 @@ struct HistoryView: View {
     @Binding var ephemerals: [Int: [String]]
     @Binding var editType: Behavior
     @ObservedObject var viewModel: HistoryModel
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             if editType == Behavior.inlineEdit {
@@ -69,21 +71,26 @@ struct ContentView: View {
     @State var ephemerals: [Int: [String]] = [:]
     @State var showSettings: Bool = false
     @State var showHelp: Bool = false
+    @State var showDashboard: Bool = false
     @State var showBuffers: Bool = false
     @State var curBuffer: String = "default"
+    @State private var selectedView: Int = 0
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
     @AppStorage("lang") var lang: Language = .bqn
     @AppStorage("editType") var editType: Behavior = .inlineEdit
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel: HistoryModel
-
+    
     func onMySubmit(input: String) {
         switch input {
         case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
             showHelp = true
         case "clear":
             viewModel.clear(b: curBuffer)
+            self.input = ""
+        case "custom":
+            showDashboard = true
             self.input = ""
         case _ where input.hasPrefix(#"\,"#):
             let components = input.components(separatedBy: " ")
@@ -93,45 +100,57 @@ struct ContentView: View {
         default:
             if !input.isEmpty {
                 // FIXME, below is a hacky workaround for appstorage not syncing?
-                if UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue {
-                    viewModel.addMessage(with: input, out: e(input: input), for: curBuffer)
-                } else {
-                    viewModel.addMessage(with: input, out: ke(input: input), for: curBuffer)
+                let output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                ? e(input: input)
+                : ke(input: input)
+                let attributeSet = CSSearchableItemAttributeSet(contentType: .plainText)
+                attributeSet.title = input
+                attributeSet.contentDescription = output
+                let uniqueIdentifier = UUID().uuidString
+                let searchableItem = CSSearchableItem(uniqueIdentifier: uniqueIdentifier, domainIdentifier: "arrscience.Beacon.search", attributeSet: attributeSet)
+                CSSearchableIndex.default().indexSearchableItems([searchableItem]) { error in
+                    if let error = error {
+                        print("Indexing error: \(error.localizedDescription)")
+                    } else {
+                        print("Search item successfully indexed!")
+                    }
                 }
+                viewModel.addMessage(with: input, out: output, for: curBuffer)
             } else {
                 isFocused = false
             }
             self.input = ""
         }
     }
-
+    
     var body: some View {
-        ScrollViewReader { scrollView in
-            VStack {
-                ScrollView(.vertical) {
-                    VStack {
-                        ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, historyItem in
-                            HistoryView(index: index, historyItem: historyItem, curBuffer: curBuffer, onMySubmit: onMySubmit, input: $input, ephemerals: $ephemerals, editType: $editType, viewModel: viewModel)
-                        }.listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                    }.id("HistoryScrollView")
-                        .onChange(of: viewModel.history) { _ in
-                            withAnimation {
-                                scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
+        TabView(selection: $selectedView) {
+            ScrollViewReader { scrollView in
+                VStack {
+                    ScrollView(.vertical) {
+                        VStack {
+                            ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, historyItem in
+                                HistoryView(index: index, historyItem: historyItem, curBuffer: curBuffer, onMySubmit: onMySubmit, input: $input, ephemerals: $ephemerals, editType: $editType, viewModel: viewModel)
+                            }.listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                        }.id("HistoryScrollView")
+                            .onChange(of: viewModel.history) {
+                                withAnimation {
+                                    scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
+                                }
                             }
-                        }
-                }
-            }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                .padding(.bottom, 5)
-
-            CustomInputField(text: $input,
-                             helpB: $showHelp,
-                             settingsB: $showSettings,
-                             buffersB: $showBuffers,
-                             onSubmit: { onMySubmit(input: self.input) },
-                             font: UIFont(name: "BQN386 Unicode", size: 20)!,
-                             keyboardType: .asciiCapable,
-                             lang: self.lang)
+                    }
+                }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(.bottom, 5)
+                
+                CustomInputField(text: $input,
+                                 helpB: $showHelp,
+                                 settingsB: $showSettings,
+                                 buffersB: $showBuffers,
+                                 onSubmit: { onMySubmit(input: self.input) },
+                                 font: UIFont(name: "BQN386 Unicode", size: 20)!,
+                                 keyboardType: .asciiCapable,
+                                 lang: self.lang)
                 .frame(height: 24)
                 .padding(.bottom, 4)
                 .focused($isFocused)
@@ -152,23 +171,27 @@ struct ContentView: View {
                         }
                     }
                 }
+            }
+            .padding(.top, 0.1)
+            .sheet(isPresented: $showSettings) {
+                ConfigView()
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $showHelp) {
+                HelpView(key: self.$input)
+                    .presentationDetents([.large])
+            }
+            .sheet(isPresented: $showBuffers) {
+                BuffersView(buffers: $viewModel.history, sel: self.$curBuffer)
+                    .presentationDetents([.medium])
+            }
+            .onAppear(perform: initRepl)
+            
+            Dashboard().tag(1)
         }
-        .padding(.top, 0.1)
-        .sheet(isPresented: $showSettings) {
-            ConfigView()
-                .presentationDetents([.medium])
-        }
-        .sheet(isPresented: $showHelp) {
-            HelpView(key: self.$input)
-                .presentationDetents([.large])
-        }
-        .sheet(isPresented: $showBuffers) {
-            BuffersView(buffers: $viewModel.history, sel: self.$curBuffer)
-                .presentationDetents([.medium])
-        }
-        .onAppear(perform: initRepl)
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
-
+    
     func initRepl() {
         viewModel.load(Buffers.get())
         kinit()

@@ -57,6 +57,6 @@ struct BuffersView: View {
     }
 }
 
-#Preview {
+// #Preview {
     // BuffersView(buffers:  ["key1": "value1", "key2": "value2"], sel: .constant("1"))
-}
+// }
