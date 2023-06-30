@@ -13,7 +13,6 @@ struct Card: Identifiable {
 
 struct Dashboard: View {
     @State private var cards: [Card] = [Card(id: UUID(), snippet: "")]
-    
     var body: some View {
         VStack {
             Text("Dashboard")
@@ -21,7 +20,7 @@ struct Dashboard: View {
                 .fontWeight(.bold)
                 .padding(.bottom, 20)
             Spacer()
-            ScrollView(.horizontal, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     ForEach(0 ..< cards.count, id: \.self) { index in
                         CardView(card: $cards[index], removeCard: {
@@ -33,10 +32,7 @@ struct Dashboard: View {
                     Button(action: {
                         self.cards.append(Card(id: UUID(), snippet: ""))
                     }) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("New")
-                        }
+                        HStack { Image(systemName: "plus") }
                         .padding()
                         .foregroundColor(.white)
                         .background(Color.blue)
@@ -60,11 +56,6 @@ struct CardView: View {
     var body: some View {
         VStack{
             ZStack {
-                RoundedRectangle(cornerRadius: 4)
-                    .foregroundColor(.white)
-                    .shadow(color: .gray, radius: 4, x: 2, y: 2)
-                    .frame(width: 300, height: 200)
-                
                 VStack {
                     HStack {
                         Spacer()
@@ -76,8 +67,8 @@ struct CardView: View {
                                 .foregroundColor(.red)
                         }
                         Button(action: {
-                            self.tempSnippet = ""
                             self.card.snippet = ""
+                            updater.deinit_timer()
                         }) {
                             Image(systemName: "pencil.circle.fill")
                                 .font(.title2)
@@ -86,42 +77,63 @@ struct CardView: View {
                         .padding(.trailing)
                     }
                     if self.card.snippet.isEmpty {
-                        TextField("snippet", text: $tempSnippet, onCommit: {
-                            self.card.snippet = self.tempSnippet
-                            self.updater.snippet = self.card.snippet
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
+                        TextEditor(text: $tempSnippet)
+                            .padding(.horizontal)
+                            .navigationTitle("snippet")
+                            .onChange(of: tempSnippet) {
+                                if tempSnippet.suffix(2) == "\n\n" {
+                                    self.card.snippet = self.tempSnippet
+                                    self.updater.snippet = self.card.snippet
+                                    updater.init_timer()
+                                }
+                            }
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .font(Font.system(.body, design: .monospaced))
+                            .foregroundColor(.accentColor) // Text color
+                            .frame(width: 350, height: 350)
+                            .border(.yellow)
+                            .padding()
                     } else {
                         Text(updater.output)
+                            .frame(width: 350, height: 350)
+                            .border(.yellow)
                             .font(.body)
+                            .padding()
                     }
                 }
                 .padding()
             }
         }
     }
+}
+
+class Updater: ObservableObject {
+    var snippet: String = ""
+    @Published var output: String = ""
+    var timer: Timer?
     
-    class Updater: ObservableObject {
-        var snippet: String = ""
-        @Published var output: String = ""
-        var timer: Timer?
-        
-        init() {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { _ in
-                self.refresh()
-            })
-        }
-        
-        deinit {
-            timer?.invalidate()
-        }
-        
-        func refresh() {
-            output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-            ? e(input: self.snippet)
-            : ke(input: self.snippet)
+   deinit {
+        timer?.invalidate()
+    }
+    
+    func init_timer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { _ in
+            self.refresh()
+        })
+        self.refresh()
+    }
+   func deinit_timer() {
+        timer?.invalidate()
+    }
+    
+    func refresh() {
+        let snippets = self.snippet.split(separator: "\n")
+        var to: String
+        for snippet in snippets {
+            to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+            ? e(input: String(snippet))
+            : ke(input: String(snippet))
+            if snippet == snippets.last { output = to }
         }
     }
 }
-

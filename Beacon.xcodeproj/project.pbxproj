@@ -30,9 +30,9 @@
 		F32D9E9029966FCD007BC97C /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B198E02995184400FE664F /* libcbqn.a */; };
 		F32D9E972996710A007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
-		F3512E092A4CE18D00658F24 /* libk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3512E082A4CE18D00658F24 /* libk.a */; };
 		F3877C8E29952A6600E2FCB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3877C8D29952A6600E2FCB5 /* Assets.xcassets */; };
 		F38F03A92A323F8500F66354 /* libksim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38F03A82A323F8500F66354 /* libksim.a */; };
+		F3AC4D262A4F6C3100B4FECD /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AC4D252A4F6C3000B4FECD /* curl.xcframework */; };
 		F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198CD299517DA00FE664F /* BeaconApp.swift */; };
 		F3B198D5299517DB00FE664F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B198D4299517DB00FE664F /* Preview Assets.xcassets */; };
 		F3B198F4299518E900FE664F /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198F3299518E900FE664F /* KeyboardViewController.swift */; };
@@ -49,6 +49,7 @@
 		F3D296822A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
 		F3D296832A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
 		F3DF828A2A4EF33A00F6CD19 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */; };
+		F3DF828B2A4F22FF00F6CD19 /* libk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3512E082A4CE18D00658F24 /* libk.a */; };
 		F3E1DFEF2A31F56800B4A553 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
 		F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */; };
@@ -112,6 +113,7 @@
 		F3877C8B29952A5400E2FCB5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F3877C8D29952A6600E2FCB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F38F03A82A323F8500F66354 /* libksim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libksim.a; path = Beacon/libs/libksim.a; sourceTree = "<group>"; };
+		F3AC4D252A4F6C3000B4FECD /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = curl.xcframework; path = Beacon/Libs/curl.xcframework; sourceTree = "<group>"; };
 		F3B198CA299517DA00FE664F /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B198CD299517DA00FE664F /* BeaconApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconApp.swift; sourceTree = "<group>"; };
 		F3B198D4299517DB00FE664F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -132,7 +134,6 @@
 		F3B19904299518F900FE664F /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		F3B19905299518F900FE664F /* AutocompleteProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteProvider.swift; sourceTree = "<group>"; };
 		F3D296812A404A3E00AD21A2 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
-		F3DF82872A4CF0C000F6CD19 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = Beacon/Libs/libcurl.a; sourceTree = "<group>"; };
 		F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		F3E1DFF62A3216C000B4A553 /* k.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = k.h; sourceTree = "<group>"; };
@@ -154,7 +155,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3512E092A4CE18D00658F24 /* libk.a in Frameworks */,
+				F3DF828B2A4F22FF00F6CD19 /* libk.a in Frameworks */,
+				F3AC4D262A4F6C3100B4FECD /* curl.xcframework in Frameworks */,
 				F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */,
 				F3B199112995193C00FE664F /* Introspect in Frameworks */,
 			);
@@ -182,7 +184,7 @@
 		F312CF7329951A0F008EC197 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F3DF82872A4CF0C000F6CD19 /* libcurl.a */,
+				F3AC4D252A4F6C3000B4FECD /* curl.xcframework */,
 				F3512E082A4CE18D00658F24 /* libk.a */,
 				F38F03A82A323F8500F66354 /* libksim.a */,
 				F3E1DFF72A3217E300B4A553 /* libk.a */,
@@ -630,12 +632,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MERGEABLE_LIBRARY = NO;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lz";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -685,12 +690,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MERGEABLE_LIBRARY = NO;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lz";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				WARNING_LDFLAGS = "";
 			};
 			name = Release;
 		};
@@ -727,6 +735,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -767,6 +779,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Beacon/Utilities/Beacon-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
