@@ -3,19 +3,19 @@
 //  Beacon
 //
 
+import Charts
 import Foundation
 import SwiftUI
-import Charts
 
 struct DataElement: Identifiable, Comparable {
     var id = UUID()
     let key: String
     let value: Int
-    
+
     static func < (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key < rhs.key
     }
-    
+
     static func == (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key == rhs.key
     }
@@ -36,7 +36,7 @@ func parseData(s: String) -> [String: Int] {
         assert(keys.count == values.count, "Keys and values count mismatch!")
         var dict: [String: Int] = [:]
         for (index, key) in keys.enumerated() {
-            dict[key] = values[index]
+            dict[key.replacingOccurrences(of: "\"", with: #""#)] = values[index]
         }
         return dict
     } else {
@@ -53,17 +53,16 @@ class DashboardViewModel: ObservableObject {
             }
         }
     }
-    
-    
+
     init() {
         if let cardsData = UserDefaults.standard.data(forKey: "cards") {
             let decoder = JSONDecoder()
             if let loadedCards = try? decoder.decode([Card].self, from: cardsData) {
-                self.cards = loadedCards
+                cards = loadedCards
                 return
             }
         }
-        self.cards = [Card(id: UUID(), snippet: "")]
+        cards = [Card(id: UUID(), snippet: "")]
     }
 }
 
@@ -84,7 +83,7 @@ struct Dashboard: View {
                         })
                         .padding(.horizontal)
                     }
-                    
+
                     Button(action: {
                         viewModel.cards.append(Card(id: UUID(), snippet: ""))
                     }) {
@@ -110,11 +109,11 @@ struct CardView: View {
     @State private var tempSnippet: String = ""
     @State private var isLoading: Bool = false
     @State private var isEditing: Bool = false
-    @StateObject var updater: Updater = Updater()
+    @StateObject var updater: Updater = .init()
     var data: [String: Int] { return parseData(s: updater.output) }
-    
+
     var body: some View {
-        VStack{
+        VStack {
             ZStack {
                 VStack {
                     HStack {
@@ -134,7 +133,7 @@ struct CardView: View {
                         }
                         .padding(.trailing)
                     }
-                    if self.isEditing {
+                    if self.isEditing || self.card.snippet.isEmpty {
                         TextEditor(text: $tempSnippet)
                             .padding(.horizontal)
                             .navigationTitle("snippet")
@@ -159,7 +158,7 @@ struct CardView: View {
                             }
                             VStack {
                                 VStack {
-                                    if !updater.output.contains("Error") && updater.output.contains("!") { // FIXME need a better check if the output is a dict
+                                    if !updater.output.contains("Error") && updater.output.contains("!") { // FIXME: need a better check if the output is a dict
                                         Chart {
                                             ForEach(data.map { DataElement(key: $0.key, value: $0.value) }.sorted()) { item in
                                                 BarMark(
@@ -177,14 +176,15 @@ struct CardView: View {
                                                     .annotation(
                                                         position: .top,
                                                         spacing: 0,
-                                                        overflowResolution: .init(x: .disabled, y: .disabled)) {
-                                                            ChartPopOverView(xval: barSelection, yval: data[barSelection] ?? 0)
-                                                        }
+                                                        overflowResolution: .init(x: .disabled, y: .disabled)
+                                                    ) {
+                                                        ChartPopOverView(xval: barSelection, yval: data[barSelection] ?? 0)
+                                                    }
                                             }
                                         }
                                         .chartXSelection(value: $barSelection)
                                         .chartLegend(position: .bottom, alignment: .leading, spacing: 25)
-                                        .padding(.top, 15)
+                                        .padding(.all, 15)
                                         .chartYAxis {
                                             AxisMarks(position: .leading) { _ in
                                                 AxisValueLabel()
@@ -202,16 +202,16 @@ struct CardView: View {
                                         Spacer()
                                     }
                                     /*
-                                    ProgressView(value: updater.timeRemaining, total: updater.refreshRate)
-                                        .accentColor(.green)
-                                        .frame(height: 8.0)
-                                        .scaleEffect(x: 1, y: 2, anchor: .center)
+                                     ProgressView(value: updater.timeRemaining, total: updater.refreshRate)
+                                     .accentColor(.green)
+                                     .frame(height: 8.0)
+                                     .scaleEffect(x: 1, y: 2, anchor: .center)
                                      */
                                 }
                                 .frame(width: 350, height: 350)
                             }
                         }
-                        .border(.blue)
+                        // .border(.blue)
                     }
                 }
                 .padding()
@@ -223,6 +223,7 @@ struct CardView: View {
             }
         })
     }
+
     @ViewBuilder
     func ChartPopOverView(xval: String, yval: Int) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -239,7 +240,6 @@ struct CardView: View {
     }
 }
 
-
 class Updater: ObservableObject {
     var snippet: String = ""
     var refreshRate: Double = 15.0
@@ -247,14 +247,14 @@ class Updater: ObservableObject {
     @Published var output: String = ""
     @Published var isLoading: Bool = false
     var timer: Timer?
-    
+
     deinit {
         timer?.invalidate()
     }
-    
+
     func init_timer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            if (self.timeRemaining == self.refreshRate) {
+            if self.timeRemaining == self.refreshRate {
                 Task {
                     await self.refresh()
                 }
@@ -267,22 +267,23 @@ class Updater: ObservableObject {
             await self.refresh()
         }
     }
-    
+
     func deinit_timer() {
         timer?.invalidate()
     }
-    
+
     func refresh() async {
         isLoading = true
-        let snippets = self.snippet.split(separator: "\n")
+        let snippets = snippet.split(separator: "\n")
         var to: String
         for snippet in snippets {
             to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-            ? e(input: String(snippet))
-            : ke(input: String(snippet))
-            if snippet == snippets.last { output = to }
+                ? e(input: String(snippet))
+                : ke(input: String(snippet))
+            if snippet == snippets.last {
+                output = to
+            }
         }
         isLoading = false
     }
 }
-
