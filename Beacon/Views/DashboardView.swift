@@ -4,6 +4,7 @@
 //
 
 import Charts
+import Combine
 import Foundation
 import SwiftUI
 
@@ -11,11 +12,11 @@ struct DataElement: Identifiable, Comparable {
     var id = UUID()
     let key: String
     let value: Int
-
+    
     static func < (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key < rhs.key
     }
-
+    
     static func == (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key == rhs.key
     }
@@ -53,7 +54,11 @@ class DashboardViewModel: ObservableObject {
             }
         }
     }
-
+    
+    func removeCard(at index: Int) {
+        cards.remove(at: index)
+    }
+    
     init() {
         if let cardsData = UserDefaults.standard.data(forKey: "cards") {
             let decoder = JSONDecoder()
@@ -77,13 +82,13 @@ struct Dashboard: View {
             Spacer()
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(0 ..< viewModel.cards.count, id: \.self) { index in
+                    ForEach(viewModel.cards.indices, id: \.self) { index in
                         CardView(card: $viewModel.cards[index], removeCard: {
-                            viewModel.cards.remove(at: index)
+                            viewModel.removeCard(at: index)
                         })
                         .padding(.horizontal)
                     }
-
+                    
                     Button(action: {
                         viewModel.cards.append(Card(id: UUID(), snippet: ""))
                     }) {
@@ -106,12 +111,14 @@ struct CardView: View {
     @Binding var card: Card
     let removeCard: () -> Void
     @State private var barSelection: String?
-    @State private var tempSnippet: String = ""
     @State private var isLoading: Bool = false
     @State private var isEditing: Bool = false
-    @StateObject var updater: Updater = .init()
-    var data: [String: Int] { return parseData(s: updater.output) }
-
+    @State var output: String = ""
+    @State var snippet: String = ""
+    var refreshRate: Double = 60.0
+    var data: [String: Int] { return parseData(s: output) }
+    let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         VStack {
             ZStack {
@@ -125,7 +132,6 @@ struct CardView: View {
                         }
                         Button(action: {
                             self.isEditing = true
-                            updater.deinit_timer()
                         }) {
                             Image(systemName: "pencil.circle.fill")
                                 .font(.title2)
@@ -134,15 +140,14 @@ struct CardView: View {
                         .padding(.trailing)
                     }
                     if self.isEditing || self.card.snippet.isEmpty {
-                        TextEditor(text: $tempSnippet)
+                        TextEditor(text: $snippet)
                             .padding(.horizontal)
                             .navigationTitle("snippet")
-                            .onChange(of: tempSnippet) {
-                                if tempSnippet.suffix(2) == "\n\n" {
-                                    self.card.snippet = self.tempSnippet
+                            .onChange(of: snippet) {
+                                if snippet.suffix(2) == "\n\n" {
+                                    self.card.snippet = self.snippet
                                     self.isEditing = false
-                                    self.updater.snippet = self.card.snippet
-                                    updater.init_timer()
+                                    self.refresh()
                                 }
                             }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -153,12 +158,12 @@ struct CardView: View {
                             .padding()
                     } else {
                         ZStack {
-                            if updater.isLoading {
+                            if isLoading {
                                 ProgressView().frame(width: 350, height: 350)
                             }
                             VStack {
                                 VStack {
-                                    if !updater.output.contains("Error") && updater.output.contains("!") { // FIXME: need a better check if the output is a dict
+                                    if !output.contains("Error") && output.contains("!") { // FIXME: need a better check if the output is a dict
                                         Chart {
                                             ForEach(data.map { DataElement(key: $0.key, value: $0.value) }.sorted()) { item in
                                                 BarMark(
@@ -196,7 +201,7 @@ struct CardView: View {
                                             }
                                         }
                                     } else {
-                                        Text(updater.output)
+                                        Text(output)
                                             .font(.body)
                                             .padding()
                                         Spacer()
@@ -217,13 +222,31 @@ struct CardView: View {
                 .padding()
             }
         }.onAppear(perform: {
-            if !card.snippet.isEmpty {
-                updater.snippet = card.snippet
-                updater.init_timer()
-            }
-        })
+            self.snippet = card.snippet
+            refresh()
+        }).onReceive(timer) { _ in
+            refresh()
+        }
     }
-
+    
+    func refresh() {
+        if !isEditing {
+            Task.init {
+                    self.isLoading = true
+                    let snippets = snippet.split(separator: "\n")
+                    for snippet in snippets {
+                        let to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                            ? e(input: String(snippet))
+                            : ke(input: String(snippet))
+                        if snippet == snippets.last {
+                            self.output = to
+                        }
+                    }
+                    self.isLoading = false
+                }
+            }
+    }
+    
     @ViewBuilder
     func ChartPopOverView(xval: String, yval: Int) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -240,44 +263,3 @@ struct CardView: View {
     }
 }
 
-class Updater: ObservableObject {
-    var snippet: String = ""
-    var refreshRate: Double = 60.0
-    @Published var output: String = ""
-    @Published var isLoading: Bool = false
-    var timer: Timer?
-
-    deinit {
-        timer?.invalidate()
-    }
-
-    func init_timer() {
-        timer = Timer.scheduledTimer(withTimeInterval: refreshRate, repeats: true, block: { _ in
-            Task {
-                await self.refresh()
-            }
-        })
-        Task {
-            await self.refresh()
-        }
-    }
-
-    func deinit_timer() {
-        timer?.invalidate()
-    }
-
-    func refresh() async {
-        isLoading = true
-        let snippets = snippet.split(separator: "\n")
-        var to: String
-        for snippet in snippets {
-            to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-                ? e(input: String(snippet))
-                : ke(input: String(snippet))
-            if snippet == snippets.last {
-                output = to
-            }
-        }
-        isLoading = false
-    }
-}
