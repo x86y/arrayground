@@ -242,8 +242,7 @@ struct CardView: View {
 
 class Updater: ObservableObject {
     var snippet: String = ""
-    var refreshRate: Double = 15.0
-    @Published var timeRemaining: Double = 0.0
+    var refreshRate: Double = 60.0
     @Published var output: String = ""
     @Published var isLoading: Bool = false
     var timer: Timer?
@@ -253,14 +252,9 @@ class Updater: ObservableObject {
     }
 
     func init_timer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            if self.timeRemaining == self.refreshRate {
-                Task {
-                    await self.refresh()
-                }
-                self.timeRemaining = 0.0
-            } else {
-                self.timeRemaining += 1.0
+        timer = Timer.scheduledTimer(withTimeInterval: refreshRate, repeats: true, block: { _ in
+            Task {
+                await self.refresh()
             }
         })
         Task {

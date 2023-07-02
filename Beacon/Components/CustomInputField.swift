@@ -54,6 +54,7 @@ struct CustomInputField: UIViewRepresentable {
         textView.autocorrectionType = .no
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = true
+        textView.becomeFirstResponder()
         textView.showsVerticalScrollIndicator = true
         textView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         textView.textContainer.lineBreakMode = NSLineBreakMode.byWordWrapping

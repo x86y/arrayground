@@ -71,10 +71,8 @@ struct ContentView: View {
     @State var ephemerals: [Int: [String]] = [:]
     @State var showSettings: Bool = false
     @State var showHelp: Bool = false
-    @State var showDashboard: Bool = false
     @State var showBuffers: Bool = false
     @State var curBuffer: String = "default"
-    @State private var selectedView: Int = 0
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
     @AppStorage("lang") var lang: Language = .bqn
@@ -88,9 +86,6 @@ struct ContentView: View {
             showHelp = true
         case "clear":
             viewModel.clear(b: curBuffer)
-            self.input = ""
-        case "custom":
-            showDashboard = true
             self.input = ""
         case _ where input.hasPrefix(#"\,"#):
             let components = input.components(separatedBy: " ")
@@ -124,72 +119,78 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedView) {
-            ScrollViewReader { scrollView in
-                VStack {
-                    ScrollView(.vertical) {
-                        VStack {
+        ScrollViewReader { scrollView in
+            VStack {
+                ScrollView(.vertical) {
+                    VStack {
+                        if viewModel.history[curBuffer, default: []].isEmpty {
+                            VStack {
+                                Text("ngn/k, (c) 2019-2023")
+                                    .font(Font.custom("BQN386 Unicode", size: 16))
+                                    .foregroundColor(.primary)
+                                Text("dzaima/cbqn, (c) 2019-2023")
+                                    .font(Font.custom("BQN386 Unicode", size: 16))
+                                    .foregroundColor(.primary)
+                            }
+                        } else {
                             ForEach(Array(viewModel.history[curBuffer, default: []].enumerated()), id: \.offset) { index, historyItem in
                                 HistoryView(index: index, historyItem: historyItem, curBuffer: curBuffer, onMySubmit: onMySubmit, input: $input, ephemerals: $ephemerals, editType: $editType, viewModel: viewModel)
                             }.listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
-                        }.id("HistoryScrollView")
-                            .onChange(of: viewModel.history) {
-                                withAnimation {
-                                    scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
-                                }
-                            }
-                    }
-                }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                    .padding(.bottom, 5)
-
-                CustomInputField(text: $input,
-                                 helpB: $showHelp,
-                                 settingsB: $showSettings,
-                                 buffersB: $showBuffers,
-                                 onSubmit: { onMySubmit(input: self.input) },
-                                 font: UIFont(name: "BQN386 Unicode", size: 20)!,
-                                 keyboardType: .asciiCapable,
-                                 lang: self.lang)
-                    .frame(height: 24)
-                    .padding(.bottom, 4)
-                    .focused($isFocused)
-                    .onTapGesture {
-                        // isFocused = true
-                        scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
-                    }
-                    .onReceive(Just(input)) { newV in
-                        if lang == .bqn {
-                            let oldCurPos = self.inpPos
-                            newV.matchingStrings(regex: "\\\\[a-zA-Z0-9]").forEach { NSR in
-                                let range = Range(NSR[0], in: newV)!
-                                if let res = characterMap[String(newV[range])] {
-                                    let mod = newV.replacingCharacters(in: range, with: String(res))
-                                    self.input = mod
-                                }
-                                self.move(oldCurPos)
+                        }
+                    }.id("HistoryScrollView")
+                        .onChange(of: viewModel.history) {
+                            withAnimation {
+                                scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
                             }
                         }
-                    }
-            }
-            .padding(.top, 0.1)
-            .sheet(isPresented: $showSettings) {
-                ConfigView()
-                    .presentationDetents([.medium])
-            }
-            .sheet(isPresented: $showHelp) {
-                HelpView(key: self.$input)
-                    .presentationDetents([.large])
-            }
-            .sheet(isPresented: $showBuffers) {
-                BuffersView(buffers: $viewModel.history, sel: self.$curBuffer)
-                    .presentationDetents([.medium])
-            }
-            .onAppear(perform: initRepl)
+                }
+            }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                .padding(.bottom, 5)
 
-            Dashboard().tag(1)
+            CustomInputField(text: $input,
+                             helpB: $showHelp,
+                             settingsB: $showSettings,
+                             buffersB: $showBuffers,
+                             onSubmit: { onMySubmit(input: self.input) },
+                             font: UIFont(name: "BQN386 Unicode", size: 20)!,
+                             keyboardType: .asciiCapable,
+                             lang: self.lang)
+                .frame(height: 24)
+                .padding(.bottom, 4)
+                .focused($isFocused)
+                .onTapGesture {
+                    // isFocused = true
+                    scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
+                }
+                .onReceive(Just(input)) { newV in
+                    if lang == .bqn {
+                        let oldCurPos = self.inpPos
+                        newV.matchingStrings(regex: "\\\\[a-zA-Z0-9]").forEach { NSR in
+                            let range = Range(NSR[0], in: newV)!
+                            if let res = characterMap[String(newV[range])] {
+                                let mod = newV.replacingCharacters(in: range, with: String(res))
+                                self.input = mod
+                            }
+                            self.move(oldCurPos)
+                        }
+                    }
+                }
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        .padding(.top, 0.1)
+        .sheet(isPresented: $showSettings) {
+            ConfigView()
+                .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $showHelp) {
+            HelpView(key: self.$input)
+                .presentationDetents([.large])
+        }
+        .sheet(isPresented: $showBuffers) {
+            BuffersView(buffers: $viewModel.history, sel: self.$curBuffer)
+                .presentationDetents([.medium])
+        }
+        .onAppear(perform: initRepl)
     }
 
     func initRepl() {
