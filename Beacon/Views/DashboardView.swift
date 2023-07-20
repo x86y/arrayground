@@ -145,6 +145,7 @@ struct CardView: View {
                             .navigationTitle("snippet")
                             .onChange(of: snippet) {
                                 if snippet.suffix(2) == "\n\n" {
+                                    self.snippet = self.snippet.trimmingLastOccurrence(of: "\n\n")
                                     self.card.snippet = self.snippet
                                     self.isEditing = false
                                     self.refresh()

@@ -28,6 +28,13 @@ struct BeaconApp: App {
                     .preferredColorScheme(appearanceSwitch)
                 Dashboard().tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .onChange(of: selectedView) {
+                    dismissKeyboard()
+                }
         }
+    }
+    
+    func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

@@ -82,6 +82,12 @@ extension String {
             }
         }
     }
+    func trimmingLastOccurrence(of target: String) -> String {
+        if let range = self.range(of: target, options: .backwards) {
+            return self.replacingCharacters(in: range, with: "")
+        }
+        return self
+    }
 }
 
 func trimLongText(_ input: String) -> String {
