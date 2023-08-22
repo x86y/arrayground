@@ -1,24 +1,10 @@
 //
-//  DemoKeyboardLayoutProvider.swift
-//  Keyboard
+//  KeyboardLayoutProvider.swift
 //
-//  Created by Daniel Saidi on 2021-02-19.
-//  Copyright © 2021 Daniel Saidi. All rights reserved.
 //
 
 import KeyboardKit
 
-/**
- This demo-specific layout provider will add a locale picker
- next to space, if the keyboard context has multiple locales.
-
- ``KeyboardViewController`` registers it to show how you can
- register and use a custom keyboard layout provider.
-
- The KeyboardKit Pro demo will automatically set up the demo
- keyboard with all available locales, while the non-pro demo
- will by default only use English.
- */
 class DemoKeyboardLayoutProvider: StandardKeyboardLayoutProvider {
     override func keyboardLayout(for context: KeyboardContext) -> KeyboardLayout {
         let layout = super.keyboardLayout(for: context)

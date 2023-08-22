@@ -1,25 +1,10 @@
 //
 //  DemoKeyboardActionHandler.swift
-//  KeyboardKit
-//
-//  Created by Daniel Saidi on 2020-07-02.
-//  Copyright © 2021 Daniel Saidi. All rights reserved.
 //
 
 import KeyboardKit
 import UIKit
 
-/**
- This demo-specific action handler adds demo-specific action
- handling, such as saving or copying images.
-
- ``KeyboardViewController`` registers it to show how you can
- register and use a custom keyboard action handler.
-
- If you change the ``DemoKeyboardLayoutProvider`` to show an
- `.image` action, this class will copy the images on tap and
- save them on long press.
- */
 class DemoKeyboardActionHandler: StandardKeyboardActionHandler {
     // MARK: - Overrides
 
@@ -92,10 +77,6 @@ private extension UIImage {
     }
 }
 
-/**
- This class is used as a target/selector holder by the image
- extension above.
- */
 private class ImageService: NSObject {
     public typealias Completion = (Error?) -> Void
 
