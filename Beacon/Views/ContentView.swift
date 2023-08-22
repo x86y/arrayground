@@ -102,7 +102,7 @@ struct ContentView: View {
                 attributeSet.title = input
                 attributeSet.contentDescription = output
                 let uniqueIdentifier = UUID().uuidString
-                let searchableItem = CSSearchableItem(uniqueIdentifier: uniqueIdentifier, domainIdentifier: "arrscience.Beacon.search", attributeSet: attributeSet)
+                let searchableItem = CSSearchableItem(uniqueIdentifier: uniqueIdentifier, domainIdentifier: "arrscience.Beacons", attributeSet: attributeSet)
                 CSSearchableIndex.default().indexSearchableItems([searchableItem]) { error in
                     if let error = error {
                         print("Indexing error: \(error.localizedDescription)")

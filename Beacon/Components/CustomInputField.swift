@@ -140,17 +140,15 @@ struct CustomInputField: UIViewRepresentable {
         init(_ textView: CustomInputField) {
             parent = textView
         }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            parent.text = textView.text
+        }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if text == "\n" {
                 parent.onSubmit?()
                 return false
-            }
-            if let currentText = textView.text,
-               let range = Range(range, in: currentText)
-            {
-                let updatedText = currentText.replacingCharacters(in: range, with: text)
-                parent.text = updatedText
             }
             return true
         }

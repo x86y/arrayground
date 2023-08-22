@@ -33,7 +33,7 @@ func parseData(s: String) -> [String: Int] {
         let keysString = components[0].trimmingCharacters(in: CharacterSet(charactersIn: "()\""))
         let valuesString = components[1]
         let keys = keysString.components(separatedBy: ";")
-        let values = valuesString.split(separator: " ").map { Int($0)! }
+        let values = valuesString.split(separator: " ").map { Int($0) }
         assert(keys.count == values.count, "Keys and values count mismatch!")
         var dict: [String: Int] = [:]
         for (index, key) in keys.enumerated() {
