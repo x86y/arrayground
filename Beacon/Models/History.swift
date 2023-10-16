@@ -11,6 +11,7 @@ struct Entry: Hashable, Codable, Identifiable {
     var id: String = UUID().uuidString
     var src: String
     var out: String
+    var lang: Language
 }
 
 enum Buffers {
@@ -38,8 +39,8 @@ enum Buffers {
 class HistoryModel: ObservableObject {
     @Published var history: [String: [Entry]] = ["default": []]
 
-    func addMessage(with src: String, out: String, for key: String) {
-        let entry = Entry(src: src, out: out)
+    func addMessage(with src: String, out: String, lang: Language, for key: String) {
+        let entry = Entry(src: src, out: out, lang: lang)
         if var entries = history[key] {
             entries.append(entry)
             history[key] = entries

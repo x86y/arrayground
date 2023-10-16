@@ -48,45 +48,27 @@ struct HistoryView: View {
                 .font(Font.custom("BQN386 Unicode", size: 18))
                 .foregroundColor(.blue)
             } else if editType == Behavior.duplicate {
-                /*
-                 HStack(spacing: 0) {
-                     ForEach(tokenize(code: historyItem.src), id: \.value) { token in
-                         switch token.type {
-                         case .number:
-                             Text(token.value)
-                                 .foregroundColor(.green)
-                         case .function:
-                             Text(token.value)
-                                 .foregroundColor(.purple)
-                         case .variable:
-                             Text(token.value)
-                                 .foregroundColor(.blue)
-                         case .string:
-                             Text(token.value)
-                                 .foregroundColor(.orange)
-                         case .statement:
-                             Text(token.value)
-                                 .foregroundColor(.pink)
-                         case .comment:
-                             Text(token.value)
-                                 .foregroundColor(.gray)
-                         case .other:
-                             Text(token.value)
-                                 .foregroundColor(.primary)
-                         }
-                     }
-                 }
-                 */
-                Text(historyItem.src)
-                    .font(Font.custom("BQN386 Unicode", size: 18))
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        self.input = historyItem.src
+                VStack(spacing: 1) {
+                    let tokens = historyItem.lang == .k
+                        ? tokenize(historyItem.src, parseK(historyItem.src))
+                        : tokenize(historyItem.src, parseBQN(code: historyItem.src))
+                    ForEach(Array(tokens.enumerated()), id: \.offset) { _, line in
+                        HStack(spacing: 0) {
+                            ForEach(line, id: \.id) { token in
+                                Text(token.value)
+                                    .foregroundColor(tokenToColor(token.type))
+                                    .font(Font.custom("BQN386 Unicode", size: 18))
+                                    .onTapGesture {
+                                        self.input = historyItem.src
+                                    }
+                            }
+                        }.frame(maxWidth: .infinity, alignment: .leading)
                     }
+                }
             }
             Text("\(trimLongText(historyItem.out))")
                 .font(Font.custom("BQN386 Unicode", size: 18))
-                .foregroundColor(historyItem.out.starts(with: "Error:") ? .red : .primary)
+                .foregroundColor(historyItem.out.starts(with: "Error:") || historyItem.out.starts(with: "\"Error:") ? .red : .primary)
                 .multilineTextAlignment(.leading)
                 .onTapGesture {
                     self.input = historyItem.out
@@ -139,7 +121,7 @@ struct ContentView: View {
                         print("Search item successfully indexed!")
                     }
                 }
-                viewModel.addMessage(with: input, out: output, for: curBuffer)
+                viewModel.addMessage(with: input, out: output, lang: lang, for: curBuffer)
             } else {
                 isFocused = false
             }
@@ -178,11 +160,11 @@ struct ContentView: View {
                 .padding(.bottom, 5)
 
             ReplInput(text: $input,
-                              helpOpen: $showHelp,
-                              settingsOpen: $showSettings,
-                              buffersOpen: $showBuffers,
-                              lang: self.lang, onSubmit: { onMySubmit(input: self.input) },
-                              font: Font.custom("BQN386 Unicode", size: 20))
+                      helpOpen: $showHelp,
+                      settingsOpen: $showSettings,
+                      buffersOpen: $showBuffers,
+                      lang: self.lang, onSubmit: { onMySubmit(input: self.input) },
+                      font: Font.custom("BQN386 Unicode", size: 20))
                 .padding(.bottom, 4)
                 .focused($isFocused)
                 .onTapGesture {

@@ -17,7 +17,7 @@ enum AppFont: Int {
     case apl = 2
 }
 
-enum Language: Int {
+enum Language: Int, Codable {
     case bqn = 0
     case k = 1
 }

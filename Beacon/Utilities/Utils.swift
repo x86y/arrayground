@@ -58,7 +58,7 @@ func e(input: String) -> String {
         input = "\(vars) •Import \"\(Bundle.main.resourcePath!)/bqn-libs/\(filename)\""
     }
     input = input.replacingOccurrences(of: "\"", with: #""""#)
-    input = "•Out ((•ReBQN{repl⇐\"loose\"})⎊{𝕊: \"Error: \"∾•CurrentError@}) \"\(input)\""
+    input = "((•ReBQN{repl⇐\"loose\"})⎊{𝕊: •Out \"Error: \"∾•CurrentError@}) \"\(input)\""
     return runCmd(cbqnCmd, input)
 }
 
