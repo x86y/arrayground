@@ -82,9 +82,10 @@ extension String {
             }
         }
     }
+
     func trimmingLastOccurrence(of target: String) -> String {
-        if let range = self.range(of: target, options: .backwards) {
-            return self.replacingCharacters(in: range, with: "")
+        if let range = range(of: target, options: .backwards) {
+            return replacingCharacters(in: range, with: "")
         }
         return self
     }

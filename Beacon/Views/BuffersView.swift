@@ -1,5 +1,5 @@
 //
-//  BufferView.swift
+//  BuffersView.swift
 //  Beacon
 //
 

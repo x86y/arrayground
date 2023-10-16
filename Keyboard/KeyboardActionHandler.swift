@@ -1,5 +1,5 @@
 //
-//  DemoKeyboardActionHandler.swift
+//  KeyboardActionHandler.swift
 //
 
 import KeyboardKit

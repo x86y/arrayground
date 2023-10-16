@@ -119,15 +119,8 @@ struct CustomInputField: UIViewRepresentable {
         return button
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    func updateUIView(_ uiView: UITextView, context _: Context) {
         uiView.text = text
-
-        if let toolbar = uiView.inputAccessoryView as? UIToolbar,
-           let scrollView = toolbar.items?.first?.customView as? UIScrollView,
-           let scrollable = scrollView.subviews.first as? UIStackView
-        {
-            updateLetterButtons(coordinator: context.coordinator, scrollable: scrollable)
-        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -140,12 +133,12 @@ struct CustomInputField: UIViewRepresentable {
         init(_ textView: CustomInputField) {
             parent = textView
         }
-        
+
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
         }
 
-        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        func textView(_: UITextView, shouldChangeTextIn _: NSRange, replacementText text: String) -> Bool {
             if text == "\n" {
                 parent.onSubmit?()
                 return false

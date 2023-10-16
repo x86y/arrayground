@@ -1,5 +1,5 @@
 //
-//  DemoKeyboardAppearance.swift
+//  KeyboardAppearance.swift
 //  Keyboard
 //
 //

@@ -160,7 +160,6 @@ struct ContentView: View {
                 .padding(.bottom, 4)
                 .focused($isFocused)
                 .onTapGesture {
-                    // isFocused = true
                     scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
                 }
                 .onReceive(Just(input)) { newV in

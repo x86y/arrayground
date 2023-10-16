@@ -1,5 +1,5 @@
 //
-//  GeneratedView.swift
+//  DashboardView.swift
 //  Beacon
 //
 
@@ -12,11 +12,11 @@ struct DataElement: Identifiable, Comparable {
     var id = UUID()
     let key: String
     let value: Int
-    
+
     static func < (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key < rhs.key
     }
-    
+
     static func == (lhs: DataElement, rhs: DataElement) -> Bool {
         return lhs.key == rhs.key
     }
@@ -54,11 +54,11 @@ class DashboardViewModel: ObservableObject {
             }
         }
     }
-    
+
     func removeCard(at index: Int) {
         cards.remove(at: index)
     }
-    
+
     init() {
         if let cardsData = UserDefaults.standard.data(forKey: "cards") {
             let decoder = JSONDecoder()
@@ -88,7 +88,7 @@ struct Dashboard: View {
                         })
                         .padding(.horizontal)
                     }
-                    
+
                     Button(action: {
                         viewModel.cards.append(Card(id: UUID(), snippet: ""))
                     }) {
@@ -118,7 +118,7 @@ struct CardView: View {
     var refreshRate: Double = 60.0
     var data: [String: Int] { return parseData(s: output) }
     let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
-    
+
     var body: some View {
         VStack {
             ZStack {
@@ -229,25 +229,25 @@ struct CardView: View {
             refresh()
         }
     }
-    
+
     func refresh() {
         if !isEditing {
             Task.init {
-                    self.isLoading = true
-                    let snippets = snippet.split(separator: "\n")
-                    for snippet in snippets {
-                        let to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-                            ? e(input: String(snippet))
-                            : ke(input: String(snippet))
-                        if snippet == snippets.last {
-                            self.output = to
-                        }
+                self.isLoading = true
+                let snippets = snippet.split(separator: "\n")
+                for snippet in snippets {
+                    let to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                        ? e(input: String(snippet))
+                        : ke(input: String(snippet))
+                    if snippet == snippets.last {
+                        self.output = to
                     }
-                    self.isLoading = false
                 }
+                self.isLoading = false
             }
+        }
     }
-    
+
     @ViewBuilder
     func ChartPopOverView(xval: String, yval: Int) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -263,4 +263,3 @@ struct CardView: View {
         .background(.cyan, in: .rect(cornerRadius: 8))
     }
 }
-

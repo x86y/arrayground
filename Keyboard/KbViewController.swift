@@ -1,5 +1,5 @@
 //
-//  DemoKeyboardViewController.swift
+//  KbViewController.swift
 //  KeyboardKit
 //
 
@@ -19,7 +19,7 @@ class KbViewController: KeyboardInputViewController {
         )
         super.viewDidLoad()
     }
-    
+
     override func viewWillSetupKeyboard() {
         super.viewWillSetupKeyboard()
         setup { KeyboardView(controller: $0) }
