@@ -18,6 +18,8 @@
 		F31BCE7C2A33B3A200A6116D /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */; };
 		F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7D2A348B7500A6116D /* HelpView.swift */; };
 		F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31BCE7D2A348B7500A6116D /* HelpView.swift */; };
+		F327CA1A2ADD0A2F00FD72D9 /* SwiftUIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F327CA192ADD0A2F00FD72D9 /* SwiftUIInput.swift */; };
+		F327CA1B2ADD0A2F00FD72D9 /* SwiftUIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F327CA192ADD0A2F00FD72D9 /* SwiftUIInput.swift */; };
 		F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */; };
 		F32D9E8529966FCD007BC97C /* BeaconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B198CD299517DA00FE664F /* BeaconApp.swift */; };
 		F32D9E8629966FCD007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
@@ -100,6 +102,7 @@
 		F31BCE772A33B33E00A6116D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
 		F31BCE7D2A348B7500A6116D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		F327CA192ADD0A2F00FD72D9 /* SwiftUIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIInput.swift; sourceTree = "<group>"; };
 		F32D9E9429966FCD007BC97C /* BeaconSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32D9E9529966FCD007BC97C /* Beacon copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Beacon copy-Info.plist"; path = "/Users/sp/mac/applefarm/Beacon/Beacon copy-Info.plist"; sourceTree = "<absolute>"; };
 		F3512E082A4CE18D00658F24 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/Libs/libk.a; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				F31BCE7A2A33B3A200A6116D /* CustomInputField.swift */,
+				F327CA192ADD0A2F00FD72D9 /* SwiftUIInput.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -450,6 +454,7 @@
 				F30A7B8B2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */,
 				F32D9E8529966FCD007BC97C /* BeaconApp.swift in Sources */,
+				F327CA1B2ADD0A2F00FD72D9 /* SwiftUIInput.swift in Sources */,
 				F31BCE7C2A33B3A200A6116D /* CustomInputField.swift in Sources */,
 				F32D9E8629966FCD007BC97C /* ContentView.swift in Sources */,
 			);
@@ -467,6 +472,7 @@
 				F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */,
 				F3B198CE299517DA00FE664F /* BeaconApp.swift in Sources */,
+				F327CA1A2ADD0A2F00FD72D9 /* SwiftUIInput.swift in Sources */,
 				F31BCE7B2A33B3A200A6116D /* CustomInputField.swift in Sources */,
 				F32D9E972996710A007BC97C /* ContentView.swift in Sources */,
 			);

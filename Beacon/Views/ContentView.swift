@@ -148,15 +148,12 @@ struct ContentView: View {
             }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 .padding(.bottom, 5)
 
-            CustomInputField(text: $input,
-                             helpB: $showHelp,
-                             settingsB: $showSettings,
-                             buffersB: $showBuffers,
-                             onSubmit: { onMySubmit(input: self.input) },
-                             font: UIFont(name: "BQN386 Unicode", size: 20)!,
-                             keyboardType: .asciiCapable,
-                             lang: self.lang)
-                .frame(height: 24)
+            SwiftUIInputField(text: $input,
+                              helpOpen: $showHelp,
+                              settingsOpen: $showSettings,
+                              buffersOpen: $showBuffers,
+                              lang: self.lang, onSubmit: { onMySubmit(input: self.input) },
+                              font: Font.custom("BQN386 Unicode", size: 20))
                 .padding(.bottom, 4)
                 .focused($isFocused)
                 .onTapGesture {

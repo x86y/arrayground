@@ -1,12 +1,23 @@
 //
 //  CustomInputField.swift
-//  Beacon
-//
-//
 //
 
 import SwiftUI
 import UIKit
+
+class NewlineTextView: UITextView {
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "\r", modifierFlags: [.shift], action: #selector(shiftEnterPressed)),
+        ]
+    }
+
+    @objc func shiftEnterPressed() {
+        let cursorPosition = selectedRange
+        text.insert("\n", at: text.index(text.startIndex, offsetBy: cursorPosition.location))
+        selectedRange = NSRange(location: cursorPosition.location + 1, length: 0)
+    }
+}
 
 struct CustomInputField: UIViewRepresentable {
     @Binding var text: String
@@ -45,20 +56,24 @@ struct CustomInputField: UIViewRepresentable {
         }
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        textView.invalidateIntrinsicContentSize()
+    }
+
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+        let textView = NewlineTextView()
         textView.delegate = context.coordinator
         textView.font = font
         textView.keyboardType = keyboardType
         textView.returnKeyType = .done
         textView.autocorrectionType = .no
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isScrollEnabled = true
         textView.becomeFirstResponder()
-        textView.showsVerticalScrollIndicator = true
-        textView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        textView.textContainer.lineBreakMode = NSLineBreakMode.byWordWrapping
-        textView.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: NSLayoutConstraint.Axis.vertical)
+        textView.isScrollEnabled = false
+        textView.layer.cornerRadius = 16
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
+        textView.sizeToFit()
 
         let stickyRightView = UIStackView()
         stickyRightView.axis = .horizontal
@@ -132,6 +147,10 @@ struct CustomInputField: UIViewRepresentable {
 
         init(_ textView: CustomInputField) {
             parent = textView
+        }
+
+        @objc func onSubmit() {
+            parent.onSubmit?()
         }
 
         func textViewDidChange(_ textView: UITextView) {

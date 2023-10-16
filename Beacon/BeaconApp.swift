@@ -26,7 +26,7 @@ struct BeaconApp: App {
             TabView(selection: $selectedView) {
                 ContentView(viewModel: viewModel).tag(0)
                     .preferredColorScheme(appearanceSwitch)
-                Dashboard().tag(1)
+                //Dashboard().tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .onChange(of: selectedView) {
                     dismissKeyboard()

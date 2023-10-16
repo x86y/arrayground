@@ -22,6 +22,14 @@ enum Language: Int {
     case k = 1
 }
 
+func languageToString(l: Language) -> String {
+    if l == .bqn {
+        return "BQN"
+    } else {
+        return "K"
+    }
+}
+
 enum Behavior: Int {
     case inlineEdit = 0
     case duplicate = 1
