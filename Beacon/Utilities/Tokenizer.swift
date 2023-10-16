@@ -53,14 +53,14 @@ struct Token: Identifiable {
     let type: TokenType
 }
 
-func tokenize(_ str: String, _ parseKOutput: [String]) -> [[Token]] {
+func tokenize(_ str: String, _ lexed: [String]) -> [[Token]] {
     var tokens: [Token] = []
     var i = 0
 
-    while i < parseKOutput.count {
-        if let type = TokenType(rawValue: parseKOutput[i]) {
+    while i < lexed.count {
+        if let type = TokenType(rawValue: lexed[i]) {
             var j = i + 1
-            while j < parseKOutput.count && parseKOutput[j] == "" {
+            while j < lexed.count && lexed[j] == "" {
                 j += 1
             }
             let value = str[str.index(str.startIndex, offsetBy: i) ..< str.index(str.startIndex, offsetBy: j)]

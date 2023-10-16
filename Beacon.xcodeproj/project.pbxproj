@@ -38,6 +38,8 @@
 		F379CEC72ADDB24D00164F76 /* LexBQN.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC52ADDB24D00164F76 /* LexBQN.swift */; };
 		F379CEC92ADDD2A700164F76 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC82ADDD2A700164F76 /* Tokenizer.swift */; };
 		F379CECA2ADDD2A700164F76 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC82ADDD2A700164F76 /* Tokenizer.swift */; };
+		F379CECC2ADDD42C00164F76 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CECB2ADDD42C00164F76 /* HistoryView.swift */; };
+		F379CECD2ADDD42C00164F76 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CECB2ADDD42C00164F76 /* HistoryView.swift */; };
 		F3877C8E29952A6600E2FCB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3877C8D29952A6600E2FCB5 /* Assets.xcassets */; };
 		F38F03A92A323F8500F66354 /* libksim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38F03A82A323F8500F66354 /* libksim.a */; };
 		F3AC4D262A4F6C3100B4FECD /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AC4D252A4F6C3000B4FECD /* curl.xcframework */; };
@@ -113,6 +115,7 @@
 		F379CEC22ADD94BC00164F76 /* LexK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexK.swift; sourceTree = "<group>"; };
 		F379CEC52ADDB24D00164F76 /* LexBQN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexBQN.swift; sourceTree = "<group>"; };
 		F379CEC82ADDD2A700164F76 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		F379CECB2ADDD42C00164F76 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		F3877C8B29952A5400E2FCB5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F3877C8D29952A6600E2FCB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F38F03A82A323F8500F66354 /* libksim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libksim.a; path = Beacon/libs/libksim.a; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 				F30A7B892A370B7800503966 /* BuffersView.swift */,
 				F3E1DFF32A31F9D800B4A553 /* ConfigView.swift */,
 				F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */,
+				F379CECB2ADDD42C00164F76 /* HistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,6 +463,7 @@
 				F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */,
 				F379CEC72ADDB24D00164F76 /* LexBQN.swift in Sources */,
 				F379CEC42ADD94BC00164F76 /* LexK.swift in Sources */,
+				F379CECD2ADDD42C00164F76 /* HistoryView.swift in Sources */,
 				F30A7B8B2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */,
 				F32D9E8529966FCD007BC97C /* ArraygroundApp.swift in Sources */,
@@ -479,6 +484,7 @@
 				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,
 				F379CEC62ADDB24D00164F76 /* LexBQN.swift in Sources */,
 				F379CEC32ADD94BC00164F76 /* LexK.swift in Sources */,
+				F379CECC2ADDD42C00164F76 /* HistoryView.swift in Sources */,
 				F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */,
 				F3B198CE299517DA00FE664F /* ArraygroundApp.swift in Sources */,

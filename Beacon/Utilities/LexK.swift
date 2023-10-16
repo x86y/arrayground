@@ -43,7 +43,7 @@ func parseK(_ str: String) -> [String] {
             continue
         } else if (c == " " && n == "/") || ((p == "\n" || p == "\0") && c == "/") {
             res[i] = comC
-            while str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)] != "\n" {
+            while i < str.count, str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)] != "\n" {
                 i += 1
             }
         } else if fns.contains(c) || c.unicodeScalars.first!.value >= 0x80 {
