@@ -1,8 +1,6 @@
 //
 //  Utils.swift
-//  Beacon
-//
-//
+//  Arrayground
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 //
 //  BuffersView.swift
-//  Beacon
+//  Arrayground
 //
 
 import SwiftUI

@@ -1,6 +1,6 @@
 //
 //  HelpView.swift
-//  Beacon
+//  Arrayground
 //
 
 import Foundation

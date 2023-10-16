@@ -1,6 +1,6 @@
 //
 //  History.swift
-//  Beacon
+//  Arrayground
 //
 
 import Foundation

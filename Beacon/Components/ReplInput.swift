@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SwiftUIInputField: View {
+struct ReplInput: View {
     @Binding var text: String
     @Binding var helpOpen: Bool
     @Binding var settingsOpen: Bool

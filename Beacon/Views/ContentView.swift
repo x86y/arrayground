@@ -48,6 +48,35 @@ struct HistoryView: View {
                 .font(Font.custom("BQN386 Unicode", size: 18))
                 .foregroundColor(.blue)
             } else if editType == Behavior.duplicate {
+                /*
+                 HStack(spacing: 0) {
+                     ForEach(tokenize(code: historyItem.src), id: \.value) { token in
+                         switch token.type {
+                         case .number:
+                             Text(token.value)
+                                 .foregroundColor(.green)
+                         case .function:
+                             Text(token.value)
+                                 .foregroundColor(.purple)
+                         case .variable:
+                             Text(token.value)
+                                 .foregroundColor(.blue)
+                         case .string:
+                             Text(token.value)
+                                 .foregroundColor(.orange)
+                         case .statement:
+                             Text(token.value)
+                                 .foregroundColor(.pink)
+                         case .comment:
+                             Text(token.value)
+                                 .foregroundColor(.gray)
+                         case .other:
+                             Text(token.value)
+                                 .foregroundColor(.primary)
+                         }
+                     }
+                 }
+                 */
                 Text(historyItem.src)
                     .font(Font.custom("BQN386 Unicode", size: 18))
                     .foregroundColor(.blue)
@@ -148,7 +177,7 @@ struct ContentView: View {
             }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 .padding(.bottom, 5)
 
-            SwiftUIInputField(text: $input,
+            ReplInput(text: $input,
                               helpOpen: $showHelp,
                               settingsOpen: $showSettings,
                               buffersOpen: $showBuffers,

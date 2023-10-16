@@ -1,7 +1,6 @@
 //
 //  k.h
-//  Beacon
-//
+//  Arrayground
 //
 
 #ifndef k_h

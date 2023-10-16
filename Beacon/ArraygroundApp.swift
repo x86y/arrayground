@@ -1,12 +1,12 @@
 //
-//  BeaconApp.swift
-//  Beacon
+//  ArraygroundApp.swift
+//  Arrayground
 //
 
 import SwiftUI
 
 @main
-struct BeaconApp: App {
+struct ArraygroundApp: App {
     @AppStorage("scheme") private var scheme: Appearance = .system
     @State private var selectedView = 0
     var appearanceSwitch: ColorScheme? {
@@ -26,7 +26,7 @@ struct BeaconApp: App {
             TabView(selection: $selectedView) {
                 ContentView(viewModel: viewModel).tag(0)
                     .preferredColorScheme(appearanceSwitch)
-                //Dashboard().tag(1)
+                // Dashboard().tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .onChange(of: selectedView) {
                     dismissKeyboard()

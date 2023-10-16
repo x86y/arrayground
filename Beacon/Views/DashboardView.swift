@@ -1,6 +1,6 @@
 //
 //  DashboardView.swift
-//  Beacon
+//  Arrayground
 //
 
 import Charts

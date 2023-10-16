@@ -1,7 +1,6 @@
 //
 //  Beacon-Bridging-Header.h
-//  Beacon
-//
+//  Arrayground
 //
 
 #ifndef Beacon_Bridging_Header_h

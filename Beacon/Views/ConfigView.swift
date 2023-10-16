@@ -1,6 +1,6 @@
 //
 //  ConfigView.swift
-//  Beacon
+//  Arrayground
 //
 
 import SwiftUI
