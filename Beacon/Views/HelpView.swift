@@ -7,10 +7,9 @@ import Foundation
 import SwiftUI
 
 func toDict(h: String) -> [String: String] {
-    var helpDict = [String: String]()
-    var components = h.components(separatedBy: "--------------------------------------------------------------------------------")
-    components.removeFirst()
-    for component in components {
+    var helpDict: [String: String] = [:]
+    let components = h.components(separatedBy: "--------------------------------------------------------------------------------")
+    for component in components.dropFirst() {
         let lines = component.components(separatedBy: "\n")
         let key = String(lines[1])
         let value = lines[2...].joined(separator: "\n")
@@ -19,20 +18,11 @@ func toDict(h: String) -> [String: String] {
     return helpDict
 }
 
+
 // taken from ngn/k/repl.k
 let kh: String = """
 --------------------------------------------------------------------------------
-\\:h
-\\   help               \\\\         exit
-\\a  license(AGPLv3)    \\l file.k  load
-\\0  types              \\d foo.bar set namespace; restore with  \\d .
-\\+  verbs              \\t:n expr  time(elapsed milliseconds after n runs)
-\\:  I/O verbs          \\v         variables
-\\'  adverbs            \\f         functions
-\\`  symbols            \\cd path   change directory
-\\h  summary            \\other     command(through /bin/sh)
---------------------------------------------------------------------------------
-\\0
+General
 Types:
 list atom
  `A        generic list   ()   ,"ab"   (0;`1;"2";{3};%)
@@ -50,7 +40,7 @@ list atom
       `w   adverb         '   /:
       `x   external func
 --------------------------------------------------------------------------------
-\\:
+IO
 I/O verbs
   0:x read  lines
 x 0:y write lines
@@ -65,7 +55,7 @@ x can be a file descriptor (int) or symbol or string such as
  "host:port"
  ":port"         /host defaults to 127.0.0.1
 --------------------------------------------------------------------------------
-\\+
+Primitives
 Verbs:    : + - * % ! & | < > = ~ , ^ # _ $ ? @ . 0: 1:
 notation: [c]har [i]nt [n]umber(int|float|char) [s]ymbol [a]tom [d]ict
           [f]unc(monad) [F]unc(dyad) [xyz]any
@@ -151,8 +141,7 @@ x.y apply(n)  {x*y+1}. 2 3 -> 8   (`a`b`c;`d`e`f). 1 0 -> `d
 .[f;y;f]   try    .[+;1 2;"E:",] -> 3   .[+;1,`;"E:",] -> "E:'type\\n"
 ?[x;y;z]   splice ?["abcd";1 3;"xyz"] -> "axyzd"
 --------------------------------------------------------------------------------
-\\`
-Special symbols:
+Special Symbols
    `j?C parse json   `j?"{\\"a\\":1,\\"b\\":[true,\\"c\\"]}" -> `a`b!(1.0;(1;,"c"))
    `k@x pretty-print `k("ab";2 3) -> "(\\"ab\\";2 3)"
    `p@C parse k
@@ -171,8 +160,7 @@ Special symbols:
   `ln@N logarithm    `ln 2 -> 0.6931471805599453
 `exit@i exit
 --------------------------------------------------------------------------------
-\\'
-Adverbs:   ' / \\ ': /: \\:
+Adverbs
    f' each1     #'("abc";3 4 5 6) -> 3 4
  x F' each2     2 3#'"ab" -> ("aa";"bbb")
    X' binsearch 1 3 5 7 9'8 9 0 -> 3 4 -1
@@ -197,7 +185,7 @@ x F': seeded ': 10-':12 13 11 17 14 -> 2 1 -2 6 -3
 x F/: eachright 1 2*/:3 4 -> (3 6;4 8)
 x F\\: eachleft  1 2*\\:3 4 -> (3 4;6 8)
 --------------------------------------------------------------------------------
-\\h
+Grammar
 : SET      RETURN    :[c;t;f]     COND
 + add      flip
 - subtract negate    '  each|slide|bin
@@ -222,47 +210,53 @@ grammar:  E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N
 limits: 8 args, 16 locals, 256 bytecode, 2048 stack
 """
 
+struct HelpCard: View {
+    let key: String
+    let value: String
+    @State var isExpanded: Bool = false
+    
+    var body: some View {
+        VStack {
+            Button(action: { self.isExpanded.toggle() }) {
+                Text(key)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+            }
+            if isExpanded {
+                Text(value)
+                    .font(.monospaced(.body)())
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(8)
+        .padding([.top, .horizontal])
+    }
+}
+
 struct HelpView: View {
-    @Binding var key: String
-    let helpDictionary: [String: String] = toDict(h: kh)
+    let helpDict: [String: String]
+
+    init() {
+        self.helpDict = toDict(h: kh)
+    }
+    
     var body: some View {
         ScrollView {
-            if key == #"\\:"# || key == "" {
-                all()
-            } else {
-                single(for: key)
-            }
-        }
-    }
-
-    private func single(for key: String) -> some View {
-        VStack(alignment: .leading) {
-            if let helpText = helpDictionary[key] {
-                Text(key)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.blue)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    Text(helpText)
-                        .font(.system(.body, design: .monospaced))
-                        .lineLimit(nil)
+            ForEach(helpDict.keys.sorted(), id: \.self) { key in
+                if let value = helpDict[key] {
+                    HelpCard(key: key, value: value)
                 }
-                .padding()
             }
-        }
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(10)
-        .padding(.bottom)
-    }
-
-    private func all() -> some View {
-        ForEach(Array(helpDictionary.keys), id: \.self) { key in
-            single(for: key)
         }
     }
 }
 
+
 #Preview {
-    HelpView(key: .constant("\\:"))
+    HelpView()
 }

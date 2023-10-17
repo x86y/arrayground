@@ -120,7 +120,7 @@ struct ContentView: View {
                 .presentationDetents([.medium])
         }
         .sheet(isPresented: $showHelp) {
-            HelpView(key: self.$input)
+            HelpView()
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $showBuffers) {
