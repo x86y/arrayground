@@ -12,6 +12,7 @@ struct Entry: Hashable, Codable, Identifiable {
     var src: String
     var out: String
     var lang: Language
+    var tokens: [[Token]]
 }
 
 enum Buffers {
@@ -40,7 +41,10 @@ class HistoryModel: ObservableObject {
     @Published var history: [String: [Entry]] = ["default": []]
 
     func addMessage(with src: String, out: String, lang: Language, for key: String) {
-        let entry = Entry(src: src, out: out, lang: lang)
+        let tokenize = lang == .k
+            ? tokenize(src, parseK(src))
+            : tokenize(src, parseBQN(code: src))
+        let entry = Entry(src: src, out: out, lang: lang, tokens: tokenize)
         if var entries = history[key] {
             entries.append(entry)
             history[key] = entries

@@ -45,10 +45,7 @@ struct HistoryView: View {
                 .foregroundColor(.blue)
             } else if editType == Behavior.duplicate {
                 VStack(spacing: 1) {
-                    let tokens = historyItem.lang == .k
-                        ? tokenize(historyItem.src, parseK(historyItem.src))
-                        : tokenize(historyItem.src, parseBQN(code: historyItem.src))
-                    ForEach(Array(tokens.enumerated()), id: \.offset) { _, line in
+                    ForEach(Array(historyItem.tokens.enumerated()), id: \.offset) { _, line in
                         HStack(spacing: 0) {
                             ForEach(line, id: \.id) { token in
                                 Text(token.value)

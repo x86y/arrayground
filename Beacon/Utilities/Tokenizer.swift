@@ -33,7 +33,7 @@ func tokenToColor(_ type: TokenType) -> Color {
     }
 }
 
-enum TokenType: String {
+enum TokenType: String, Codable {
     case regC = "0"
     case fnsC = "1"
     case mopC = "2"
@@ -47,7 +47,7 @@ enum TokenType: String {
     case endL = "E"
 }
 
-struct Token: Identifiable {
+struct Token: Hashable, Codable, Identifiable {
     var id = UUID()
     let value: String
     let type: TokenType
