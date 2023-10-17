@@ -33,6 +33,48 @@ func tokenToColor(_ type: TokenType) -> Color {
     }
 }
 
+func tokenToColorK(_ type: TokenType, _ isDarkTheme: Bool) -> Color {
+    let colorHex: String
+    switch type {
+    case .regC, .namC:
+        colorHex = isDarkTheme ? "39BAE6" : "000000"
+    case .comC, .endL:
+        colorHex = isDarkTheme ? "ACB6BF" : "6A737D"
+    case .digC:
+        colorHex = isDarkTheme ? "D2A6FF" : "005CC5"
+    case .parC:
+        colorHex = isDarkTheme ? "E6B673" : "000000"
+    case .dmdC:
+        colorHex = isDarkTheme ? "FFFF00" : "0000FF"
+    case .strC:
+        colorHex = isDarkTheme ? "AAD94C" : "032F62"
+    case .fnsC:
+        colorHex = isDarkTheme ? "F29668" : "D73A49"
+    case .mopC:
+        colorHex = isDarkTheme ? "39BAE6" : "ED5F00"
+    case .dfnC:
+        colorHex = isDarkTheme ? "FFB454" : "A906D4"
+    }
+    return Color(hex: colorHex)
+}
+
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        var rgb: UInt64 = 0
+
+        scanner.scanHexInt64(&rgb)
+
+        let red = Double((rgb & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgb & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgb & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue)
+    }
+}
+
+
 enum TokenType: String, Codable {
     case regC = "0"
     case fnsC = "1"

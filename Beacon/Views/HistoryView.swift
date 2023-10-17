@@ -15,6 +15,7 @@ struct HistoryView: View {
     @Binding var ephemerals: [Int: [String]]
     @Binding var editType: Behavior
     @ObservedObject var viewModel: HistoryModel
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -48,8 +49,10 @@ struct HistoryView: View {
                     ForEach(Array(historyItem.tokens.enumerated()), id: \.offset) { _, line in
                         HStack(spacing: 0) {
                             ForEach(line, id: \.id) { token in
+                                let isDarkTheme = (scheme == .dark)
+                                let col = historyItem.lang == Language.k ? tokenToColorK(token.type, isDarkTheme) : tokenToColor(token.type)
                                 Text(token.value)
-                                    .foregroundColor(tokenToColor(token.type))
+                                    .foregroundColor(col)
                                     .font(Font.custom("BQN386 Unicode", size: 18))
                                     .onTapGesture {
                                         self.input = historyItem.src
