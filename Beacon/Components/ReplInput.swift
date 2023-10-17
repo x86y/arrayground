@@ -66,10 +66,10 @@ struct ReplInput: View {
                 .submitLabel(.done)
                 .disableAutocorrection(true)
                 .font(font)
-                .frame(minHeight: 48)
-                .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
+                .frame(minHeight: 36)
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 48))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 18)
+                    RoundedRectangle(cornerRadius: 48)
                         .stroke(.gray.opacity(0.25), lineWidth: 1)
                 ).modifier(EvalButton(onSubmit: onSubmit))
         }
@@ -87,7 +87,7 @@ struct EvalButton: ViewModifier {
             }) {
                 Image(systemName: "restart.circle")
                     .resizable()
-                    .frame(width: 32.0, height: 32.0)
+                    .frame(width: 36.0, height: 36.0)
             }
             .padding(8)
         }
