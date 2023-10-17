@@ -26,8 +26,6 @@ struct ContentView: View {
 
     func onMySubmit(input: String) {
         switch input {
-        case _ where [#"\:"#, #"\h"#, #"\'"#, #"\`"#, #"\+"#, #"\\:"#].contains(input):
-            showHelp = true
         case "clear":
             viewModel.clear(b: curBuffer)
             self.input = ""

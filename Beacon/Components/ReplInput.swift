@@ -9,7 +9,7 @@ struct ReplInput: View {
     var onSubmit: (() -> Void)?
     var font: Font
     var letters: [String] {
-        lang == .bqn ? glyphs : ["'", "/", "\\", "%", "*", "+", "-", "=", "!", "\"", ":"]
+        lang == .bqn ? glyphs : ["`", "'", "/", "\\", "%", "*", "+", "-", "=", "!", "\"", ":", "@"]
     }
 
     var body: some View {
