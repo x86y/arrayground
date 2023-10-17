@@ -13,50 +13,53 @@ struct ReplInput: View {
     }
 
     var body: some View {
-        HStack {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(letters, id: \.self) { letter in
-                        Button(letter) {
-                            text.append(letter)
+        let toolbar = ToolbarItemGroup(placement: .keyboard) {
+            HStack {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(letters, id: \.self) { letter in
+                            Button(letter) {
+                                text.append(letter)
+                            }
+                            .font(.custom("BQN386 Unicode", size: 16))
+                            .padding(8)
+                            .background(.gray.opacity(0.1))
+                            .foregroundStyle(.primary)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
-                        .font(.custom("BQN386 Unicode", size: 16))
-                        .padding(8)
-                        .background(.gray.opacity(0.1))
-                        .foregroundStyle(.primary)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                 }
-            }
 
-            HStack {
                 Button(action: { text = "" }) {
                     Image(systemName: "arrow.left.square.fill")
                         .resizable()
-                        .frame(width: 24.0, height: 24.0)
+                        .frame(width: 16.0, height: 16.0)
                 }
                 Button(action: { helpOpen.toggle() }) {
                     Image(systemName: "questionmark.app.fill")
                         .resizable()
-                        .frame(width: 24.0, height: 24.0)
+                        .frame(width: 16.0, height: 16.0)
                 }
                 Button(action: { buffersOpen.toggle() }) {
                     Image(systemName: "list.bullet.rectangle.portrait.fill")
                         .resizable()
-                        .frame(width: 24.0, height: 24.0)
+                        .frame(width: 16.0, height: 16.0)
                 }
                 Button(action: { settingsOpen.toggle() }) {
                     Image(systemName: "command.square.fill")
                         .resizable()
-                        .frame(width: 24.0, height: 24.0)
+                        .frame(width: 16.0, height: 16.0)
                 }
             }
         }
 
         HStack {
-            TextField("Type some \(languageToString(l: lang)) code..", text: $text, axis: .vertical)
+            TextField("Type \(languageToString(l: lang))...", text: $text, axis: .vertical)
                 .onSubmit {
                     onSubmit?()
+                }
+                .toolbar {
+                    toolbar
                 }
                 .lineLimit(1 ... 8)
                 .keyboardType(.asciiCapable)
@@ -84,7 +87,7 @@ struct EvalButton: ViewModifier {
             }) {
                 Image(systemName: "restart.circle")
                     .resizable()
-                    .frame(width: 24.0, height: 24.0)
+                    .frame(width: 32.0, height: 32.0)
             }
             .padding(8)
         }

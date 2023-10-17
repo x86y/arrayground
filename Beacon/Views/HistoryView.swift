@@ -63,6 +63,7 @@ struct HistoryView: View {
                 }
             }
             Text("\(trimLongText(historyItem.out))")
+                .foregroundStyle(.primary.opacity(0.8))
                 .font(Font.custom("BQN386 Unicode", size: 18))
                 .foregroundColor(historyItem.out.starts(with: "Error:") || historyItem.out.starts(with: "\"Error:") ? .red : .primary)
                 .multilineTextAlignment(.leading)

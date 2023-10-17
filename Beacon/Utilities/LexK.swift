@@ -28,22 +28,20 @@ func parseK(_ str: String) -> [String] {
     res[0] = regC
 
     var i = 0
-
     while i < str.count {
-        let p = i - 1 >= 0 ? String(str[str.index(str.startIndex, offsetBy: i - 1) ... str.index(str.startIndex, offsetBy: i - 1)]) : "\0"
-        let c = String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)])
-        let n = i + 1 < str.count ? String(str[str.index(str.startIndex, offsetBy: i + 1) ... str.index(str.startIndex, offsetBy: i + 1)]) : "\0"
+        let p = charAt(str, i - 1)
+        let c = charAt(str, i)
+        let n = charAt(str, i + 1)
 
         if dig.contains(c) || (c == "." && dig.contains(n)) {
             res[i] = digC
-            while i < str.count, dig.contains(String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)])) || ".eEnNbiwW".contains(String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)])) {
+            while i < str.count, dig.contains(charAt(str, i)) || ".eEnNbiwW".contains(charAt(str, i)) {
                 i += 1
             }
-
             continue
         } else if (c == " " && n == "/") || ((p == "\n" || p == "\0") && c == "/") {
             res[i] = comC
-            while i < str.count, str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)] != "\n" {
+            while i < str.count, charAt(str, i) != "\n" {
                 i += 1
             }
         } else if fns.contains(c) || c.unicodeScalars.first!.value >= 0x80 {
@@ -62,15 +60,15 @@ func parseK(_ str: String) -> [String] {
             res[i] = dmdC
         } else if nam.contains(c) {
             res[i] = namC
-            while nam.contains(String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)])) || dig.contains(String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)])) {
+            while i < str.count, nam.contains(charAt(str, i)) || dig.contains(charAt(str, i)) {
                 i += 1
             }
             continue
         } else if c == "\"" {
             res[i] = strC
             i += 1
-            while str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)] != "\"", str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)] != "\n" {
-                i += String(str[str.index(str.startIndex, offsetBy: i) ... str.index(str.startIndex, offsetBy: i)]) == "\\" ? 2 : 1
+            while charAt(str, i) != "\"", charAt(str, i) != "\n" {
+                i += charAt(str, i) == "\\" ? 2 : 1
             }
         } else if !" \t".contains(c) {
             res[i] = regC
@@ -79,5 +77,14 @@ func parseK(_ str: String) -> [String] {
         }
         i += 1
     }
+
     return res
+}
+
+func charAt(_ str: String, _ i: Int) -> String {
+    if i < 0 || i >= str.count {
+        return "\0"
+    }
+    let index = str.index(str.startIndex, offsetBy: i)
+    return String(str[index])
 }

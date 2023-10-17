@@ -38,8 +38,8 @@ enum Behavior: Int {
 struct ConfigView: View {
     @AppStorage("scheme") private var scheme: Appearance = .system
     @AppStorage("font") private var font: AppFont = .bqn386
-    @AppStorage("lang") private var lang: Language = .bqn
-    @AppStorage("editType") private var editType: Behavior = .inlineEdit
+    @AppStorage("lang") private var lang: Language = .k
+    @AppStorage("editType") private var editType: Behavior = .duplicate
 
     var body: some View {
         NavigationView {

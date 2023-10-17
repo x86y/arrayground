@@ -64,7 +64,12 @@ func parseBQN(code: String) -> [String] {
                 i = code.index(after: i)
             }
             let ce = code[safe: code.index(before: i)] ?? "\0"
-            res[fst.utf16Offset(in: code)] = cs == "_" ? (ce == "_" ? dopC : mopC) : (cs >= "A" && cs <= "Z" ? fnsC : namC)
+            let offset = fst.utf16Offset(in: code)
+            if offset < res.count {
+                res[offset] = cs == "_" ? (ce == "_" ? dopC : mopC) : (cs >= "A" && cs <= "Z" ? fnsC : namC)
+            } else {
+                // Handle this case
+            }
             continue
         } else if c == "'" || c == "\"" {
             res[i.utf16Offset(in: code)] = strC
@@ -78,10 +83,8 @@ func parseBQN(code: String) -> [String] {
             while code[safe: i] != nil, code[safe: i] != "\n" {
                 i = code.index(after: i)
             }
-        } else if !" \t".contains(c) {
+        } else if !" \n\t".contains(c) {
             res[i.utf16Offset(in: code)] = regC
-        } else if c == "\n" {
-            res[i.utf16Offset(in: code)] = newL
         }
         i = code.index(after: i)
     }

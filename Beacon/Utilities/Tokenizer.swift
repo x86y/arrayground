@@ -15,7 +15,7 @@ func tokenToColor(_ type: TokenType) -> Color {
     case .mopC:
         return Color.yellow // '#FFF455'
     case .namC:
-        return Color.white // '#D2D2D2'
+        return Color.primary.opacity(0.8) // '#D2D2D2'
     case .digC:
         return Color.purple // '#FF80F4'
     case .parC:

@@ -66,7 +66,7 @@ struct ContentView: View {
         ScrollViewReader { scrollView in
             VStack {
                 ScrollView(.vertical) {
-                    VStack {
+                    VStack(spacing: 12) {
                         if viewModel.history[curBuffer, default: []].isEmpty {
                             VStack {
                                 Text("ngn/k, (c) 2019-2023")
