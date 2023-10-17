@@ -44,6 +44,7 @@ func parseK(_ str: String) -> [String] {
             while i < str.count, charAt(str, i) != "\n" {
                 i += 1
             }
+            if charAt(str, i) == "\n" { res[i] = endL }
         } else if fns.contains(c) || c.unicodeScalars.first!.value >= 0x80 {
             res[i] = fnsC
         } else if mop.contains(c) {
@@ -72,8 +73,6 @@ func parseK(_ str: String) -> [String] {
             }
         } else if !" \t".contains(c) {
             res[i] = regC
-        } else if c == "\n" {
-            res[i] = endL
         }
         i += 1
     }
