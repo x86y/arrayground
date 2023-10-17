@@ -42,18 +42,15 @@ struct ContentView: View {
                 let output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
                     ? e(input: input)
                     : ke(input: input)
-                let attributeSet = CSSearchableItemAttributeSet(contentType: .plainText)
-                attributeSet.title = input
-                attributeSet.contentDescription = output
-                let uniqueIdentifier = UUID().uuidString
-                let searchableItem = CSSearchableItem(uniqueIdentifier: uniqueIdentifier, domainIdentifier: "arrscience.Beacons", attributeSet: attributeSet)
-                CSSearchableIndex.default().indexSearchableItems([searchableItem]) { error in
-                    if let error = error {
-                        print("Indexing error: \(error.localizedDescription)")
-                    } else {
-                        print("Search item successfully indexed!")
-                    }
-                }
+                
+                let attr = CSSearchableItemAttributeSet(contentType: .item)
+                attr.title = input
+                attr.contentDescription = output
+                attr.displayName = input
+                let uid = UUID().uuidString
+                let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
+                CSSearchableIndex.default().indexSearchableItems([item])
+                
                 viewModel.addMessage(with: input, out: output, lang: lang, for: curBuffer)
             } else {
                 isFocused = false
