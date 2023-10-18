@@ -2,6 +2,7 @@
 //  Lexer.swift
 //  Arrayground
 //
+//  Lexing adapted from https://github.com/dzaima/paste
 
 import Foundation
 import SwiftUI
