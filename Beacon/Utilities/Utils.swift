@@ -65,7 +65,7 @@ func e(input: String) -> String {
 func ke(input: String) -> String {
     var input = input.replacingOccurrences(of: "\\", with: #"\\"#)
     input = input.replacingOccurrences(of: "\"", with: #"\""#)
-    input = ".[{`0:`k@.\"\(input)\"};[];{`0:(,\"Error: \"),(-2_\"\n\"\\x)}]"
+    input = ".[{line `k@.\"\(input)\"};[];{`0:(,\"Error: \"),(-2_\"\n\"\\x)}]"
     return runCmd(kCmd, input)
 }
 
