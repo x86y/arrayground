@@ -6,7 +6,7 @@
 import Foundation
 import SwiftUI
 
-func tokenToColor(_ type: TokenType) -> Color {
+func colorBQN(_ type: TokenType) -> Color {
     switch type {
     case .regC:
         return Color.gray // '#D2D2D2'
@@ -33,7 +33,7 @@ func tokenToColor(_ type: TokenType) -> Color {
     }
 }
 
-func tokenToColorK(_ type: TokenType, _ isDarkTheme: Bool) -> Color {
+func colorK(_ type: TokenType, _ isDarkTheme: Bool) -> Color {
     let colorHex: String
     switch type {
     case .regC, .namC:
@@ -63,13 +63,10 @@ extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
         var rgb: UInt64 = 0
-
         scanner.scanHexInt64(&rgb)
-
         let red = Double((rgb & 0xFF0000) >> 16) / 255.0
         let green = Double((rgb & 0x00FF00) >> 8) / 255.0
         let blue = Double(rgb & 0x0000FF) / 255.0
-
         self.init(red: red, green: green, blue: blue)
     }
 }

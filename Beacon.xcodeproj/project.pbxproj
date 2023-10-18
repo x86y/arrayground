@@ -32,10 +32,8 @@
 		F32D9E972996710A007BC97C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3877C8B29952A5400E2FCB5 /* ContentView.swift */; };
 		F361BF092AD2A74C00200F72 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AC4D252A4F6C3000B4FECD /* curl.xcframework */; };
 		F361BF0C2AD2A76700200F72 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DF82892A4EF33A00F6CD19 /* DashboardView.swift */; };
-		F379CEC32ADD94BC00164F76 /* LexK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC22ADD94BC00164F76 /* LexK.swift */; };
-		F379CEC42ADD94BC00164F76 /* LexK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC22ADD94BC00164F76 /* LexK.swift */; };
-		F379CEC62ADDB24D00164F76 /* LexBQN.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC52ADDB24D00164F76 /* LexBQN.swift */; };
-		F379CEC72ADDB24D00164F76 /* LexBQN.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC52ADDB24D00164F76 /* LexBQN.swift */; };
+		F379CEC32ADD94BC00164F76 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC22ADD94BC00164F76 /* Lexer.swift */; };
+		F379CEC42ADD94BC00164F76 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC22ADD94BC00164F76 /* Lexer.swift */; };
 		F379CEC92ADDD2A700164F76 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC82ADDD2A700164F76 /* Tokenizer.swift */; };
 		F379CECA2ADDD2A700164F76 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CEC82ADDD2A700164F76 /* Tokenizer.swift */; };
 		F379CECC2ADDD42C00164F76 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F379CECB2ADDD42C00164F76 /* HistoryView.swift */; };
@@ -112,8 +110,7 @@
 		F3512E082A4CE18D00658F24 /* libk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libk.a; path = Beacon/Libs/libk.a; sourceTree = "<group>"; };
 		F35FE0AD2A44387C00653849 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F35FE0AF2A44387D00653849 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		F379CEC22ADD94BC00164F76 /* LexK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexK.swift; sourceTree = "<group>"; };
-		F379CEC52ADDB24D00164F76 /* LexBQN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexBQN.swift; sourceTree = "<group>"; };
+		F379CEC22ADD94BC00164F76 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		F379CEC82ADDD2A700164F76 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
 		F379CECB2ADDD42C00164F76 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		F3877C8B29952A5400E2FCB5 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -209,8 +206,7 @@
 				F3B198DD2995181F00FE664F /* bqnffi.h */,
 				F3E1DFF62A3216C000B4A553 /* k.h */,
 				F312CF8729951C49008EC197 /* Beacon-Bridging-Header.h */,
-				F379CEC22ADD94BC00164F76 /* LexK.swift */,
-				F379CEC52ADDB24D00164F76 /* LexBQN.swift */,
+				F379CEC22ADD94BC00164F76 /* Lexer.swift */,
 				F379CEC82ADDD2A700164F76 /* Tokenizer.swift */,
 			);
 			path = Utilities;
@@ -461,8 +457,7 @@
 				F31BCE792A33B33E00A6116D /* Utils.swift in Sources */,
 				F3E1DFF52A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F32D9E8429966FCD007BC97C /* Beacon-Bridging-Header.h in Sources */,
-				F379CEC72ADDB24D00164F76 /* LexBQN.swift in Sources */,
-				F379CEC42ADD94BC00164F76 /* LexK.swift in Sources */,
+				F379CEC42ADD94BC00164F76 /* Lexer.swift in Sources */,
 				F379CECD2ADDD42C00164F76 /* HistoryView.swift in Sources */,
 				F30A7B8B2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7F2A348B7500A6116D /* HelpView.swift in Sources */,
@@ -482,8 +477,7 @@
 				F3DF828A2A4EF33A00F6CD19 /* DashboardView.swift in Sources */,
 				F3E1DFF42A31F9D800B4A553 /* ConfigView.swift in Sources */,
 				F312CF8829951C89008EC197 /* Beacon-Bridging-Header.h in Sources */,
-				F379CEC62ADDB24D00164F76 /* LexBQN.swift in Sources */,
-				F379CEC32ADD94BC00164F76 /* LexK.swift in Sources */,
+				F379CEC32ADD94BC00164F76 /* Lexer.swift in Sources */,
 				F379CECC2ADDD42C00164F76 /* HistoryView.swift in Sources */,
 				F30A7B8A2A370B7800503966 /* BuffersView.swift in Sources */,
 				F31BCE7E2A348B7500A6116D /* HelpView.swift in Sources */,

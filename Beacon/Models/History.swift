@@ -42,8 +42,8 @@ class HistoryModel: ObservableObject {
 
     func addMessage(with src: String, out: String, lang: Language, for key: String) {
         let tokenize = lang == .k
-            ? tokenize(src, parseK(src))
-            : tokenize(src, parseBQN(code: src))
+            ? tokenize(src, lexK(src))
+            : tokenize(src, lexBQN(src))
         let entry = Entry(src: src, out: out, lang: lang, tokens: tokenize)
         if var entries = history[key] {
             entries.append(entry)
