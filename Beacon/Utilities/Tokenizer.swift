@@ -58,7 +58,6 @@ func colorK(_ type: TokenType, _ isDarkTheme: Bool) -> Color {
     return Color(hex: colorHex)
 }
 
-
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
@@ -70,7 +69,6 @@ extension Color {
         self.init(red: red, green: green, blue: blue)
     }
 }
-
 
 enum TokenType: String, Codable {
     case regC = "0"

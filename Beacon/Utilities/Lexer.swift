@@ -1,5 +1,5 @@
 //
-//  LexK.swift
+//  Lexer.swift
 //  Arrayground
 //
 

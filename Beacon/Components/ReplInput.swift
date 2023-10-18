@@ -67,29 +67,20 @@ struct ReplInput: View {
                 .disableAutocorrection(true)
                 .font(font)
                 .frame(minHeight: 36)
-                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 48))
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 .overlay(
                     RoundedRectangle(cornerRadius: 48)
-                        .stroke(.gray.opacity(0.25), lineWidth: 1)
-                ).modifier(EvalButton(onSubmit: onSubmit))
-        }
-    }
-}
-
-struct EvalButton: ViewModifier {
-    var onSubmit: (() -> Void)?
-
-    public func body(content: Content) -> some View {
-        ZStack(alignment: .trailing) {
-            content
+                        .stroke(.gray.opacity(0.2), lineWidth: 1)
+                )
             Button(action: {
                 onSubmit?()
             }) {
-                Image(systemName: "restart.circle")
+                Image(systemName: "play.circle.fill")
                     .resizable()
-                    .frame(width: 36.0, height: 36.0)
+                    .frame(width: 32.0, height: 32.0)
+                    .foregroundStyle(.blue.opacity(0.9))
             }
-            .padding(8)
+            .padding(4)
         }
     }
 }

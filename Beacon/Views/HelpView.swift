@@ -18,7 +18,6 @@ func toDict(h: String) -> [String: String] {
     return helpDict
 }
 
-
 // taken from ngn/k/repl.k
 let kh: String = """
 --------------------------------------------------------------------------------
@@ -214,7 +213,7 @@ struct HelpCard: View {
     let key: String
     let value: String
     @State var isExpanded: Bool = false
-    
+
     var body: some View {
         VStack {
             Button(action: { self.isExpanded.toggle() }) {
@@ -242,9 +241,9 @@ struct HelpView: View {
     let helpDict: [String: String]
 
     init() {
-        self.helpDict = toDict(h: kh)
+        helpDict = toDict(h: kh)
     }
-    
+
     var body: some View {
         ScrollView {
             ForEach(helpDict.keys.sorted(), id: \.self) { key in
@@ -255,7 +254,6 @@ struct HelpView: View {
         }
     }
 }
-
 
 #Preview {
     HelpView()

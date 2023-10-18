@@ -40,7 +40,7 @@ struct ContentView: View {
                 let output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
                     ? e(input: input)
                     : ke(input: input)
-                
+
                 let attr = CSSearchableItemAttributeSet(contentType: .item)
                 attr.title = input
                 attr.contentDescription = output
@@ -48,7 +48,7 @@ struct ContentView: View {
                 let uid = UUID().uuidString
                 let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
                 CSSearchableIndex.default().indexSearchableItems([item])
-                
+
                 viewModel.addMessage(with: input, out: output, lang: lang, for: curBuffer)
             } else {
                 isFocused = false

@@ -52,7 +52,7 @@ struct HistoryView: View {
                                 let isDarkTheme = (scheme == .dark)
                                 let col = historyItem.lang == Language.k ? colorK(token.type, isDarkTheme) : colorBQN(token.type)
                                 Text(token.value)
-                                    .lineLimit(1)  // HACK to stop long tokens from messing alignment
+                                    .lineLimit(1) // HACK to stop long tokens from messing alignment
                                     .foregroundColor(col)
                                     .font(Font.custom("BQN386 Unicode", size: 18))
                                     .onTapGesture {
