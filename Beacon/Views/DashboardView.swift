@@ -236,7 +236,7 @@ struct CardView: View {
                 self.isLoading = true
                 let snippets = snippet.split(separator: "\n")
                 for snippet in snippets {
-                    let to = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                    let to = await UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
                         ? e(input: String(snippet))
                         : ke(input: String(snippet))
                     if snippet == snippets.last {

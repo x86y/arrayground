@@ -49,7 +49,7 @@ func kCmd(_ inp: UnsafePointer<Int8>) {
     b.deallocate()
 }
 
-func e(input: String) -> String {
+func e(input: String) async -> String  {
     var input = input
     if input.contains("•Import ") {
         let i = input.split(separator: "•Import ")
@@ -62,7 +62,7 @@ func e(input: String) -> String {
     return runCmd(cbqnCmd, input)
 }
 
-func ke(input: String) -> String {
+func ke(input: String) async -> String {
     var input = input.replacingOccurrences(of: "\\", with: #"\\"#)
     input = input.replacingOccurrences(of: "\"", with: #"\""#)
     input = ".[{line `k@.\"\(input)\"};[];{`0:(,\"Error: \"),(-2_\"\n\"\\x)}]"

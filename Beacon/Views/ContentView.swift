@@ -24,7 +24,7 @@ struct ContentView: View {
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel: HistoryModel
 
-    func onMySubmit(input: String) {
+    func onMySubmit(input: String) async {
         switch input {
         case "clear":
             viewModel.clear(b: curBuffer)
@@ -36,20 +36,24 @@ struct ContentView: View {
             }
         default:
             if !input.isEmpty {
-                // FIXME, below is a hacky workaround for appstorage not syncing?
-                let output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-                    ? e(input: input)
-                    : ke(input: input)
+                let key = UUID()
+                Task {
+                    let output = await UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                        ? e(input: input)
+                        : ke(input: input)
+                    
+                    let attr = CSSearchableItemAttributeSet(contentType: .item)
+                    attr.title = input
+                    attr.contentDescription = output
+                    attr.displayName = input
+                    let uid = UUID().uuidString
+                    let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
+                    try await CSSearchableIndex.default().indexSearchableItems([item])
 
-                let attr = CSSearchableItemAttributeSet(contentType: .item)
-                attr.title = input
-                attr.contentDescription = output
-                attr.displayName = input
-                let uid = UUID().uuidString
-                let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
-                CSSearchableIndex.default().indexSearchableItems([item])
+                    viewModel.addMessage(id: key, with: input, out: output, lang: lang, for: curBuffer, isLoading: false)
+                }
+                viewModel.addMessage(id: key, with: input, out: "", lang: lang, for: curBuffer, isLoading: true)
 
-                viewModel.addMessage(with: input, out: output, lang: lang, for: curBuffer)
             } else {
                 isFocused = false
             }
@@ -91,7 +95,7 @@ struct ContentView: View {
                       helpOpen: $showHelp,
                       settingsOpen: $showSettings,
                       buffersOpen: $showBuffers,
-                      lang: self.lang, onSubmit: { onMySubmit(input: self.input) },
+                      lang: self.lang, onSubmit: { Task { await onMySubmit(input: self.input) } },
                       font: Font.custom("BQN386 Unicode", size: 20))
                 .padding(.bottom, 4)
                 .focused($isFocused)

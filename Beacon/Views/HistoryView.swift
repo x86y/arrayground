@@ -10,7 +10,7 @@ struct HistoryView: View {
     var index: Int
     var historyItem: Entry
     var curBuffer: String
-    var onMySubmit: (String) -> Void
+    var onMySubmit: (String) async -> Void
     @Binding var input: String
     @Binding var ephemerals: [Int: [String]]
     @Binding var editType: Behavior
@@ -36,11 +36,14 @@ struct HistoryView: View {
                     }
                 ))
                 .onSubmit {
-                    onMySubmit(self.viewModel.history[curBuffer, default: []][index].src)
-                    for k in ephemerals.keys {
-                        self.viewModel.history[curBuffer, default: []][k].src = ephemerals[k, default: []].first!
+                    Task {
+                        let src = self.viewModel.history[curBuffer, default: []][index].src
+                        await onMySubmit(src)
+                        for k in ephemerals.keys {
+                            self.viewModel.history[curBuffer, default: []][k].src = ephemerals[k, default: []].first!
+                        }
+                        ephemerals = [:] // reset all virtual textfield edits
                     }
-                    ephemerals = [:] // reset all virtual textfield edits
                 }
                 .font(Font.custom("BQN386 Unicode", size: 18))
                 .foregroundColor(.blue)
@@ -63,6 +66,11 @@ struct HistoryView: View {
                     }
                 }
             }
+            if historyItem.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(0.5, anchor: .center)
+            } else {
             Text("\(trimLongText(historyItem.out))")
                 .foregroundStyle(.primary.opacity(0.8))
                 .font(Font.custom("BQN386 Unicode", size: 18))
@@ -71,6 +79,7 @@ struct HistoryView: View {
                 .onTapGesture {
                     self.input = historyItem.out
                 }
+            }
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
 }
