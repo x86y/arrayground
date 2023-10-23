@@ -82,7 +82,7 @@ struct ContentView: View {
                                 .listRowSeparator(.hidden)
                         }
                     }.id("HistoryScrollView")
-                        .onChange(of: viewModel.history) {
+                        .onChange(of: viewModel.history) { _ in
                             withAnimation {
                                 scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
                             }
