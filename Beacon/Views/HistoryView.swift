@@ -16,7 +16,8 @@ struct HistoryView: View {
     @Binding var editType: Behavior
     @ObservedObject var viewModel: HistoryModel
     @Environment(\.colorScheme) var scheme: ColorScheme
-
+    @State private var isShowingCard = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             if editType == Behavior.inlineEdit {
@@ -60,10 +61,24 @@ struct HistoryView: View {
                                     .font(Font.custom("BQN386 Unicode", size: 18))
                                     .onTapGesture {
                                         self.input = historyItem.src
+                                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                                     }
                             }
                         }.frame(maxWidth: .infinity, alignment: .leading)
+                            .onLongPressGesture(minimumDuration: 0.5) {
+                                withAnimation {
+                                    self.isShowingCard = true
+                                }
+                            }
                     }
+                }
+                .popover(isPresented: $isShowingCard) {
+                    Text("selectedLine")
+                        .padding()
+                        .frame(width: 200, height: 100)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                 }
             }
             if historyItem.isLoading {
@@ -71,14 +86,15 @@ struct HistoryView: View {
                     .progressViewStyle(CircularProgressViewStyle())
                     .scaleEffect(0.5, anchor: .center)
             } else {
-            Text("\(trimLongText(historyItem.out))")
-                .foregroundStyle(.primary.opacity(0.8))
-                .font(Font.custom("BQN386 Unicode", size: 18))
-                .foregroundColor(historyItem.out.starts(with: "Error:") || historyItem.out.starts(with: "\"Error:") ? .red : .primary)
-                .multilineTextAlignment(.leading)
-                .onTapGesture {
-                    self.input = historyItem.out
-                }
+                Text("\(trimLongText(historyItem.out))")
+                    .foregroundStyle(.primary.opacity(0.8))
+                    .font(Font.custom("BQN386 Unicode", size: 18))
+                    .foregroundColor(historyItem.out.starts(with: "Error:") || historyItem.out.starts(with: "\"Error:") ? .red : .primary)
+                    .multilineTextAlignment(.leading)
+                    .onTapGesture {
+                        self.input = historyItem.out
+                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                    }
             }
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
