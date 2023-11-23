@@ -28,7 +28,7 @@ struct ArraygroundApp: App {
                     .preferredColorScheme(appearanceSwitch)
                 // Dashboard().tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .onChange(of: selectedView) {
+                .onChange(of: selectedView) { _ in
                     dismissKeyboard()
                 }
         }

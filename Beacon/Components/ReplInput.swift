@@ -54,12 +54,16 @@ struct ReplInput: View {
         }
 
         HStack {
-            TextField("Type \(languageToString(l: lang))...", text: $text, axis: .vertical)
+            Spacer()
+            TextField("", text: $text, axis: .vertical)
                 .onSubmit {
                     onSubmit?()
                 }
                 .toolbar {
                     toolbar
+                }
+                .placeholder(when: text.isEmpty) {
+                    Text("Type \(languageToString(l: lang))...").font(.monospaced(.system(size: 16))()).opacity(0.3)
                 }
                 .lineLimit(1 ... 8)
                 .keyboardType(.asciiCapable)
@@ -67,9 +71,9 @@ struct ReplInput: View {
                 .disableAutocorrection(true)
                 .font(font)
                 .frame(minHeight: 36)
-                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)) //
                 .overlay(
-                    RoundedRectangle(cornerRadius: 48)
+                    RoundedRectangle(cornerRadius: 18)
                         .stroke(.gray.opacity(0.2), lineWidth: 1)
                 )
             Button(action: {
@@ -81,6 +85,19 @@ struct ReplInput: View {
                     .foregroundStyle(.blue.opacity(0.9))
             }
             .padding(4)
+        }
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content
+    ) -> some View {
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
         }
     }
 }

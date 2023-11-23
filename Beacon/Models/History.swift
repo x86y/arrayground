@@ -8,11 +8,12 @@ import Foundation
 let d = UserDefaults.standard
 
 struct Entry: Hashable, Codable, Identifiable {
-    var id: String = UUID().uuidString
+    var id: UUID
     var src: String
     var out: String
     var lang: Language
     var tokens: [[Token]]
+    var isLoading: Bool
 }
 
 enum Buffers {
@@ -40,11 +41,16 @@ enum Buffers {
 class HistoryModel: ObservableObject {
     @Published var history: [String: [Entry]] = ["default": []]
 
-    func addMessage(with src: String, out: String, lang: Language, for key: String) {
+    func addMessage(id: UUID, with src: String, out: String, lang: Language, for key: String, isLoading: Bool) {
+        if !isLoading {
+            if let index = history[key]?.firstIndex(where: { $0.id == id }) {
+                history[key]?.remove(at: index)
+            }
+        }
         let tokenize = lang == .k
             ? tokenize(src, lexK(src))
             : tokenize(src, lexBQN(src))
-        let entry = Entry(src: src, out: out, lang: lang, tokens: tokenize)
+        let entry = Entry(id: id, src: src, out: out, lang: lang, tokens: tokenize, isLoading: isLoading)
         if var entries = history[key] {
             entries.append(entry)
             history[key] = entries

@@ -53,7 +53,6 @@
 		F3B1990E299518F900FE664F /* AutocompleteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B19905299518F900FE664F /* AutocompleteProvider.swift */; };
 		F3B199142995195C00FE664F /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B199132995195C00FE664F /* KeyboardKit */; };
 		F3B199152995199000FE664F /* stdlib in Resources */ = {isa = PBXBuildFile; fileRef = F3B198DB2995181700FE664F /* stdlib */; };
-		F3CEF79D2A94D3E000DC8858 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3CEF79C2A94D3E000DC8858 /* KeyboardKit */; };
 		F3CEF79E2A94D85500DC8858 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3B198F1299518E900FE664F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3D296822A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
 		F3D296832A404A3E00AD21A2 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D296812A404A3E00AD21A2 /* History.swift */; };
@@ -64,6 +63,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F31AB4F72AE0490F0074EA1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3B198C2299517DA00FE664F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3B198F0299518E900FE664F;
+			remoteInfo = Keyboard;
+		};
 		F3E1DFF02A31F56800B4A553 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F3B198C2299517DA00FE664F /* Project object */;
@@ -159,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3CEF79D2A94D3E000DC8858 /* KeyboardKit in Frameworks */,
 				F3DF828B2A4F22FF00F6CD19 /* libk.a in Frameworks */,
 				F3AC4D262A4F6C3100B4FECD /* curl.xcframework in Frameworks */,
 				F32D9E9629967067007BC97C /* libcbqn.a in Frameworks */,
@@ -342,10 +347,10 @@
 			);
 			dependencies = (
 				F3E1DFF12A31F56800B4A553 /* PBXTargetDependency */,
+				F31AB4F82AE0490F0074EA1B /* PBXTargetDependency */,
 			);
 			name = Beacon;
 			packageProductDependencies = (
-				F3CEF79C2A94D3E000DC8858 /* KeyboardKit */,
 			);
 			productName = Beacon;
 			productReference = F3B198CA299517DA00FE664F /* Beacon.app */;
@@ -399,9 +404,7 @@
 			);
 			mainGroup = F3B198C1299517DA00FE664F;
 			packageReferences = (
-				F3B1990F2995193C00FE664F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */,
-				F3CEF79B2A94D3E000DC8858 /* XCRemoteSwiftPackageReference "KeyboardKit" */,
 			);
 			productRefGroup = F3B198CB299517DA00FE664F /* Products */;
 			projectDirPath = "";
@@ -506,6 +509,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F31AB4F82AE0490F0074EA1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3B198F0299518E900FE664F /* Keyboard */;
+			targetProxy = F31AB4F72AE0490F0074EA1B /* PBXContainerItemProxy */;
+		};
 		F3E1DFF12A31F56800B4A553 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F3B198F0299518E900FE664F /* Keyboard */;
@@ -594,6 +602,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -641,7 +650,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MERGEABLE_LIBRARY = NO;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -658,6 +667,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -699,7 +709,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MERGEABLE_LIBRARY = NO;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -720,7 +730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
 				DEVELOPMENT_TEAM = KPW29M2DBH;
 				ENABLE_PREVIEWS = YES;
@@ -733,7 +743,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -744,7 +754,7 @@
 					"$(PROJECT_DIR)/Beacon/libs",
 					"$(PROJECT_DIR)/Beacon/Libs",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -767,7 +777,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Beacon/Preview Content\"";
 				DEVELOPMENT_TEAM = KPW29M2DBH;
 				ENABLE_PREVIEWS = YES;
@@ -780,7 +790,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -791,7 +801,7 @@
 					"$(PROJECT_DIR)/Beacon/libs",
 					"$(PROJECT_DIR)/Beacon/Libs",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = arrscience.Beacons;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -908,28 +918,12 @@
 				kind = branch;
 			};
 		};
-		F3B1990F2995193C00FE664F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/KeyboardKit/KeyboardKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
-			};
-		};
-		F3CEF79B2A94D3E000DC8858 /* XCRemoteSwiftPackageReference "KeyboardKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/KeyboardKit/KeyboardKit";
-			requirement = {
-				kind = exactVersion;
-				version = 7.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -943,11 +937,6 @@
 		F3B199132995195C00FE664F /* KeyboardKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F3B199122995195C00FE664F /* XCRemoteSwiftPackageReference "KeyboardKit" */;
-			productName = KeyboardKit;
-		};
-		F3CEF79C2A94D3E000DC8858 /* KeyboardKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F3CEF79B2A94D3E000DC8858 /* XCRemoteSwiftPackageReference "KeyboardKit" */;
 			productName = KeyboardKit;
 		};
 /* End XCSwiftPackageProductDependency section */

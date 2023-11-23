@@ -111,7 +111,7 @@ func lexBQN(_ code: String) -> [String] {
     let dmdC = "D"
     let dmd = "←↩,⋄→⇐"
     let comC = "C"
-    let newL = "E"
+    let _newL = "E"
 
     var res = Array(repeating: "", count: code.count)
     var i = code.startIndex

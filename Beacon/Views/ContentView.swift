@@ -19,12 +19,12 @@ struct ContentView: View {
     @State var curBuffer: String = "default"
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
-    @AppStorage("lang") var lang: Language = .bqn
-    @AppStorage("editType") var editType: Behavior = .inlineEdit
+    @AppStorage("lang") var lang: Language = .k
+    @AppStorage("editType") var editType: Behavior = .duplicate
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel: HistoryModel
 
-    func onMySubmit(input: String) {
+    func onMySubmit(input: String) async {
         switch input {
         case "clear":
             viewModel.clear(b: curBuffer)
@@ -36,20 +36,24 @@ struct ContentView: View {
             }
         default:
             if !input.isEmpty {
-                // FIXME, below is a hacky workaround for appstorage not syncing?
-                let output = UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
-                    ? e(input: input)
-                    : ke(input: input)
+                let key = UUID()
+                Task {
+                    let output = await UserDefaults.standard.integer(forKey: "lang") == Language.bqn.rawValue
+                        ? e(input: input)
+                        : ke(input: input)
 
-                let attr = CSSearchableItemAttributeSet(contentType: .item)
-                attr.title = input
-                attr.contentDescription = output
-                attr.displayName = input
-                let uid = UUID().uuidString
-                let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
-                CSSearchableIndex.default().indexSearchableItems([item])
+                    let attr = CSSearchableItemAttributeSet(contentType: .item)
+                    attr.title = input
+                    attr.contentDescription = output
+                    attr.displayName = input
+                    let uid = UUID().uuidString
+                    let item = CSSearchableItem(uniqueIdentifier: uid, domainIdentifier: "arrscience.beacons", attributeSet: attr)
+                    try await CSSearchableIndex.default().indexSearchableItems([item])
 
-                viewModel.addMessage(with: input, out: output, lang: lang, for: curBuffer)
+                    viewModel.addMessage(id: key, with: input, out: output, lang: lang, for: curBuffer, isLoading: false)
+                }
+                viewModel.addMessage(id: key, with: input, out: "", lang: lang, for: curBuffer, isLoading: true)
+
             } else {
                 isFocused = false
             }
@@ -61,7 +65,7 @@ struct ContentView: View {
         ScrollViewReader { scrollView in
             VStack {
                 ScrollView(.vertical) {
-                    VStack(spacing: 12) {
+                    LazyVStack(spacing: 12) {
                         if viewModel.history[curBuffer, default: []].isEmpty {
                             VStack {
                                 Text("ngn/k, (c) 2019-2023")
@@ -76,14 +80,16 @@ struct ContentView: View {
                                 HistoryView(index: index, historyItem: historyItem, curBuffer: curBuffer, onMySubmit: onMySubmit, input: $input, ephemerals: $ephemerals, editType: $editType, viewModel: viewModel)
                             }.listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .pagedScrollingTarget()
                         }
                     }.id("HistoryScrollView")
-                        .onChange(of: viewModel.history) {
+                        .onChange(of: viewModel.history) { _ in
                             withAnimation {
                                 scrollView.scrollTo("HistoryScrollView", anchor: .bottom)
                             }
                         }
                 }
+                .scrolltargetbhv()
             }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 .padding(.bottom, 5)
 
@@ -91,8 +97,8 @@ struct ContentView: View {
                       helpOpen: $showHelp,
                       settingsOpen: $showSettings,
                       buffersOpen: $showBuffers,
-                      lang: self.lang, onSubmit: { onMySubmit(input: self.input) },
-                      font: Font.custom("BQN386 Unicode", size: 20))
+                      lang: self.lang, onSubmit: { Task { await onMySubmit(input: self.input) } },
+                      font: Font.custom("BQN386 Unicode", size: 18))
                 .padding(.bottom, 4)
                 .focused($isFocused)
                 .onTapGesture {
@@ -134,28 +140,64 @@ struct ContentView: View {
         repl_init()
         // below is adapted from https://codeberg.org/ngn/k/src/branch/master/repl.k
         let k_formatter = """
-(opn;sem;cls):"(;)"
-lines:cols:80
-upd:(lines;cols)
-lim:{(x<#y)(x#)/y}
-dd:{(x<#y)(,[;".."](x-2)#)/y}
-fmt:{upd[];$[(::)~x;"";(1<#x)&|/`m`M`A=@x;mMA x;(dd[cols]`k@lim[cols]x),"\n"]}
-fmtx:{$[(::)~x;"";`k[x],"\n"]}
-mMA:{(P;f;q):((,"!/+(";dct;,")");(("+![";" +(");tbl;")]");(,,"(";lst;,")"))`m`M`A?t:@x
- w:cols-#*P;u:w-#q;h:lines-2
- x:$[h<(`M=t)+#x;,[;,".."](h-1)#f[w;u;h#x];f[w;u;x]]
- ,[;"\n"]@"\n"/@[;-1+#x;,;q]P[!#x],'x}
-lst:{[w;u;x](((-1+#x)#w),u)dd'`k'lim[cols]'x}
-dct:{[w;u;x]k:(|/#'k)$k:`k'!x;par'(((-1+#x)#w-3),u-3)dd'sem/'+(k;`k'.x)}
-tbl:{[w;u;x]h:`k'!x;d:`k''.x;W:(#'h)|/'#''d
- r:,$[`S~@!x;dd[w](""opn),(""sem)/;par@dd[w-2]@sem/]W$'h
- r,par'dd[w-2]'sem/'+@[W;&~^`i`d?_@'.x;-:]$'}
-cell:{$[|/`i`d=@y;-x;x]$z}
-par:{opn,x,cls}
-line0:{c:{0x07~*-2#*x}{(l;r):x;(1:1;r,,(-2_l))}/(x;());"\n"/(*|c),,*c}
-line1:{$[#x;;:0];.[`1:(fmt;fmtx)[" "~*x]@.:;,x;{`0:`err[]}]}
-line:line1@line0@
-"""
+        (opn;sem;cls):"(;)"
+        lines:cols:80
+        upd:(lines;cols)
+        lim:{(x<#y)(x#)/y}
+        dd:{(x<#y)(,[;".."](x-2)#)/y}
+        fmt:{upd[];$[(::)~x;"";(1<#x)&|/`m`M`A=@x;mMA x;(dd[cols]`k@lim[cols]x),"\n"]}
+        fmtx:{$[(::)~x;"";`k[x],"\n"]}
+        mMA:{(P;f;q):((,"!/+(";dct;,")");(("+![";" +(");tbl;")]");(,,"(";lst;,")"))`m`M`A?t:@x
+         w:cols-#*P;u:w-#q;h:lines-2
+         x:$[h<(`M=t)+#x;,[;,".."](h-1)#f[w;u;h#x];f[w;u;x]]
+         ,[;"\n"]@"\n"/@[;-1+#x;,;q]P[!#x],'x}
+        lst:{[w;u;x](((-1+#x)#w),u)dd'`k'lim[cols]'x}
+        dct:{[w;u;x]k:(|/#'k)$k:`k'!x;par'(((-1+#x)#w-3),u-3)dd'sem/'+(k;`k'.x)}
+        tbl:{[w;u;x]h:`k'!x;d:`k''.x;W:(#'h)|/'#''d
+         r:,$[`S~@!x;dd[w](""opn),(""sem)/;par@dd[w-2]@sem/]W$'h
+         r,par'dd[w-2]'sem/'+@[W;&~^`i`d?_@'.x;-:]$'}
+        cell:{$[|/`i`d=@y;-x;x]$z}
+        par:{opn,x,cls}
+        line0:{c:{0x07~*-2#*x}{(l;r):x;(1:1;r,,(-2_l))}/(x;());"\n"/(*|c),,*c}
+        line1:{$[#x;;:0];.[`1:(fmt;fmtx)[" "~*x]@.:;,x;{`0:`err[]}]}
+        line:line1@line0@
+        """
         let _ = runCmd(kCmd, k_formatter)
+        let bqnRepl = "RRR←((•ReBQN{repl⇐\"loose\"})⎊{𝕊: •Out \"Error: \"∾•CurrentError@})"
+        let _ = runCmd(cbqnCmd, bqnRepl)
+    }
+}
+
+struct PagedScrollingTarget: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content
+                .scrollTargetLayout()
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func pagedScrollingTarget() -> some View {
+        modifier(PagedScrollingTarget())
+    }
+}
+
+struct ScrollTargetBhv: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content
+                .scrollTargetBehavior(.viewAligned)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func scrolltargetbhv() -> some View {
+        modifier(ScrollTargetBhv())
     }
 }
