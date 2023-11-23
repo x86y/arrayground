@@ -163,6 +163,8 @@ struct ContentView: View {
         line:line1@line0@
         """
         let _ = runCmd(kCmd, k_formatter)
+        let bqnRepl = "RRR←((•ReBQN{repl⇐\"loose\"})⎊{𝕊: •Out \"Error: \"∾•CurrentError@})"
+        let _ = runCmd(cbqnCmd, bqnRepl)
     }
 }
 
