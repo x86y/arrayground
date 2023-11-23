@@ -19,8 +19,8 @@ struct ContentView: View {
     @State var curBuffer: String = "default"
     @State var inpPos: Int = -1
     @State var move: (Int) -> Void = { _ in }
-    @AppStorage("lang") var lang: Language = .bqn
-    @AppStorage("editType") var editType: Behavior = .inlineEdit
+    @AppStorage("lang") var lang: Language = .k
+    @AppStorage("editType") var editType: Behavior = .duplicate
     @FocusState var isFocused: Bool
     @ObservedObject var viewModel: HistoryModel
 
